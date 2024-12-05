@@ -1,0 +1,186 @@
+#calendar {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+#dayEx {
+  display: none;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#dayName, #dayContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  height: 100px;
+  overflow: auto;
+  position: relative;
+}
+
+.empty {
+  opacity: 0.5;
+}
+
+.day-number {
+  padding: 2px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.day-schedule {
+  font-size: 0.9em;
+  margin: 1px 0;
+  text-align: left;
+  color: #555;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  border-top: 1px solid #ccc;
+}
+.day-schedule>.schedule-list{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  white-space: nowrap;
+}
+
+.day:hover {
+  background-color: #d0e8f2;
+}
+
+/* 작은 화면: 태블릿 이하 */
+@media (max-width: 768px) {
+  #calendar {
+    max-width: 100%;
+    /* 화면 크기에 맞게 최대 확장 */
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(7, minmax(30px, 1fr));
+    /* 각 칸 크기 최소화 */
+    gap: 3px;
+  }
+
+  .day {
+    padding: 8px;
+  }
+
+  .day-number {
+    font-size: 1em;
+    /* 글자 크기 조정 */
+  }
+
+  .day-schedule {
+    font-size: 0.8em;
+  }
+}
+
+/* 더 작은 화면: 모바일 */
+@media (max-width: 480px) {
+  #calendar {
+    max-width: 100%;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+    /* 4열로 변경 */
+  }
+
+  .day {
+    padding: 5px;
+    height: 80px;
+    /* 높이를 줄임 */
+  }
+
+  .day-number {
+    font-size: 0.9em;
+  }
+
+  .day-schedule {
+    font-size: 0.7em;
+  }
+}
+
+
+/* 기본 스타일 */
+.schedule-list {
+  position: relative; /* 툴팁의 기준점을 설정 */
+  margin: 5px 0;
+}
+
+.title {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-size: contain;
+  margin-right: 8px;
+  cursor: pointer; /* 포인터 모양 변경 */
+}
+
+/* 아이콘 스타일 */
+.icon-meeting {
+  background-image: url('icon-meeting.png'); /* 미팅 아이콘 이미지 */
+}
+
+.icon-code {
+  background-image: url('icon-code.png'); /* 코드 리뷰 아이콘 이미지 */
+}
+
+/* 툴팁 기본 설정 (숨김 상태) */
+.title::after {
+  content: attr(data-time); /* 툴팁 내용으로 시간 표시 */
+  position: absolute;
+  top: -25px; /* 아이콘 위에 표시 */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.9em;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0; /* 기본적으로 보이지 않음 */
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1000;
+}
+
+/* 툴팁 화살표 추가 */
+.title::before {
+  content: '';
+  position: absolute;
+  top: -2px; /* 툴팁 바로 아래에 삼각형 */
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+  opacity: 0; /* 기본적으로 보이지 않음 */
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1000;
+}
+
+/* 아이콘 위로 마우스 오버 시 툴팁 표시 */
+.title:hover::after,
+.title:hover::before {
+  opacity: 1;
+  visibility: visible;
+}

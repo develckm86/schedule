@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="calendar.css">
     <title>프로젝트</title>
+    <script defer src="./calendar.js"></script>
     <script defer src="./app.js"></script>
 </head>
 <body>
-    <h1>프로젝트</h1>
-    <div id="container"></div>
+    <header></header>
+    <main>
+        <h1>스케줄 어플</h1>
+        <div>
+            <div id="dayEx" class="day" data-day=""><div class="day-number"></div><ul class="day-schedule"></ul></div>
+            <li id="scheduleLiEx" class="schedule-list">
+              <div class="icon"></div>
+              <div class="date"></div>
+              <div class="title"></div>
+            </li>
+        </div>
+        <div id="calendar">
+            <div class="calendar-header">
+              <button id="prevMonthBtn">◀</button>
+              <span id="currentMonth">December 2024</span>
+              <button id="nextMonthBtn">▶</button>
+            </div>
+            <div id="calendarGrid">
+              <div id="dayName">
+                <div class="day-name">Sun</div>
+                <div class="day-name">Mon</div>
+                <div class="day-name">Tue</div>
+                <div class="day-name">Wed</div>
+                <div class="day-name">Thu</div>
+                <div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+              </div>
+              <div id="dayContainer">
+
+              </div>              
+            </div>
+          </div>
+                    
+    </main>
+    <footer>
+
+    </footer>    
 </body>
 </html>
