@@ -1,0 +1,16 @@
+{
+  "2024-11":{
+      "1": [{"hour":800,"title":"아침 운동", "icon":"icon-run"}, {"hour":1000,"title":"팀 미팅", "icon":"icon-meeting"}],
+      "2": [{"hour":900,"title":"고객 미팅", "icon":"icon-call"}, {"hour":1200,"title":"팀 런치", "icon":"icon-lunch"}],
+      "3": [{"hour":1000,"title":"코드 리뷰", "icon":"icon-code"}, {"hour":1400,"title":"요가 클래스", "icon":"icon-yoga"}],
+      "5": [{"hour":900,"title":"정기 검진", "icon":"icon-doctor"}, {"hour":1100,"title":"프로젝트 회의", "icon":"icon-meeting"}],
+      "8": [{"hour":1000,"title":"장보기", "icon":"icon-shopping"}, {"hour":1300,"title":"친구 모임", "icon":"icon-dinner"}],
+      "10": [{"hour":900,"title":"스프린트 미팅", "icon":"icon-sprint"}, {"hour":1400,"title":"개발 세션", "icon":"icon-code"}],
+      "15": [{"hour":1000,"title":"주간 회의", "icon":"icon-meeting"}, {"hour":1400,"title":"온라인 강의", "icon":"icon-online-class"}],
+      "18": [{"hour":1100,"title":"치과 검진", "icon":"icon-dental"}, {"hour":1300,"title":"저녁 산책", "icon":"icon-walk"}],
+      "22": [{"hour":1000,"title":"쇼핑", "icon":"icon-shopping"}, {"hour":1500,"title":"카페 미팅", "icon":"icon-meeting"}],
+      "25": [{"hour":900,"title":"팀 워크숍", "icon":"icon-meeting"}, {"hour":1300,"title":"저녁 모임", "icon":"icon-party"}],
+      "28": [{"hour":1000,"title":"팀 빌딩", "icon":"icon-party"}, {"hour":1400,"title":"보드게임", "icon":"icon-board-game"}, {"hour":1300,"title":"회식", "icon":"icon-dinner"}],
+      "30": [{"hour":1000,"title":"월간 회의", "icon":"icon-meeting"}, {"hour":1500,"title":"프로젝트 리뷰", "icon":"icon-code"}]
+  }
+}

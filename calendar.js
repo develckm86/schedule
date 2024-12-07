@@ -1,14 +1,13 @@
 const dayEx = document.querySelector('#dayEx');
-const dayContainer = document.querySelector('#dayContainer');
+
 const currentMonthLabel = document.getElementById('currentMonth');
 const prevMonthButton = document.getElementById('prevMonthBtn');
 const nextMonthButton = document.getElementById('nextMonthBtn');
 const scheduleLiEx=document.querySelector('#scheduleLiEx');
 
-let currentDate = new Date();
 
 // Example schedule data
-let scheduleData;
+const scheduleData={};
 const cloneDayEx=function(dayNumber,addClassName){
   const dayClone = dayEx.cloneNode(true);
   dayClone.removeAttribute('id');
@@ -33,13 +32,40 @@ const scheduleLiAppendScheduleUl=function(schedules,scheduleUlNode){
 }
 
 // 캘린더 렌더링
-const renderCalendar=function (date, encode="ko") {
-  dayContainer.innerHTML = '';
-
-  let month=date.getMonth()+1;
+const renderCalendar=async function (date=new Date(), encode="ko") {
+  document.querySelector('#dayContainer').innerHTML = '';
+  let month=date.getMonth();
   let year=date.getFullYear();
+  const nextDate=new Date(new Date().setMonth(month+1));
+  const prevDate=new Date(new Date().setMonth(month-1));
+  month=month+1;
+  console.log(prevDate.toLocaleDateString());
+  let url=`${date.getFullYear()}_${date.getMonth()+1}_schedule.json`;
+  let prevUrl=`${prevDate.getFullYear()}_${prevDate.getMonth()+1}_schedule.json`;
+  let nextUrl=`${nextDate.getFullYear()}_${nextDate.getMonth()+1}_schedule.json`;
+  console.log(url,prevUrl,nextUrl);
+  //3달치 데이터를 가져옴
+  const resArr=await Promise.all([
+    fetch(`./data/${url}`),
+    fetch(`./data/${prevUrl}`),
+    fetch(`./data/${nextUrl}`)
+  ]);
+  ;
+  const scheduleArr=await Promise.all(resArr.map(res=>{
+    if(res.status===200){
+      return res.json();
+    }
+  }));
+  scheduleArr.forEach(schedule=>{
+    for(let key in schedule){
+      scheduleData[key]=schedule[key];
+    }
+  });
+  console.log(scheduleData);
+  // Initial render
+
   let monthString;
-  
+
   switch(encode){
     case "ko":
       monthString=`${month}월 ${year}년`;
@@ -59,15 +85,14 @@ const renderCalendar=function (date, encode="ko") {
     dayContainer.appendChild(cloneDayEx(day,'empty'));
     
   }
-
   // 이번 달의 날짜들을 추가합니다
   for (let i = 1; i <= lastDate; i++) {
     const dayNode=cloneDayEx(i);
     dayContainer.appendChild(dayNode);
-    let key=`${year}-${month}-${i}`;
+    let key=`${year}-${month}`;
 
-    if(key in scheduleData){
-      scheduleLiAppendScheduleUl(scheduleData[key],dayNode.querySelector('.day-schedule'));
+    if(key in scheduleData && i in scheduleData[key]){
+      scheduleLiAppendScheduleUl(scheduleData[key][i],dayNode.querySelector('.day-schedule'));
     }
   }
 
@@ -75,24 +100,13 @@ const renderCalendar=function (date, encode="ko") {
   for(let i=1;i<=(6-lastDay);i++){
     dayContainer.appendChild(cloneDayEx(i,'empty'));
   }
+  prevMonthButton.onclick=()=>{
+    renderCalendar(prevDate);
+  }
+  
+  nextMonthButton.onclick=()=>{
+    renderCalendar(nextDate);
+  }
 }
 
-prevMonthButton.addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar(currentDate);
-});
-
-nextMonthButton.addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar(currentDate);
-});
-
-
-async function init(){
-  let url=`${currentDate.getFullYear()}_${currentDate.getMonth()+1}_schedule.json`;
-  scheduleData=await fetch(`./data/${url}`)
-  .then(res=>res.json());
-  // Initial render
-  renderCalendar(currentDate);
-}
-init();
+renderCalendar();

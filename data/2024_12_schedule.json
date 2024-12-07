@@ -1,14 +1,16 @@
 {
-    "2024-12-1": [{"hour":500,"title":"아침 조깅", "icon":"icon-run"}, {"hour":530,"title":"프로젝트 회의", "icon":"icon-meeting"}],
-    "2024-12-2": [{"hour":500,"title":"고객과 통화", "icon":"icon-call"}, {"hour":730,"title":"팀 점심식사", "icon":"icon-lunch"}],
-    "2024-12-3": [{"hour":700,"title":"코드 리뷰", "icon":"icon-code"}, {"hour":800,"title":"요가 수업", "icon":"icon-yoga"}],
-    "2024-12-5": [{"hour":900,"title":"병원 예약", "icon":"icon-doctor"}],
-    "2024-12-8": [{"hour":1000,"title":"쇼핑", "icon":"icon-shopping"}, {"hour":1030,"title":"친구들과 저녁", "icon":"icon-dinner"}],
-    "2024-12-10": [{"hour":900,"title":"스프린트 계획", "icon":"icon-sprint"}],
-    "2024-12-15": [{"hour":900,"title":"주간 동기화 회의", "icon":"icon-meeting"}, {"hour":1200,"title":"온라인 강의 세션", "icon":"icon-online-class"}],
-    "2024-12-18": [{"hour":1000,"title":"치과 방문", "icon":"icon-dental"}, {"hour":1030,"title":"저녁 산책", "icon":"icon-walk"}],
-    "2024-12-22": [{"hour":600,"title":"크리스마스 쇼핑", "icon":"icon-shopping"}],
-    "2024-12-25": [{"hour":830,"title":"크리스마스 파티", "icon":"icon-party"}],
-    "2024-12-28": [{"hour":700,"title":"팀 야유회", "icon":"icon-party"}, {"hour":900,"title":"보드게임", "icon":"icon-board-game"}],
-    "2024-12-31": [{"hour":1400,"title":"새해 카운트다운", "icon":"icon-countdown"}]
+  "2024-12":{
+    "1": [{"hour":500,"title":"아침 조깅", "icon":"icon-run"}, {"hour":530,"title":"프로젝트 회의", "icon":"icon-meeting"}],
+    "2": [{"hour":500,"title":"고객과 통화", "icon":"icon-call"}, {"hour":730,"title":"팀 점심식사", "icon":"icon-lunch"}],
+    "3": [{"hour":700,"title":"코드 리뷰", "icon":"icon-code"}, {"hour":800,"title":"요가 수업", "icon":"icon-yoga"}],
+    "5": [{"hour":900,"title":"병원 예약", "icon":"icon-doctor"}],
+    "8": [{"hour":1000,"title":"쇼핑", "icon":"icon-shopping"}, {"hour":1030,"title":"친구들과 저녁", "icon":"icon-dinner"}],
+    "10": [{"hour":900,"title":"스프린트 계획", "icon":"icon-sprint"}],
+    "15": [{"hour":900,"title":"주간 동기화 회의", "icon":"icon-meeting"}, {"hour":1200,"title":"온라인 강의 세션", "icon":"icon-online-class"}],
+    "18": [{"hour":1000,"title":"치과 방문", "icon":"icon-dental"}, {"hour":1030,"title":"저녁 산책", "icon":"icon-walk"}],
+    "22": [{"hour":600,"title":"크리스마스 쇼핑", "icon":"icon-shopping"}],
+    "25": [{"hour":830,"title":"크리스마스 파티", "icon":"icon-party"}],
+    "28": [{"hour":700,"title":"팀 야유회", "icon":"icon-party"}, {"hour":900,"title":"보드게임", "icon":"icon-board-game"}],
+    "31": [{"hour":1400,"title":"새해 카운트다운", "icon":"icon-countdown"}]
   }
+}

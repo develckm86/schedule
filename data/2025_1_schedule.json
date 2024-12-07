@@ -1,0 +1,16 @@
+{
+  "2025-1":{
+    "1": [{"hour":900,"title":"새해 맞이 산책", "icon":"icon-walk"}, {"hour":1100,"title":"가족 모임", "icon":"icon-party"}],
+    "2": [{"hour":800,"title":"연간 계획 수립", "icon":"icon-meeting"}, {"hour":1200,"title":"동료와 점심", "icon":"icon-lunch"}],
+    "3": [{"hour":1000,"title":"프로젝트 킥오프", "icon":"icon-meeting"}, {"hour":1400,"title":"헬스장", "icon":"icon-run"}],
+    "5": [{"hour":900,"title":"주간 장보기", "icon":"icon-shopping"}],
+    "8": [{"hour":1000,"title":"팀 회의", "icon":"icon-meeting"}, {"hour":1500,"title":"커피 미팅", "icon":"icon-meeting"}],
+    "10": [{"hour":900,"title":"코드 리뷰", "icon":"icon-code"}],
+    "15": [{"hour":1000,"title":"분기 계획 회의", "icon":"icon-meeting"}, {"hour":1400,"title":"개발자 세미나", "icon":"icon-online-class"}],
+    "18": [{"hour":900,"title":"건강검진", "icon":"icon-doctor"}, {"hour":1400,"title":"영화 관람", "icon":"icon-party"}],
+    "22": [{"hour":1000,"title":"프로젝트 발표", "icon":"icon-meeting"}],
+    "25": [{"hour":1100,"title":"주말 브런치", "icon":"icon-lunch"}],
+    "28": [{"hour":900,"title":"스프린트 리뷰", "icon":"icon-meeting"}, {"hour":1500,"title":"팀 빌딩", "icon":"icon-party"}],
+    "31": [{"hour":1000,"title":"월간 마무리 회의", "icon":"icon-meeting"}]
+  }
+}
