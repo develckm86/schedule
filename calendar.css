@@ -1,9 +1,14 @@
-#calendar {
-  max-width: 600px;
+#calendar{
+  max-width: 800px;
+  height: 800px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
+  border: 1px solid;
 }
-
+.day-container{
+  width: 600px;
+  margin: 0 10px;
+}
 #dayEx {
   display: none;
 }
@@ -14,8 +19,17 @@
   align-items: center;
   margin-bottom: 10px;
 }
-
-#dayName, #dayContainer {
+#calendarContainer{
+  width: auto;
+  transition: tansform 0.3s ease-in-out;
+  transform: translateX(-500px);
+  height: 700px;
+  display: flex;
+  border: 1px solid;
+  overflow-x: scroll;
+  position: absolute;
+}
+.day-name, .day-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
@@ -66,7 +80,7 @@
 
 /* 작은 화면: 태블릿 이하 */
 @media (max-width: 768px) {
-  #calendar {
+  #calendar,.day-container {
     max-width: 100%;
     /* 화면 크기에 맞게 최대 확장 */
   }
@@ -93,7 +107,7 @@
 
 /* 더 작은 화면: 모바일 */
 @media (max-width: 480px) {
-  #calendar {
+  #calendar,.day-container{
     max-width: 100%;
   }
 
