@@ -5,8 +5,9 @@ const nextMonthButton = document.getElementById('nextMonthBtn');
 const scheduleLiEx=document.getElementById('scheduleLiEx');
 const calendarContainer=document.getElementById('calendarContainer');
 const dayContainerEx=document.getElementById('dayContainerEx');
-console.log(calendarContainer);
-
+const monthNameEx=document.getElementById('monthNameEx');
+const renderDateData={};
+let selectedDateData=null;
 // Example schedule data
 const scheduleData={};
 const cloneDayEx=function(dayNumber,addClassName){
@@ -60,19 +61,27 @@ class DateData{
     this.nextDate=new Date(this.nextYear,this.nextMonth,0); 
     this.nextDateKey=`${this.nextYear}-${this.nextMonth}`;
     //this.nextDateUrl=`${this.nextDate.getFullYear()}_${this.nextDate.getMonth()+1}_schedule.json`;
+    this.nextDateNodeKey=Number(`${this.nextYear}${(this.nextMonth < 10)?'0':''}${this.nextMonth}`);
     
     //이전 달
     this.prevDate=new Date(this.prevYear,this.prevMonth,0);
     this.prevDateKey=`${this.prevYear}-${this.prevMonth}`;
     //this.prevDateUrl=`${this.prevDate.getFullYear()}_${this.prevDate.getMonth()+1}_schedule.json`;
+    this.prevDateNodeKey=Number(`${this.prevYear}${(this.prevMonth < 10)?'0':''}${this.prevMonth}`);
+
     this.encode=encode;
+
     
     switch(encode){
       case "ko":
-        this.monthString=`${this.nowMonth}월 ${this.nowYear}년`;
+        this.monthYearString=`${this.nowMonth}월 ${this.nowYear}년`;
+        this.monthString=`${this.nowMonth}월`;
+
         break;
       case "en":
-        this.monthString=`${this.nowMonth} ${this.nowYear}`;
+        this.monthYearString=`${this.nowMonth} ${this.nowYear}`;
+        this.monthString=`${this.nowMonth} Month`;
+
         break;
     }
   }
@@ -91,15 +100,15 @@ const scheduleNodes={};
 const renderCalendar=async function (date=new Date(), encode="ko") {
 
   const dateData=new DateData(date,encode);
-  console.log(dateData);
-  if(scheduleData[dateData.nowDateKey]){
+  console.log(dateData.nowDateNodeKey);
+  if(dateData.nowDateNodeKey in renderDateData){
     console.log('이미 렌더링된 달입니다.');
     return;
   }
-
+  renderDateData[dateData.nowDateNodeKey]=dateData;
   const dayContainer=dayContainerEx.cloneNode(true);
   dayContainer.id=dateData.nowDateKey;
-  calendarContainer.appendChild(dayContainer);
+  //calendarContainer.appendChild(dayContainer);
 
   //3달치 데이터를 가져옴
   const resArr=await fetch(`./data/${dateData.nowDateUrl}`);
@@ -114,7 +123,13 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
   console.log(scheduleData);
   }
 
-  currentMonthLabel.textContent=dateData.monthString;
+  //이번 달 이름 추가
+  const monthName=monthNameEx.cloneNode(true);
+  monthName.removeAttribute('id');
+  monthName.querySelector('.month_name').innerText=dateData.monthString;
+  monthName.style.gridColumn=`${dateData.firstDay+1} / 8`;
+  dayContainer.appendChild(monthName);    
+
   
   // 이전 달의 날짜들을 추가합니다
   for (let i = 0; i < dateData.firstDay; i++) {
@@ -122,29 +137,45 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
     dayContainer.appendChild(cloneDayEx(day,'empty'));
     
   }
+
   // 이번 달의 날짜들을 추가합니다
   for (let i = 1; i <= dateData.lastDateNum; i++) {
     const dayNode=cloneDayEx(i);
     dayContainer.appendChild(dayNode);
     const scheduleUl=dayNode.querySelector('.day-schedule');
-
     if(scheduleData[dateData.nowDateKey]?.hasOwnProperty(i)){
       scheduleLiAppendScheduleUl(scheduleData[dateData.nowDateKey][i],scheduleUl);
     }
   }
 
-  // 다음 달의 날짜들을 추가합니다.
-  for(let i=1;i<=(6-dateData.lastDay);i++){
-    const day=dateData.lastDateNum - dateData.lastDay + i + 1;
-    dayContainer.appendChild(cloneDayEx(day,'empty'));
-  }
-  prevMonthButton.onclick=()=>{
-    renderCalendar(dateData.prevDate);
-  }
+  return dateData;
+}
+const calendarNodesAppend=function(dateData){
   
-  nextMonthButton.onclick=()=>{
-    renderCalendar(dateData.nextDate);
+}
+const nextMonthButtonClick=async function(){
+
+  console.log(scheduleData);
+
+
+  if(scheduleData[selectedDateData.nextDateNodeKey]){
+    console.log("이미 렌더링된 달입니다.???");
+    return;
   }
 }
+const prevMonthButtonClick=async function(){
+  const prevDateData=await renderCalendar(selectedDateData.prevDate);
+  calendarNodesAppend(prevDateData);
+}
+const initCalendar= async function(){
+  const nowDateData=await renderCalendar();
+  let selectedDateData=nowDateData;
+  await renderCalendar(nowDateData.prevDate);
+  await renderCalendar(nowDateData.nextDate);  
 
-renderCalendar();
+  for(let key in scheduleNodes){
+    calendarContainer.appendChild(scheduleNodes[key]);
+  }
+  window.location.href=`./#${nowDateData.nowDateKey}`;
+}
+initCalendar();

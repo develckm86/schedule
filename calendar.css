@@ -6,8 +6,27 @@
   border: 1px solid;
 }
 .day-container{
-  width: 600px;
-  margin: 0 10px;
+  margin-top: 60px;
+}
+.day-container>.month_container{
+  grid-column: 1/8;
+  text-align: center;
+  border-bottom: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px 30px;
+}
+.month_container>.month_name{
+  font-size: 1.2em;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 #dayEx {
   display: none;
@@ -20,14 +39,9 @@
   margin-bottom: 10px;
 }
 #calendarContainer{
-  width: auto;
-  transition: tansform 0.3s ease-in-out;
-  transform: translateX(-500px);
-  height: 700px;
-  display: flex;
   border: 1px solid;
-  overflow-x: scroll;
-  position: absolute;
+  height: 800px;
+  overflow-y: auto;
 }
 .day-name, .day-container {
   display: grid;
@@ -48,7 +62,7 @@
 }
 
 .empty {
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .day-number {
