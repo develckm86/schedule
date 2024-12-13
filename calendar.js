@@ -10,6 +10,9 @@ const renderDateData={};
 let selectedDateData=null;
 // Example schedule data
 const scheduleData={};
+const scheduleNodes={};
+var observer=null;
+
 const cloneDayEx=function(dayNumber,addClassName){
   const dayClone = dayEx.cloneNode(true);
   dayClone.removeAttribute('id');
@@ -94,13 +97,40 @@ class DateData{
 //   202405 : dayContainerEx,
 //   202406 : dayContainerEx,
 // }
-const scheduleNodes={};
+
+const observerCallback=function(entries,inerObserver){
+  entries.forEach( async entry =>{
+    if(entry.isIntersecting){ //달력 끝에 도달했을 때
+      console.log(entry.target.dataset.nodeKey);
+      let nodeKey=entry.target.dataset.nodeKey;
+      let dateData=renderDateData[nodeKey];
+      let nextDateKey=dateData.nextDateKey;
+      let nextdateData=await renderCalendar(new Date(nextDateKey));
+      const calendarNode=scheduleNodes[nextdateData.nowDateNodeKey];
+      calendarContainer.appendChild(calendarNode);
+      
+      setTimeout(() => {
+        observer.observe(calendarNode);
+      }, 0); // Delay observer.observe to ensure DOM update
+      console.log(calendarNode);
+      
+      //inerObserver.unobserve(entry.target); //인터섹션 옵저버 제거
+    }
+  });
+}
+const observerOptions={
+  threshold: 0.5,
+  rootMargin: '0px',
+  root:calendarContainer
+}
+
+var observer=new IntersectionObserver(observerCallback,observerOptions);
 
 // 캘린더 렌더링
 const renderCalendar=async function (date=new Date(), encode="ko") {
 
   const dateData=new DateData(date,encode);
-  console.log(dateData.nowDateNodeKey);
+  
   if(dateData.nowDateNodeKey in renderDateData){
     console.log('이미 렌더링된 달입니다.');
     return;
@@ -108,9 +138,9 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
   renderDateData[dateData.nowDateNodeKey]=dateData;
   const dayContainer=dayContainerEx.cloneNode(true);
   dayContainer.id=dateData.nowDateKey;
-  //calendarContainer.appendChild(dayContainer);
+  dayContainer.dataset.nodeKey=dateData.nowDateNodeKey;
+  scheduleNodes[dateData.nowDateNodeKey]=dayContainer;
 
-  //3달치 데이터를 가져옴
   const resArr=await fetch(`./data/${dateData.nowDateUrl}`);
 
   if(resArr.status===200){
@@ -118,16 +148,17 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
     for(let key in schedule){
       scheduleData[key]=schedule[key];
       scheduleData[key]["dateData"]=dateData;
-      scheduleNodes[dateData.nowDateNodeKey]=dayContainer;
     }
   console.log(scheduleData);
   }
 
+  console.log(dateData);
   //이번 달 이름 추가
   const monthName=monthNameEx.cloneNode(true);
   monthName.removeAttribute('id');
   monthName.querySelector('.month_name').innerText=dateData.monthString;
   monthName.style.gridColumn=`${dateData.firstDay+1} / 8`;
+  
   dayContainer.appendChild(monthName);    
 
   
@@ -153,20 +184,20 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
 const calendarNodesAppend=function(dateData){
   
 }
-const nextMonthButtonClick=async function(){
+// const nextMonthButtonClick=async function(){
 
-  console.log(scheduleData);
+//   console.log(scheduleData);
 
 
-  if(scheduleData[selectedDateData.nextDateNodeKey]){
-    console.log("이미 렌더링된 달입니다.???");
-    return;
-  }
-}
-const prevMonthButtonClick=async function(){
-  const prevDateData=await renderCalendar(selectedDateData.prevDate);
-  calendarNodesAppend(prevDateData);
-}
+//   if(scheduleData[selectedDateData.nextDateNodeKey]){
+//     console.log("이미 렌더링된 달입니다.???");
+//     return;
+//   }
+// }
+// const prevMonthButtonClick=async function(){
+//   const prevDateData=await renderCalendar(selectedDateData.prevDate);
+//   calendarNodesAppend(prevDateData);
+// }
 const initCalendar= async function(){
   const nowDateData=await renderCalendar();
   let selectedDateData=nowDateData;
@@ -175,6 +206,10 @@ const initCalendar= async function(){
 
   for(let key in scheduleNodes){
     calendarContainer.appendChild(scheduleNodes[key]);
+    //인터섹션 옵저버 추가 (무한스크롤구현)
+    console.log(scheduleNodes[key]);
+    observer.observe(scheduleNodes[key]); 
+
   }
   window.location.href=`./#${nowDateData.nowDateKey}`;
 }
