@@ -1,3 +1,9 @@
+#dayEx,#dayContainerEx,#monthNameEx,#scheduleLiEx{
+  display: none;
+}
+h1{
+  text-align: center;
+}
 #calendar{
   max-width: 800px;
   height: 850px;
