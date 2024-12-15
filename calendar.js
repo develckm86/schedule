@@ -38,12 +38,18 @@ class DateData{
     //현재 날짜
     this.nowDate=date;
     this.nowYear=this.nowDate.getFullYear();
-    this.nowMonth=this.nowDate.getMonth()+1;
+    this.nowMonth=this.nowDate.getMonth();
+    this.firstDay=new Date(this.nowYear,this.nowMonth,1).getDay();//1일의 요일
+    this.lastDate=new Date(this.nowYear,this.nowMonth+1,0);//마지막 날짜객체
+    this.lastDay=this.lastDate.getDay();//마지막 날짜의 요일
+    this.lastDateNum=this.lastDate.getDate();//마지막 날짜
+
+    this.nowMonth+=1;
+    
     this.nowDateKey=`${this.nowYear}-${this.nowMonth}`;    
     this.nowDateNodeKey=Number(`${this.nowYear}${(this.nowMonth < 10)?'0':''}${this.nowMonth}`);
     this.nowDateUrl=`${this.nowYear}_${this.nowMonth}_schedule.json`;
 
-    //this.nowDay=this.nowDate.getDate();
 
     //이전 달
     this.prevYear=(this.nowMonth-1)===0?this.nowYear-1:this.nowYear;
@@ -54,10 +60,6 @@ class DateData{
     this.nextMonth=(this.nowMonth+1)===13?1:this.nowMonth+1;
    
     
-    this.firstDay=new Date(this.nowYear,this.nowMonth,1).getDay();//1일의 요일
-    this.lastDate=new Date(this.nowYear,this.nowMonth+1,0);//마지막 날짜객체
-    this.lastDay=this.lastDate.getDay();//마지막 날짜의 요일
-    this.lastDateNum=this.lastDate.getDate();//마지막 날짜
 
 
     //다음 달
@@ -97,22 +99,38 @@ class DateData{
 //   202405 : dayContainerEx,
 //   202406 : dayContainerEx,
 // }
-
+//
 const observerCallback=function(entries,inerObserver){
   entries.forEach( async entry =>{
-    if(entry.isIntersecting){ //달력 끝에 도달했을 때
-      console.log(entry.target.dataset.nodeKey);
-      let nodeKey=entry.target.dataset.nodeKey;
-      let dateData=renderDateData[nodeKey];
-      let nextDateKey=dateData.nextDateKey;
-      let nextdateData=await renderCalendar(new Date(nextDateKey));
-      const calendarNode=scheduleNodes[nextdateData.nowDateNodeKey];
-      calendarContainer.appendChild(calendarNode);
+    if (entry.isIntersecting) { // 달력 끝에 도달했을 때
+      let nodeKey = entry.target.id;
+      let dateData = renderDateData[nodeKey];
+
       
-      setTimeout(() => {
+      if (entry.boundingClientRect.top < 0) { // 스크롤을 올릴 때
+        console.log("up");
+        let prevDateKey = dateData.prevDateKey;
+        let prevDateNodeKey=dateData.prevDateNodeKey;
+        if(prevDateNodeKey in scheduleNodes) return;
+
+        let prevdateData = await renderCalendar(new Date(prevDateKey));
+        const calendarNode = scheduleNodes[prevdateData.nowDateNodeKey];
+        calendarContainer.insertBefore(calendarNode, calendarContainer.firstChild);
+        
         observer.observe(calendarNode);
-      }, 0); // Delay observer.observe to ensure DOM update
-      console.log(calendarNode);
+      }else{
+        console.log("down");
+        let nextDateKey = dateData.nextDateKey;
+        let nextDateNodeKey=dateData.nextDateNodeKey
+        if(nextDateNodeKey in scheduleNodes) return;
+
+        let nextdateData = await renderCalendar(new Date(nextDateKey));        
+        const calendarNode = scheduleNodes[nextdateData.nowDateNodeKey];
+        calendarContainer.appendChild(calendarNode);
+        
+        observer.observe(calendarNode);
+      }  
+     
       
       //inerObserver.unobserve(entry.target); //인터섹션 옵저버 제거
     }
@@ -137,8 +155,7 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
   }
   renderDateData[dateData.nowDateNodeKey]=dateData;
   const dayContainer=dayContainerEx.cloneNode(true);
-  dayContainer.id=dateData.nowDateKey;
-  dayContainer.dataset.nodeKey=dateData.nowDateNodeKey;
+  dayContainer.id=dateData.nowDateNodeKey;
   scheduleNodes[dateData.nowDateNodeKey]=dayContainer;
 
   const resArr=await fetch(`./data/${dateData.nowDateUrl}`);
@@ -149,10 +166,8 @@ const renderCalendar=async function (date=new Date(), encode="ko") {
       scheduleData[key]=schedule[key];
       scheduleData[key]["dateData"]=dateData;
     }
-  console.log(scheduleData);
   }
 
-  console.log(dateData);
   //이번 달 이름 추가
   const monthName=monthNameEx.cloneNode(true);
   monthName.removeAttribute('id');
@@ -199,18 +214,29 @@ const calendarNodesAppend=function(dateData){
 //   calendarNodesAppend(prevDateData);
 // }
 const initCalendar= async function(){
-  const nowDateData=await renderCalendar();
-  let selectedDateData=nowDateData;
+  const nowDate=new Date();
+  const nowDateData=await renderCalendar(nowDate);
+  selectedDateData=nowDateData;
+  console.log(nowDateData);
+  
   await renderCalendar(nowDateData.prevDate);
   await renderCalendar(nowDateData.nextDate);  
 
   for(let key in scheduleNodes){
     calendarContainer.appendChild(scheduleNodes[key]);
     //인터섹션 옵저버 추가 (무한스크롤구현)
-    console.log(scheduleNodes[key]);
-    observer.observe(scheduleNodes[key]); 
-
+    let scheduleNode=scheduleNodes[key];
+    
+    if(scheduleNode.id==nowDateData.nowDateNodeKey){
+      let nowDay=scheduleNode.querySelector([`[data-day="${nowDate.getDate()}"]`]);
+      nowDay.id="now"
+      observer.unobserve(scheduleNode)
+    }else{
+      observer.observe(scheduleNode); 
+    }
   }
-  window.location.href=`./#${nowDateData.nowDateKey}`;
+  
+  
+  window.location.href=`./#${nowDateData.nowDateNodeKey}`;
 }
 initCalendar();

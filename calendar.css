@@ -1,9 +1,16 @@
+body{
+  background-color: rgba(29, 27, 32, 1);
+  margin: 0;
+  padding: 0;
+  color: white;
+}
 #dayEx,#dayContainerEx,#monthNameEx,#scheduleLiEx{
   display: none;
 }
 h1{
   text-align: center;
 }
+
 #calendar{
   max-width: 800px;
   height: 850px;
@@ -25,10 +32,10 @@ h1{
 }
 .month_container>.month_name{
   font-size: 1.2em;
-  height: 60px;
   width: 60px;
+  /* height: 60px;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,43 +57,85 @@ h1{
   overflow-y: auto;
   scrollbar-width: none;
 }
-.day-name, .day-container {
+.day-name,.day-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 1px;
 }
-.day {
+.day-container>.day {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   padding: 1px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  height: 100px;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 130px;
   overflow: auto;
   position: relative;
 }
+.day-container>.day:nth-child(2),
+.day-container>.day:nth-child(9),
+.day-container>.day:nth-child(16),
+.day-container>.day:nth-child(23),
+.day-container>.day:nth-child(30),
+.day-container>.day:nth-child(37) {
+  color: red !important;
+}
+.day-container>.day:nth-child(8),
+.day-container>.day:nth-child(15),
+.day-container>.day:nth-child(22),
+.day-container>.day:nth-child(29),
+.day-container>.day:nth-child(36),
+.day-container>.day:nth-child(43) {
+  color: blue !important;
+}
+#now>.day-number{
+  background-color: #333;
+  color: white !important;
+  border-radius: 50%;
+}
 
+.day-container>.day#now:nth-child(2)>.day-number,
+.day-container>.day#now:nth-child(9)>.day-number,
+.day-container>.day#now:nth-child(16)>.day-number,
+.day-container>.day#now:nth-child(23)>.day-number,
+.day-container>.day#now:nth-child(30)>.day-number,
+.day-container>.day#now:nth-child(37)>.day-number {
+  background-color:  red !important;
+  color: white !important;
+}
+.day-container>.day#now:nth-child(8)>.day-number,
+.day-container>.day#now:nth-child(15)>.day-number,
+.day-container>.day#now:nth-child(22)>.day-number,
+.day-container>.day#now:nth-child(29)>.day-number,
+.day-container>.day#now:nth-child(36)>.day-number,
+.day-container>.day#now:nth-child(43)>.day-number {
+  color: blue !important;
+  color: white !important;
+}
 .empty {
   opacity: 0;
 }
 
 .day-number {
-  padding: 2px 0;
-  font-size: 1.2em;
+  height: 30px;
+  line-height: 30px;
+  width: 30px;
+  text-align: center;
+  font-size: 1em;
   font-weight: bold;
 }
 
 .day-schedule {
-  font-size: 0.9em;
+  font-size: 0.8em;
+  font-weight: 300;
   margin: 1px 0;
   text-align: left;
-  color: #555;
+  color: rgba(255, 255, 255, .7);
   list-style: none;
   padding: 0;
   width: 100%;
-  border-top: 1px solid #ccc;
+  /* border-top: 1px solid #ccc; */
 }
 .day-schedule>.schedule-list{
   margin: 0;
@@ -96,7 +145,7 @@ h1{
 }
 
 .day:hover {
-  background-color: #d0e8f2;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* 작은 화면: 태블릿 이하 */
