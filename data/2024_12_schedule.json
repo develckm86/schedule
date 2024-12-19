@@ -1,16 +1,199 @@
 {
-  "2024-12":{
-    "1": [{"hour":500,"title":"아침 조깅", "icon":"icon-run"}, {"hour":530,"title":"프로젝트 회의", "icon":"icon-meeting"}],
-    "2": [{"hour":500,"title":"고객과 통화", "icon":"icon-call"}, {"hour":730,"title":"팀 점심식사", "icon":"icon-lunch"}],
-    "3": [{"hour":700,"title":"코드 리뷰", "icon":"icon-code"}, {"hour":800,"title":"요가 수업", "icon":"icon-yoga"}],
-    "5": [{"hour":900,"title":"병원 예약", "icon":"icon-doctor"}],
-    "8": [{"hour":1000,"title":"쇼핑", "icon":"icon-shopping"}, {"hour":1030,"title":"친구들과 저녁", "icon":"icon-dinner"}],
-    "10": [{"hour":900,"title":"스프린트 계획", "icon":"icon-sprint"}],
-    "15": [{"hour":900,"title":"주간 동기화 회의", "icon":"icon-meeting"}, {"hour":1200,"title":"온라인 강의 세션", "icon":"icon-online-class"}],
-    "18": [{"hour":1000,"title":"치과 방문", "icon":"icon-dental"}, {"hour":1030,"title":"저녁 산책", "icon":"icon-walk"}],
-    "22": [{"hour":600,"title":"크리스마스 쇼핑", "icon":"icon-shopping"}],
-    "25": [{"hour":830,"title":"크리스마스 파티", "icon":"icon-party"}],
-    "28": [{"hour":700,"title":"팀 야유회", "icon":"icon-party"}, {"hour":900,"title":"보드게임", "icon":"icon-board-game"}],
-    "31": [{"hour":1400,"title":"새해 카운트다운", "icon":"icon-countdown"}]
+  "2024-12": {
+    "1": [
+      {
+        "eventName": "아침 조깅",
+        "type": "timed",
+        "hour": [
+          500,
+          530
+        ],
+        "icon": "🏃"
+      },
+      {
+        "eventName": "프로젝트 회의",
+        "type": "timed",
+        "hour": [
+          530,
+          600
+        ],
+        "icon": "📅"
+      }
+    ],
+    "2": [
+      {
+        "eventName": "고객과 통화",
+        "type": "timed",
+        "hour": [
+          500,
+          600
+        ],
+        "icon": "📞"
+      },
+      {
+        "eventName": "팀 점심식사",
+        "type": "timed",
+        "hour": [
+          730,
+          830
+        ],
+        "icon": "🍴"
+      }
+    ],
+    "3": [
+      {
+        "eventName": "코드 리뷰",
+        "type": "timed",
+        "hour": [
+          700,
+          800
+        ],
+        "icon": "💻"
+      },
+      {
+        "eventName": "요가 수업",
+        "type": "timed",
+        "hour": [
+          800,
+          900
+        ],
+        "icon": "🧘"
+      }
+    ],
+    "5": [
+      {
+        "eventName": "병원 예약",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "🏥"
+      }
+    ],
+    "8": [
+      {
+        "eventName": "쇼핑",
+        "type": "timed",
+        "hour": [
+          1000,
+          1030
+        ],
+        "icon": "🛒"
+      },
+      {
+        "eventName": "친구들과 저녁",
+        "type": "timed",
+        "hour": [
+          1030,
+          1200
+        ],
+        "icon": "🍽️"
+      }
+    ],
+    "10": [
+      {
+        "eventName": "스프린트 계획",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "📈"
+      }
+    ],
+    "15": [
+      {
+        "eventName": "주간 동기화 회의",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "온라인 강의 세션",
+        "type": "timed",
+        "hour": [
+          1200,
+          1300
+        ],
+        "icon": "💻"
+      }
+    ],
+    "18": [
+      {
+        "eventName": "치과 방문",
+        "type": "timed",
+        "hour": [
+          1000,
+          1030
+        ],
+        "icon": "🦷"
+      },
+      {
+        "eventName": "저녁 산책",
+        "type": "timed",
+        "hour": [
+          1030,
+          1200
+        ],
+        "icon": "🚶"
+      }
+    ],
+    "22": [
+      {
+        "eventName": "크리스마스 쇼핑",
+        "type": "timed",
+        "hour": [
+          600,
+          800
+        ],
+        "icon": "🎄"
+      }
+    ],
+    "25": [
+      {
+        "eventName": "크리스마스 파티",
+        "type": "timed",
+        "hour": [
+          830,
+          1200
+        ],
+        "icon": "🎉"
+      }
+    ],
+    "28": [
+      {
+        "eventName": "팀 야유회",
+        "type": "timed",
+        "hour": [
+          700,
+          900
+        ],
+        "icon": "🎈"
+      },
+      {
+        "eventName": "보드게임",
+        "type": "timed",
+        "hour": [
+          900,
+          1100
+        ],
+        "icon": "🎲"
+      }
+    ],
+    "31": [
+      {
+        "eventName": "새해 카운트다운",
+        "type": "timed",
+        "hour": [
+          1400,
+          1600
+        ],
+        "icon": "🎆"
+      }
+    ]
   }
 }

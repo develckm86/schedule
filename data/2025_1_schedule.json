@@ -1,16 +1,199 @@
 {
-  "2025-1":{
-    "1": [{"hour":900,"title":"새해 맞이 산책", "icon":"icon-walk"}, {"hour":1100,"title":"가족 모임", "icon":"icon-party"}],
-    "2": [{"hour":800,"title":"연간 계획 수립", "icon":"icon-meeting"}, {"hour":1200,"title":"동료와 점심", "icon":"icon-lunch"}],
-    "3": [{"hour":1000,"title":"프로젝트 킥오프", "icon":"icon-meeting"}, {"hour":1400,"title":"헬스장", "icon":"icon-run"}],
-    "5": [{"hour":900,"title":"주간 장보기", "icon":"icon-shopping"}],
-    "8": [{"hour":1000,"title":"팀 회의", "icon":"icon-meeting"}, {"hour":1500,"title":"커피 미팅", "icon":"icon-meeting"}],
-    "10": [{"hour":900,"title":"코드 리뷰", "icon":"icon-code"}],
-    "15": [{"hour":1000,"title":"분기 계획 회의", "icon":"icon-meeting"}, {"hour":1400,"title":"개발자 세미나", "icon":"icon-online-class"}],
-    "18": [{"hour":900,"title":"건강검진", "icon":"icon-doctor"}, {"hour":1400,"title":"영화 관람", "icon":"icon-party"}],
-    "22": [{"hour":1000,"title":"프로젝트 발표", "icon":"icon-meeting"}],
-    "25": [{"hour":1100,"title":"주말 브런치", "icon":"icon-lunch"}],
-    "28": [{"hour":900,"title":"스프린트 리뷰", "icon":"icon-meeting"}, {"hour":1500,"title":"팀 빌딩", "icon":"icon-party"}],
-    "31": [{"hour":1000,"title":"월간 마무리 회의", "icon":"icon-meeting"}]
+  "2025-1": {
+    "1": [
+      {
+        "eventName": "새해 맞이 산책",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "🏃"
+      },
+      {
+        "eventName": "가족 모임",
+        "type": "timed",
+        "hour": [
+          1100,
+          1300
+        ],
+        "icon": "🎉"
+      }
+    ],
+    "2": [
+      {
+        "eventName": "연간 계획 수립",
+        "type": "timed",
+        "hour": [
+          800,
+          1000
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "동료와 점심",
+        "type": "timed",
+        "hour": [
+          1200,
+          1300
+        ],
+        "icon": "🍴"
+      }
+    ],
+    "3": [
+      {
+        "eventName": "프로젝트 킥오프",
+        "type": "timed",
+        "hour": [
+          1000,
+          1200
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "헬스장",
+        "type": "timed",
+        "hour": [
+          1400,
+          1500
+        ],
+        "icon": "🏋️"
+      }
+    ],
+    "5": [
+      {
+        "eventName": "주간 장보기",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "🛒"
+      }
+    ],
+    "8": [
+      {
+        "eventName": "팀 회의",
+        "type": "timed",
+        "hour": [
+          1000,
+          1200
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "커피 미팅",
+        "type": "timed",
+        "hour": [
+          1500,
+          1600
+        ],
+        "icon": "☕"
+      }
+    ],
+    "10": [
+      {
+        "eventName": "코드 리뷰",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "💻"
+      }
+    ],
+    "15": [
+      {
+        "eventName": "분기 계획 회의",
+        "type": "timed",
+        "hour": [
+          1000,
+          1200
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "개발자 세미나",
+        "type": "timed",
+        "hour": [
+          1400,
+          1600
+        ],
+        "icon": "💻"
+      }
+    ],
+    "18": [
+      {
+        "eventName": "건강검진",
+        "type": "timed",
+        "hour": [
+          900,
+          1000
+        ],
+        "icon": "🏥"
+      },
+      {
+        "eventName": "영화 관람",
+        "type": "timed",
+        "hour": [
+          1400,
+          1600
+        ],
+        "icon": "🎥"
+      }
+    ],
+    "22": [
+      {
+        "eventName": "프로젝트 발표",
+        "type": "timed",
+        "hour": [
+          1000,
+          1200
+        ],
+        "icon": "📅"
+      }
+    ],
+    "25": [
+      {
+        "eventName": "주말 브런치",
+        "type": "timed",
+        "hour": [
+          1100,
+          1300
+        ],
+        "icon": "🍴"
+      }
+    ],
+    "28": [
+      {
+        "eventName": "스프린트 리뷰",
+        "type": "timed",
+        "hour": [
+          900,
+          1100
+        ],
+        "icon": "📅"
+      },
+      {
+        "eventName": "팀 빌딩",
+        "type": "timed",
+        "hour": [
+          1500,
+          1700
+        ],
+        "icon": "🎉"
+      }
+    ],
+    "31": [
+      {
+        "eventName": "월간 마무리 회의",
+        "type": "timed",
+        "hour": [
+          1000,
+          1200
+        ],
+        "icon": "📅"
+      }
+    ]
   }
-}
+}    
