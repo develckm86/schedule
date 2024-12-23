@@ -243,6 +243,6 @@ const initCalendar = async function () {
         }
     }
 
-    window.location.href = `./#${nowDateData.nowDateNodeKey}`;
+    //window.location.href = `./#${nowDateData.nowDateNodeKey}`;
 }
 export {initCalendar, renderCalendar, renderDateData, selectedDateData, scheduleData, scheduleNodes, observer}
