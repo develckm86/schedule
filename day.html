@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendar App</title>
+  <title>day-full App</title>
   <style>
     :root {
       --red-color: #ff7b7b;
@@ -21,13 +21,13 @@
       color: white;
     }
 
-    .calendar {
+    .day-full {
       display: grid;
       grid-template-rows: auto 1fr;
       height: 100vh;
     }
 
-    .calendar-header {
+    .day-full-header {
       padding: 1rem;
       background-color: #2c2c2e;
       display: flex;
@@ -35,17 +35,17 @@
       align-items: center;
     }
 
-    .calendar-header h1 {
+    .day-full-header h1 {
       margin: 0;
       font-size: 1.5rem;
     }
 
-    .calendar-header .navigation {
+    .day-full-header .navigation {
       display: flex;
       gap: 1rem;
     }
 
-    .calendar-header button {
+    .day-full-header button {
       background: none;
       border: none;
       color: white;
@@ -179,8 +179,8 @@
   </style>
 </head>
 <body>
-<div class="calendar">
-  <div class="calendar-header">
+<div class="day-full">
+  <div class="day-full-header">
     <h1>2024년 12월 20일</h1>
     <div class="navigation">
       <button>&lt;</button>

@@ -14,7 +14,7 @@
     <header></header>
     <main>
         <h1>스케줄 어플</h1>
-        <div id="dayContText" style="width: 800px; height: 800px; margin:auto">
+        <div id="dayContText">
             <div class="day" data-day="">
                 <div class="day-number">10</div>
                 <ul class="all-day-schedule"></ul>
@@ -26,9 +26,128 @@
                     </li>
                 </ul>
             </div>
-
         </div>
         <div>
+            <div id="dayFullEx" class="day-full none">
+<!--                <div class="day-full-header">-->
+<!--                    <h1>2024년 12월 20일</h1>-->
+<!--                    <div class="navigation">-->
+<!--                        <button>&lt;</button>-->
+<!--                        <button>&gt;</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="day-number"></div>
+                <ul class="all-day-schedule"></ul>
+                <ul class="day-schedule"></ul>
+
+                <div class="event-list">
+                    <div id="events">
+                        <div id="allDayEvents">
+                            <div><span>하루 종일</span></div>
+                            <ul id="allDayUl"></ul>
+                        </div>
+                        <ul id="timeline">
+                            <li><span>00:00</span></li>
+                            <li><span>01:00</span></li>
+                            <li><span>02:00</span></li>
+                            <li><span>03:00</span></li>
+                            <li><span>04:00</span></li>
+                            <li><span>05:00</span></li>
+                            <li><span>06:00</span></li>
+                            <li><span>07:00</span></li>
+                            <li><span>08:00</span></li>
+                            <li><span>09:00</span></li>
+                            <li><span>10:00</span></li>
+                            <li><span>11:00</span></li>
+                            <li><span>12:00</span></li>
+                            <li><span>13:00</span></li>
+                            <li><span>14:00</span></li>
+                            <li><span>15:00</span></li>
+                            <li><span>16:00</span></li>
+                            <li><span>17:00</span></li>
+                            <li><span>18:00</span></li>
+                            <li><span>19:00</span></li>
+                            <li><span>20:00</span></li>
+                            <li><span>21:00</span></li>
+                            <li><span>22:00</span></li>
+                            <li><span>23:00</span></li>
+                        </ul>
+                    </div>
+                    <form class="new-event-form none" id="newEventForm">
+                        <div class="event-container">
+                            <div id="eventEx" class="event red" data-time="00:00,01:00">
+                                <small class="time"></small>
+                                <div class="content">
+                                    <span class="icon">🎉</span>
+                                    <span class="title">새 이벤트</span>
+                                </div>
+                            </div>
+                            <li id="allDayEventEx" class="all-event red">
+                                <div class="content">
+                                    <span class="icon">🎉</span>
+                                    <span class="title">새 이벤트</span>
+                                </div>
+                            </li>
+                        </div>
+
+                        <label for="eventName">이벤트 이름</label>
+                        <input type="text" id="eventName" name="eventName" placeholder="이벤트 이름" value="새 이벤트">
+
+                        <label for="eventType">이벤트 유형</label>
+                        <select id="eventType" name="eventType">
+                            <option value="timed" selected>Timed</option>
+                            <option value="allDay">All Day</option>
+                        </select>
+
+                        <label for="startTime">시작 시간</label>
+                        <input type="time" id="startTime" name="startTime">
+
+                        <label for="endTime">종료 시간</label>
+                        <input type="time" id="endTime" name="endTime">
+
+                        <label>이벤트 색상
+                            <div id="eventColorPreview" class="color-radio">
+                                <input checked type="radio" id="colorRed" name="eventColor" value="red">
+                                <label for="colorRed">
+                                    <div class="color-box" style="background-color: var(--red-color);"></div>
+                                </label>
+
+                                <input type="radio" id="colorOrange" name="eventColor" value="orange">
+                                <label for="colorOrange">
+                                    <div class="color-box" style="background-color: var(--orange-color);"></div>
+                                </label>
+
+                                <input type="radio" id="colorYellow" name="eventColor" value="yellow">
+                                <label for="colorYellow">
+                                    <div class="color-box" style="background-color: var(--yellow-color);"></div>
+                                </label>
+
+                                <input type="radio" id="colorGreen" name="eventColor" value="green">
+                                <label for="colorGreen">
+                                    <div class="color-box" style="background-color: var(--green-color);"></div>
+                                </label>
+
+                                <input type="radio" id="colorBlue" name="eventColor" value="blue">
+                                <label for="colorBlue">
+                                    <div class="color-box" style="background-color: var(--blue-color);"></div>
+                                </label>
+                            </div>
+                        </label>
+
+                        <label for="eventIcon">이벤트 아이콘</label>
+                        <select id="eventIcon" name="eventIcon">
+                            <option selected value="🎉">🎉 파티</option>
+                            <option value="🏥">🏥 병원</option>
+                            <option value="🍴">🍴 식사</option>
+                            <option value="💻">💻 작업</option>
+                            <option value="📞">📞 전화</option>
+                        </select>
+
+                        <button type="submit" id="addEventButton">이벤트 추가</button>
+                    </form>
+                </div>
+            </div>
+
             <div id="dayEx" class="day" data-day="">
                 <div class="day-number"></div>
                 <ul class="all-day-schedule"></ul>

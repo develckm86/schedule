@@ -1,9 +1,7 @@
 import {loadHoliday} from "./ko_holiday.js";
 
-const dayEx = document.getElementById('dayEx');
-const currentMonthLabel = document.getElementById('currentMonth');
-const prevMonthButton = document.getElementById('prevMonthBtn');
-const nextMonthButton = document.getElementById('nextMonthBtn');
+//const dayEx = document.getElementById('dayEx');
+const dayEx = document.getElementById('dayFullEx');
 const scheduleLiEx = document.getElementById('scheduleLiEx');
 const calendarContainer = document.getElementById('calendarContainer');
 const dayContainerEx = document.getElementById('dayContainerEx');
@@ -15,6 +13,113 @@ let selectedDateData = null;
 const scheduleData = {};
 const scheduleNodes = {};
 let observer = null;
+
+
+
+const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
+const eventForm = document.forms["newEventForm"];
+const eventEx = document.getElementById("eventEx");
+const timeline = document.getElementById("timeline");
+
+// Object to manage events
+const events = {};
+
+// const init = function () {
+//     const startTime = eventForm.startTime;
+//     const endTime = eventForm.endTime;
+//     const time = eventEx.querySelector(".time");
+//     const now = new Date();
+//     const pad = (num) => num.toString().padStart(2, '0');
+//
+//     const defaultStartHour = now.getHours();
+//     const defaultStartMinute = now.getMinutes();
+//     const defaultStart = `${pad(defaultStartHour)}:${pad(defaultStartMinute)}`;
+//     startTime.value = defaultStart;
+//
+//
+//     let defaultEndHour = defaultStartHour + 1;
+//     let defaultEndMinute = defaultStartMinute;
+//
+//     // Correctly handle the rollover from 23 to 00
+//     if (defaultEndHour === 24) {
+//         defaultEndHour = 0;
+//         // Optionally increment the day (if your date picker supports it)
+//         // now.setDate(now.getDate() + 1) ;
+//     }
+//
+//     const defaultEnd = `${pad(defaultEndHour)}:${pad(defaultEndMinute)}`;
+//     endTime.value = defaultEnd;
+//
+//     eventEx.dataset.time = defaultStart + "," + defaultEnd;
+//     time.innerText = defaultStart + " - " + defaultEnd;
+// };
+// init();
+class AddEventFormData{
+    constructor(form) {
+        this.eventName = form.eventName.value;
+        this.eventColor = form.eventColor.value;
+        this.eventIcon = form.eventIcon.value;
+        this.startTime = form.startTime.value;
+        this.endTime = form.endTime.value;
+        this.timeRange = `${this.startTime} - ${this.endTime}`;
+        const [startHours, startMinutes] = this.startTime.split(":").map(Number);
+        const [endHours, endMinutes] = this.endTime.split(":").map(Number);
+        this.startDecimal = startHours + startMinutes / 60;
+        this.endDecimal = endHours + endMinutes / 60;
+    }
+    getEventNode(){
+        const node = eventEx.cloneNode(true);
+        node.removeAttribute("id");
+        const time = node.querySelector(".time");
+        const title = node.querySelector(".title");
+        const icon = node.querySelector(".icon");
+        node.dataset.time = this.timeRange;
+        node.classList.add(this.eventColor);
+        node.style.top = `${this.startDecimal * EVENT_HEIGHT}px`;
+        node.style.height = `${(this.endDecimal - this.startDecimal) * EVENT_HEIGHT}px`;
+        title.innerText = this.eventName;
+        icon.innerText = this.eventIcon;
+        time.innerText = this.timeRange;
+
+        return node;
+    };
+}
+// Add new event
+eventForm.onsubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new AddEventFormData(eventForm);
+    console.log(formData);
+    const eventNode = formData.getEventNode();
+
+    // Check for overlapping events
+    for (const [key, value] of Object.entries(events)) {
+        const [existingStart, existingEnd] = key.split(" - ").map((time) => {
+            const [hours, minutes] = time.split(":").map(Number);
+            return hours + minutes / 60;
+        });
+
+        if (
+            (formData.startDecimal < existingEnd && formData.startDecimal > existingStart) ||
+            (formData.endDecimal > existingStart && formData.endDecimal < existingEnd) ||
+            (formData.startDecimal <= existingStart && formData.endDecimal >= existingEnd) ||
+            (formData.startDecimal >= existingStart && formData.endDecimal <= existingEnd)
+        ) {
+            const replace = confirm(`"${value.eventName}"와 겹칩니다. 대체하시겠습니까?`);
+            if (!replace) {
+                return; // Cancel adding the event
+            }
+            // Remove the overlapping event
+            timeline.removeChild(value.node);
+            delete events[key];
+            break;
+        }
+    }
+
+    // Add new event to the timeline and events object
+    timeline.appendChild(eventNode);
+    events[formData.timeRange] = { ...formData, node: eventNode };
+};
 
 const cloneDayEx = function (dayNumber, addClassName) {
     const dayClone = dayEx.cloneNode(true);
@@ -169,7 +274,7 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     dayContainer.id = dateData.nowDateNodeKey;
     scheduleNodes[dateData.nowDateNodeKey] = dayContainer;
     // 공휴일 가져오기
-    const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
+    //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
 
 
 
@@ -202,7 +307,12 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     // 이번 달의 날짜들을 추가합니다
     for (let i = 1; i <= dateData.lastDateNum; i++) {
         const dayNode = cloneDayEx(i);
-        //
+        dayNode.addEventListener('click', function () {
+            //const eventList=dayNode.querySelector('.event-list');
+            dayNode.classList.remove('none');
+            dayNode.classList.add('full');
+            //dayNode.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        })
         dayContainer.appendChild(dayNode);
         const scheduleUl = dayNode.querySelector('.day-schedule');
         if (scheduleData[dateData.nowDateKey]?.hasOwnProperty(i)) {
