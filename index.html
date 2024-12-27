@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="calendar.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./calendar.css">
     <title>프로젝트</title>
     <script type="module" src="./ko_holiday.js"></script>
     <script defer type="module" src="./calendar.js"></script>
@@ -14,142 +14,123 @@
     <header></header>
     <main>
         <h1>스케줄 어플</h1>
-        <div id="dayContText">
-            <div class="day" data-day="">
-                <div class="day-number">10</div>
-                <ul class="all-day-schedule"></ul>
-                <ul class="day-schedule">
-                    <li class="schedule-list">
-                        <div class="icon">👥</div>
-                        <div class="date">3시~4시</div>
-                        <div class="title">주간회의</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div id="eventEx" class="event red" data-time="00:00,01:00">
-            <small class="time">00:00-01:00</small>
-            <div class="content">
-                <span class="icon">🎉</span>
-                <span class="title">새 이벤트</span>
-            </div>
-        </div>
-        <ul>
-            <li id="allDayEventEx" class="all-event red">
+        <div style="display: none;">
+            <div id="eventEx" class="event red" data-time="00:00,01:00">
+                <small class="time">00:00-01:00</small>
                 <div class="content">
                     <span class="icon">🎉</span>
                     <span class="title">새 이벤트</span>
                 </div>
-            </li>
-
-        </ul>
-        <div>
-            <div id="dayFullEx" class="day-full none">
-<!--                <div class="day-full-header">-->
-<!--                    <h1>2024년 12월 20일</h1>-->
-<!--                    <div class="navigation">-->
-<!--                        <button>&lt;</button>-->
-<!--                        <button>&gt;</button>-->
-<!--                    </div>-->
-<!--                </div>-->
+            </div>
+            <ul>
+                <li id="allDayEventEx" class="all-event red">
+                    <div class="content">
+                        <span class="icon">🎉</span>
+                        <span class="title">새 이벤트</span>
+                    </div>
+                </li>
+            </ul>
+            <div id="dayFullEx" class="day-box">
                 <div class="day-number"></div>
                 <ul class="all-day-schedule"></ul>
                 <ul class="day-schedule"></ul>
 
-                <div class="event-list">
-                    <div class="events">
-                        <div class="all-day-events">
-                            <div><span>하루 종일</span></div>
-                            <ul class="all-day-ul"></ul>
+                <div class="day-full none">
+                    <div class="event-list">
+                        <div class="events">
+                            <div class="all-day-events">
+                                <div><span>하루 종일</span></div>
+                                <ul class="all-day-ul"></ul>
+                            </div>
+                            <ul class="timeline">
+                                <li><span>00:00</span></li>
+                                <li><span>01:00</span></li>
+                                <li><span>02:00</span></li>
+                                <li><span>03:00</span></li>
+                                <li><span>04:00</span></li>
+                                <li><span>05:00</span></li>
+                                <li><span>06:00</span></li>
+                                <li><span>07:00</span></li>
+                                <li><span>08:00</span></li>
+                                <li><span>09:00</span></li>
+                                <li><span>10:00</span></li>
+                                <li><span>11:00</span></li>
+                                <li><span>12:00</span></li>
+                                <li><span>13:00</span></li>
+                                <li><span>14:00</span></li>
+                                <li><span>15:00</span></li>
+                                <li><span>16:00</span></li>
+                                <li><span>17:00</span></li>
+                                <li><span>18:00</span></li>
+                                <li><span>19:00</span></li>
+                                <li><span>20:00</span></li>
+                                <li><span>21:00</span></li>
+                                <li><span>22:00</span></li>
+                                <li><span>23:00</span></li>
+                            </ul>
                         </div>
-                        <ul class="timeline">
-                            <li><span>00:00</span></li>
-                            <li><span>01:00</span></li>
-                            <li><span>02:00</span></li>
-                            <li><span>03:00</span></li>
-                            <li><span>04:00</span></li>
-                            <li><span>05:00</span></li>
-                            <li><span>06:00</span></li>
-                            <li><span>07:00</span></li>
-                            <li><span>08:00</span></li>
-                            <li><span>09:00</span></li>
-                            <li><span>10:00</span></li>
-                            <li><span>11:00</span></li>
-                            <li><span>12:00</span></li>
-                            <li><span>13:00</span></li>
-                            <li><span>14:00</span></li>
-                            <li><span>15:00</span></li>
-                            <li><span>16:00</span></li>
-                            <li><span>17:00</span></li>
-                            <li><span>18:00</span></li>
-                            <li><span>19:00</span></li>
-                            <li><span>20:00</span></li>
-                            <li><span>21:00</span></li>
-                            <li><span>22:00</span></li>
-                            <li><span>23:00</span></li>
-                        </ul>
-                    </div>
-                    <div class="form-container">
-                        <form class="new-event-form none" id="newEventForm">
-                            <label>
-                                <strong>제목</strong>
-                                <input type="text" name="eventName" placeholder="이벤트 이름" value="새 이벤트">
-                            </label>
+                        <div class="form-container">
+                            <form class="new-event-form none" id="newEventForm">
+                                <label>
+                                    <strong>제목</strong>
+                                    <input type="text" name="eventName" placeholder="이벤트 이름" value="새 이벤트">
+                                </label>
 
-                            <label>
-                                <strong>이벤트 유형</strong>
-                                <select name="eventType">
-                                    <option value="timed" selected>Timed</option>
-                                    <option value="allDay">All Day</option>
+                                <label>
+                                    <strong>이벤트 유형</strong>
+                                    <select name="eventType">
+                                        <option value="timed" selected>Timed</option>
+                                        <option value="allDay">All Day</option>
+                                    </select>
+                                </label>
+                                    <strong>시작 및 종료 시간</strong>
+                                    <div class="time-range" >
+                                        <input type="time"  name="startTime">
+                                        ~
+                                        <input type="time"  name="endTime">
+                                    </div>
+                                </label>
+
+                                <label>
+                                    <strong>이벤트 색상</strong>
+                                    <div  class="color-radio">
+                                        <input checked type="radio" id="colorRed" name="eventColor" value="red">
+                                        <label for="colorRed">
+                                            <div class="color-box" style="background-color: var(--red-color);"></div>
+                                        </label>
+
+                                        <input type="radio" id="colorOrange" name="eventColor" value="orange">
+                                        <label for="colorOrange">
+                                            <div class="color-box" style="background-color: var(--orange-color);"></div>
+                                        </label>
+
+                                        <input type="radio" id="colorYellow" name="eventColor" value="yellow">
+                                        <label for="colorYellow">
+                                            <div class="color-box" style="background-color: var(--yellow-color);"></div>
+                                        </label>
+
+                                        <input type="radio" id="colorGreen" name="eventColor" value="green">
+                                        <label for="colorGreen">
+                                            <div class="color-box" style="background-color: var(--green-color);"></div>
+                                        </label>
+
+                                        <input type="radio" id="colorBlue" name="eventColor" value="blue">
+                                        <label for="colorBlue">
+                                            <div class="color-box" style="background-color: var(--blue-color);"></div>
+                                        </label>
+                                    </div>
+                                </label>
+
+                                <select name="eventIcon">
+                                    <option selected value="🎉">🎉 파티</option>
+                                    <option value="🏥">🏥 병원</option>
+                                    <option value="🍴">🍴 식사</option>
+                                    <option value="💻">💻 작업</option>
+                                    <option value="📞">📞 전화</option>
                                 </select>
-                            </label>
-                                <strong>시작 및 종료 시간</strong>
-                                <div class="time-range" >
-                                    <input type="time"  name="startTime">
-                                    ~
-                                    <input type="time"  name="endTime">
-                                </div>
-                            </label>
-
-                            <label>
-                                <strong>이벤트 색상</strong>
-                                <div  class="color-radio">
-                                    <input checked type="radio" id="colorRed" name="eventColor" value="red">
-                                    <label for="colorRed">
-                                        <div class="color-box" style="background-color: var(--red-color);"></div>
-                                    </label>
-
-                                    <input type="radio" id="colorOrange" name="eventColor" value="orange">
-                                    <label for="colorOrange">
-                                        <div class="color-box" style="background-color: var(--orange-color);"></div>
-                                    </label>
-
-                                    <input type="radio" id="colorYellow" name="eventColor" value="yellow">
-                                    <label for="colorYellow">
-                                        <div class="color-box" style="background-color: var(--yellow-color);"></div>
-                                    </label>
-
-                                    <input type="radio" id="colorGreen" name="eventColor" value="green">
-                                    <label for="colorGreen">
-                                        <div class="color-box" style="background-color: var(--green-color);"></div>
-                                    </label>
-
-                                    <input type="radio" id="colorBlue" name="eventColor" value="blue">
-                                    <label for="colorBlue">
-                                        <div class="color-box" style="background-color: var(--blue-color);"></div>
-                                    </label>
-                                </div>
-                            </label>
-
-                            <select name="eventIcon">
-                                <option selected value="🎉">🎉 파티</option>
-                                <option value="🏥">🏥 병원</option>
-                                <option value="🍴">🍴 식사</option>
-                                <option value="💻">💻 작업</option>
-                                <option value="📞">📞 전화</option>
-                            </select>
-                            <button type="submit" id="addEventButton">이벤트 추가</button>
-                        </form>
+                                <button type="submit" id="addEventButton">이벤트 추가</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,10 +145,12 @@
               <div class="date"></div>
               <div class="title"></div>
             </li>
-            <div id="dayContainerEx" class="day-container" id="202402">
+            <div id="dayContainerEx" class="month-container" id="202402">
             </div>
         </div>
-        <div id="monthNameEx" class="month_container"> <div class="month_name">12월</div></div>
+        <div id="monthNameEx" class="month-name-container">
+            <div class="month-name">12월</div>
+        </div>
         <div id="calendar">
             <div class="calendar-header">
               <button id="prevMonthBtn">◀</button>

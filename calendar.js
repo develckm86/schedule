@@ -1,10 +1,12 @@
 import {loadHoliday} from "./ko_holiday.js";
 
 //const dayEx = document.getElementById('dayEx');
+const dayContainerEx = document.getElementById('dayContainerEx');
 const dayEx = document.getElementById('dayFullEx');
 const scheduleLiEx = document.getElementById('scheduleLiEx');
 const calendarContainer = document.getElementById('calendarContainer');
-const dayContainerEx = document.getElementById('dayContainerEx');
+const calendar = document.getElementById('calendar');
+
 const monthNameEx = document.getElementById('monthNameEx');
 
 const renderDateData = {};
@@ -54,6 +56,32 @@ const events = {};
 //     time.innerText = defaultStart + " - " + defaultEnd;
 // };
 // init();
+
+
+function createKeyframes(animationName, keyframes) {
+    // 스타일 요소 생성
+    let styleSheet = document.querySelector('#dynamic-keyframes');
+    if (!styleSheet) {
+        styleSheet = document.createElement('style');
+        styleSheet.id = 'dynamic-keyframes';
+        document.head.appendChild(styleSheet);
+    }
+
+    // Keyframes 문자열 생성
+    const keyframesRules = Object.entries(keyframes)
+        .map(([percentage, rules]) => {
+            const rule = Object.entries(rules)
+                .map(([prop, value]) => `${prop}: ${value};`)
+                .join(' ');
+            return `${percentage} { ${rule} }`;
+        })
+        .join(' ');
+
+    // Keyframes 추가
+    styleSheet.sheet.insertRule(`@keyframes ${animationName} { ${keyframesRules} }`, styleSheet.sheet.cssRules.length);
+}
+
+
 class AddEventFormData{
     constructor(form) {
         this.eventName = form.eventName.value;
@@ -208,7 +236,7 @@ class DateData {
 //   202406 : dayContainerEx,
 // }
 //
-const observerCallback = function (entries, inerObserver) {
+const observerCallback = function (entries, innerObserver) {
     entries.forEach(async entry => {
         if (entry.isIntersecting) { // 달력 끝에 도달했을 때
             let nodeKey = entry.target.id;
@@ -216,37 +244,38 @@ const observerCallback = function (entries, inerObserver) {
 
 
             if (entry.boundingClientRect.top < 0) { // 스크롤을 올릴 때
-                console.log("up");
+               //console.log("up");
                 let prevDateKey = dateData.prevDateKey;
                 let prevDateNodeKey = dateData.prevDateNodeKey;
                 if (prevDateNodeKey in scheduleNodes) return;
-                let prevdateData = await renderCalendar(new Date(prevDateKey));
-                const calendarNode = scheduleNodes[prevdateData.nowDateNodeKey];
+                let prevDateData = await renderCalendar(new Date(prevDateKey));
+                const calendarNode = scheduleNodes[prevDateData.nowDateNodeKey];
                 calendarContainer.insertBefore(calendarNode, calendarContainer.firstChild);
 
                 observer.observe(calendarNode);
             } else {
-                console.log("down");
+                //console.log("down");
                 let nextDateKey = dateData.nextDateKey;
                 let nextDateNodeKey = dateData.nextDateNodeKey
                 if (nextDateNodeKey in scheduleNodes) return;
 
-                let nextdateData = await renderCalendar(new Date(nextDateKey));
-                const calendarNode = scheduleNodes[nextdateData.nowDateNodeKey];
+                let nextDateData = await renderCalendar(new Date(nextDateKey));
+                const calendarNode = scheduleNodes[nextDateData.nowDateNodeKey];
                 calendarContainer.appendChild(calendarNode);
 
                 observer.observe(calendarNode);
+
             }
+            console.log(entry.target);
 
-
-            //inerObserver.unobserve(entry.target); //인터섹션 옵저버 제거
+            observer.unobserve(entry.target); //인터섹션 옵저버 제거
         }
     });
 }
 const observerOptions = {
     threshold: 0.5,
     rootMargin: '0px',
-    root: calendarContainer
+    root: calendar
 }
 observer = new IntersectionObserver(observerCallback, observerOptions);
 
@@ -291,7 +320,7 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     //이번 달 이름 추가
     const monthName = monthNameEx.cloneNode(true);
     monthName.removeAttribute('id');
-    monthName.querySelector('.month_name').innerText = dateData.monthString;
+    monthName.querySelector('.month-name').innerText = dateData.monthString;
     monthName.style.gridColumn = `${dateData.firstDay + 1} / 8`;
 
     dayContainer.appendChild(monthName);
@@ -306,12 +335,90 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
 
     // 이번 달의 날짜들을 추가합니다
     for (let i = 1; i <= dateData.lastDateNum; i++) {
+
         const dayNode = cloneDayEx(i);
         dayNode.addEventListener('click', function () {
-            //const eventList=dayNode.querySelector('.event-list');
-            dayNode.classList.remove('none');
-            dayNode.classList.add('full');
-            //dayNode.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            const dayFullNode=this.querySelector(".day-full");
+            const rect = dayFullNode.getBoundingClientRect();
+            console.log(rect.top, rect.left);
+            let width = rect.width;
+            let height = rect.height;
+            let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
+            let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
+
+            dayFullNode.classList.remove("none");
+            dayFullNode.classList.add("full");
+
+            width+="px";
+            height+="px";
+            top+="px";
+            left+="px";
+
+            const keyframes = {
+                '0%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+                    width: width,
+                    height: height,
+                    left: left,
+                    top: top
+
+                },
+                '25%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+                    border: '1px solid #fff',
+                    width: width,
+                    height: height,
+                    left: left,
+                    top: top
+
+                },
+                '45%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+                    border: '1px solid #fff',
+                    width: width,
+                    height: height,
+                    left: left,
+                    top: top
+                },
+
+                '50%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+                    border: '1px solid #fff',
+                    left: left,
+                    top: top,
+                    width: width,
+                    height: height
+                },
+                '75%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+
+                    border: '1px solid #fff',
+                    left: '0',
+                    top: '0',
+                    width: width,
+                    height: height,
+                },
+                '100%': {
+                    position: 'fixed',
+                    boxSizing: 'border-box',
+
+                    border: '0px solid #fff',
+                    left: '0',
+                    top: '0',
+                    width: '100%',
+                    height: '100%',
+                },
+            };
+            createKeyframes('fade-in', keyframes);
+
+            // 애니메이션 시작
+            dayFullNode.style.animation = 'fade-in 2s forwards';
+
         })
         dayContainer.appendChild(dayNode);
         const scheduleUl = dayNode.querySelector('.day-schedule');
@@ -353,6 +460,6 @@ const initCalendar = async function () {
         }
     }
 
-    //window.location.href = `./#${nowDateData.nowDateNodeKey}`;
+    window.location.href = `./#${nowDateData.nowDateNodeKey}`;
 }
 export {initCalendar, renderCalendar, renderDateData, selectedDateData, scheduleData, scheduleNodes, observer}
