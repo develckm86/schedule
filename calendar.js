@@ -1,9 +1,9 @@
-import {loadHoliday} from "./ko_holiday.js";
-
 //const dayEx = document.getElementById('dayEx');
 const dayContainerEx = document.getElementById('dayContainerEx');
 const dayEx = document.getElementById('dayFullEx');
 const scheduleLiEx = document.getElementById('scheduleLiEx');
+const allDayLiEx = document.getElementById('allDayLiEx');
+
 const calendarContainer = document.getElementById('calendarContainer');
 const calendar = document.getElementById('calendar');
 
@@ -13,14 +13,13 @@ const renderDateData = {};
 let selectedDateData = null;
 // Example schedule data
 const scheduleData = {};
-const scheduleNodes = {};
 let observer = null;
 
 
 
 const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
 const eventForm = document.forms["newEventForm"];
-const eventEx = document.getElementById("eventEx");
+const eventLiEx = document.getElementById("eventLiEx");
 const timeline = document.getElementById("timeline");
 
 // Object to manage events
@@ -29,7 +28,7 @@ const events = {};
 // const init = function () {
 //     const startTime = eventForm.startTime;
 //     const endTime = eventForm.endTime;
-//     const time = eventEx.querySelector(".time");
+//     const time = eventLiEx.querySelector(".time");
 //     const now = new Date();
 //     const pad = (num) => num.toString().padStart(2, '0');
 //
@@ -52,7 +51,7 @@ const events = {};
 //     const defaultEnd = `${pad(defaultEndHour)}:${pad(defaultEndMinute)}`;
 //     endTime.value = defaultEnd;
 //
-//     eventEx.dataset.time = defaultStart + "," + defaultEnd;
+//     eventLiEx.dataset.time = defaultStart + "," + defaultEnd;
 //     time.innerText = defaultStart + " - " + defaultEnd;
 // };
 // init();
@@ -96,7 +95,7 @@ class AddEventFormData{
         this.endDecimal = endHours + endMinutes / 60;
     }
     getEventNode(){
-        const node = eventEx.cloneNode(true);
+        const node = eventLiEx.cloneNode(true);
         node.removeAttribute("id");
         const time = node.querySelector(".time");
         const title = node.querySelector(".title");
@@ -158,14 +157,28 @@ const cloneDayEx = function (dayNumber, addClassName) {
     //dayClone.classList.add('empty');//투명하게 만들기
     return dayClone;
 }
+const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
+    schedules.forEach(schedule => {
+        console.log(schedule)
+        const liClone = allDayLiEx.cloneNode(true);
+        liClone.removeAttribute('id');
+        const icon = liClone.querySelector('.icon');
+        let title = liClone.querySelector('.title');
+        title.textContent = schedule.eventName;
+        icon.textContent = schedule.icon;
+
+        allDayUlNode.appendChild(liClone);
+    });
+}
 const scheduleLiAppendScheduleUl = function (schedules, scheduleUlNode) {
     schedules.forEach(schedule => {
         const liClone = scheduleLiEx.cloneNode(true);
         liClone.removeAttribute('id');
-        liClone.querySelector('.icon').classList.add(schedule.icon);
+        const icon = liClone.querySelector('.icon');
         let title = liClone.querySelector('.title');
         title.dataset.time = Math.floor(schedule.hour / 60) + ':' + schedule.hour % 60;
-        title.textContent = schedule.title;
+        title.textContent = schedule.eventName;
+        icon.textContent = schedule.icon;
         scheduleUlNode.appendChild(liClone);
     });
 }
@@ -227,15 +240,6 @@ class DateData {
     }
 }
 
-// const scheduleNodes={
-//   202401 : dayContainerEx,
-//   202402 : dayContainerEx,
-//   202403 : dayContainerEx,
-//   202404 : dayContainerEx,
-//   202405 : dayContainerEx,
-//   202406 : dayContainerEx,
-// }
-//
 const observerCallback = function (entries, innerObserver) {
     entries.forEach(async entry => {
         if (entry.isIntersecting) { // 달력 끝에 도달했을 때
@@ -247,20 +251,27 @@ const observerCallback = function (entries, innerObserver) {
                //console.log("up");
                 let prevDateKey = dateData.prevDateKey;
                 let prevDateNodeKey = dateData.prevDateNodeKey;
-                if (prevDateNodeKey in scheduleNodes) return;
+
+                if (prevDateNodeKey in renderDateData) return;
+
                 let prevDateData = await renderCalendar(new Date(prevDateKey));
-                const calendarNode = scheduleNodes[prevDateData.nowDateNodeKey];
+                if (!prevDateData) return;
+
+                const calendarNode = renderDateData[prevDateData.nowDateNodeKey];
                 calendarContainer.insertBefore(calendarNode, calendarContainer.firstChild);
 
                 observer.observe(calendarNode);
             } else {
                 //console.log("down");
                 let nextDateKey = dateData.nextDateKey;
-                let nextDateNodeKey = dateData.nextDateNodeKey
-                if (nextDateNodeKey in scheduleNodes) return;
+                let nextDateNodeKey = dateData.nextDateNodeKey;
+
+                if (nextDateNodeKey in renderDateData) return;
 
                 let nextDateData = await renderCalendar(new Date(nextDateKey));
-                const calendarNode = scheduleNodes[nextDateData.nowDateNodeKey];
+                if (!nextDateData) return;
+
+                const calendarNode = renderDateData[nextDateData.nowDateNodeKey];
                 calendarContainer.appendChild(calendarNode);
 
                 observer.observe(calendarNode);
@@ -278,157 +289,157 @@ const observerOptions = {
     root: calendar
 }
 observer = new IntersectionObserver(observerCallback, observerOptions);
-
-// 캘린더 렌더링
-/**
- * 특정 날짜에 대한 캘린더를 렌더링합니다.
- * 이 함수는 스케줄 데이터를 가져오고, 캘린더 세부 정보를 DOM에 업데이트하며, 렌더링된 데이터를 캐싱 목적으로 저장합니다.
- *
- * @param {Date} [date=new Date()] - 렌더링할 대상 날짜입니다. 기본값은 현재 날짜입니다.
- * @param {string} [encode="ko"] - 일반적으로 로컬라이제이션에 사용되는 인코딩 유형입니다. 기본값은 "ko"입니다.
- * @returns {Promise<Object>} 생성된 날짜 데이터 객체를 포함하는 Promise를 반환하며, 이 객체에는 현재 캘린더 달에 대한 정보가 포함됩니다.
- *
- * @throws {Error} 데이터 가져오기에 실패하거나 제공된 날짜 및 인코딩 입력값이 유효하지 않은 경우 오류를 발생시킵니다.
- */
-const renderCalendar = async function (date = new Date(), encode = "ko") {
-
-    const dateData = new DateData(date, encode);
-
-    if (dateData.nowDateNodeKey in renderDateData) {
-        console.log('이미 렌더링된 달입니다.');
-        return;
-    }
-    renderDateData[dateData.nowDateNodeKey] = dateData;
-    const dayContainer = dayContainerEx.cloneNode(true);
-    dayContainer.id = dateData.nowDateNodeKey;
-    scheduleNodes[dateData.nowDateNodeKey] = dayContainer;
-    // 공휴일 가져오기
-    //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
-
-
-
-    const resArr = await fetch(`./data/${dateData.nowDateUrl}`);
-
-    if (resArr.status === 200) {
-        const schedule = await resArr.json();
-        for (let key in schedule) {
-            scheduleData[key] = schedule[key];
-            scheduleData[key]["dateData"] = dateData;
-        }
-    }
-
-    //이번 달 이름 추가
+const createMonthNameNode=function (dateData) {
     const monthName = monthNameEx.cloneNode(true);
     monthName.removeAttribute('id');
     monthName.querySelector('.month-name').innerText = dateData.monthString;
     monthName.style.gridColumn = `${dateData.firstDay + 1} / 8`;
+    return monthName;
+}
+const dyaNodeClickHandler=function () {
+    const dayFullNode=this.querySelector(".day-full");
+    const rect = dayFullNode.getBoundingClientRect();
+    console.log(rect.top, rect.left);
+    let width = rect.width;
+    let height = rect.height;
+    let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
+    let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
 
-    dayContainer.appendChild(monthName);
+    dayFullNode.classList.remove("none");
+    dayFullNode.classList.add("full");
+
+    width+="px";
+    height+="px";
+    top+="px";
+    left+="px";
+
+    const keyframes = {
+        '0%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+            width: width,
+            height: height,
+            left: left,
+            top: top
+
+        },
+        '25%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+            border: '1px solid #fff',
+            width: width,
+            height: height,
+            left: left,
+            top: top
+
+        },
+        '45%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+            border: '1px solid #fff',
+            width: width,
+            height: height,
+            left: left,
+            top: top
+        },
+
+        '50%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+            border: '1px solid #fff',
+            left: left,
+            top: top,
+            width: width,
+            height: height
+        },
+        '75%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+
+            border: '1px solid #fff',
+            left: '0',
+            top: '0',
+            width: width,
+            height: height,
+        },
+        '100%': {
+            position: 'fixed',
+            boxSizing: 'border-box',
+
+            border: '0px solid #fff',
+            left: '0',
+            top: '0',
+            width: '100%',
+            height: '100%',
+        },
+    };
+    createKeyframes('fade-in', keyframes);
+
+    // 애니메이션 시작
+    dayFullNode.style.animation = 'fade-in 2s forwards';
+
+}
+const renderCalendar = async function (date = new Date(), encode = "ko") {
+    if(Number.isNaN(date.valueOf())) return;
+
+    const dateData = new DateData(date, encode);
+    if (dateData.nowDateNodeKey in renderDateData) {
+        console.log('이미 렌더링된 달입니다.');
+        return;
+    }
+    renderDateData[dateData.nowDateNodeKey]={}
+    renderDateData[dateData.nowDateNodeKey]["data"] = dateData;
+    const dayContainer = dayContainerEx.cloneNode(true);
+    dayContainer.id = dateData.nowDateNodeKey;
+    renderDateData[dateData.nowDateNodeKey]["node"] = dayContainer;
+
+
+    console.log(renderDateData);
+    // 공휴일 가져오기
+    //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
+
+    const resArr = await fetch(`./data/${dateData.nowDateUrl}`);
+    if (resArr.status === 200) {
+        const schedule = await resArr.json();
+        renderDateData[dateData.nowDateNodeKey]["schedule"] = schedule;
+    }
+
+    //이번 달 이름 추가
+
+    const monthNameNode = createMonthNameNode(dateData);
+    dayContainer.appendChild(monthNameNode);
 
 
     // 이전 달의 날짜들을 추가합니다
     for (let i = 0; i < dateData.firstDay; i++) {
         const day = dateData.lastDateNum - dateData.firstDay + i + 1;
         dayContainer.appendChild(cloneDayEx(day, 'empty'));
-
     }
 
     // 이번 달의 날짜들을 추가합니다
     for (let i = 1; i <= dateData.lastDateNum; i++) {
 
         const dayNode = cloneDayEx(i);
-        dayNode.addEventListener('click', function () {
-            const dayFullNode=this.querySelector(".day-full");
-            const rect = dayFullNode.getBoundingClientRect();
-            console.log(rect.top, rect.left);
-            let width = rect.width;
-            let height = rect.height;
-            let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
-            let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
-
-            dayFullNode.classList.remove("none");
-            dayFullNode.classList.add("full");
-
-            width+="px";
-            height+="px";
-            top+="px";
-            left+="px";
-
-            const keyframes = {
-                '0%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-                    width: width,
-                    height: height,
-                    left: left,
-                    top: top
-
-                },
-                '25%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-                    border: '1px solid #fff',
-                    width: width,
-                    height: height,
-                    left: left,
-                    top: top
-
-                },
-                '45%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-                    border: '1px solid #fff',
-                    width: width,
-                    height: height,
-                    left: left,
-                    top: top
-                },
-
-                '50%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-                    border: '1px solid #fff',
-                    left: left,
-                    top: top,
-                    width: width,
-                    height: height
-                },
-                '75%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-
-                    border: '1px solid #fff',
-                    left: '0',
-                    top: '0',
-                    width: width,
-                    height: height,
-                },
-                '100%': {
-                    position: 'fixed',
-                    boxSizing: 'border-box',
-
-                    border: '0px solid #fff',
-                    left: '0',
-                    top: '0',
-                    width: '100%',
-                    height: '100%',
-                },
-            };
-            createKeyframes('fade-in', keyframes);
-
-            // 애니메이션 시작
-            dayFullNode.style.animation = 'fade-in 2s forwards';
-
-        })
+        //확대 이벤트 추가
+        dayNode.addEventListener("click", dyaNodeClickHandler);
         dayContainer.appendChild(dayNode);
-        const scheduleUl = dayNode.querySelector('.day-schedule');
-        if (scheduleData[dateData.nowDateKey]?.hasOwnProperty(i)) {
-            scheduleLiAppendScheduleUl(scheduleData[dateData.nowDateKey][i], scheduleUl);
+        const scheduleUl = dayNode.querySelector('.timed-schedule');
+        const allDayUl = dayNode.querySelector('.all-day-schedule');
+        const schedule=renderDateData[dateData.nowDateNodeKey]?.schedule[i];
+        if (schedule) {
+            console.log(schedule)
+            const allDay=schedule["allDay"];
+            const timed=schedule["timed"];
+            //const multiDay=schedule["multiDay"];
+            allDayLiAppendScheduleUl(allDay, allDayUl);
+            scheduleLiAppendScheduleUl(timed, scheduleUl);
+
+
         }
-        // 공휴일 내용 추가
-        if (scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`]) {
-            scheduleLiAppendScheduleUl(scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`], scheduleUl);
-        }
+        // // 공휴일 내용 추가
+        // if (scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`]) {
+        //     scheduleLiAppendScheduleUl(scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`], scheduleUl);
+        // }
 
     }
 
@@ -446,10 +457,10 @@ const initCalendar = async function () {
         renderCalendar(nowDateData.nextDate),
     ]);
 
-    for (let key in scheduleNodes) {
-        calendarContainer.appendChild(scheduleNodes[key]);
+    for (let key in renderDateData) {
+        calendarContainer.appendChild(renderDateData[key]["node"]);
         //인터섹션 옵저버 추가 (무한스크롤구현)
-        let scheduleNode = scheduleNodes[key];
+        let scheduleNode = renderDateData[key]["node"];
 
         if (scheduleNode.id == nowDateData.nowDateNodeKey) {
             let nowDay = scheduleNode.querySelector([`[data-day="${nowDate.getDate()}"]`]);
@@ -462,4 +473,4 @@ const initCalendar = async function () {
 
     window.location.href = `./#${nowDateData.nowDateNodeKey}`;
 }
-export {initCalendar, renderCalendar, renderDateData, selectedDateData, scheduleData, scheduleNodes, observer}
+export {initCalendar, renderCalendar, renderDateData, selectedDateData, scheduleData, observer}

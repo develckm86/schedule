@@ -1,199 +1,216 @@
 {
-  "2024-12": {
-    "1": [
+  "1": {
+    "allDay": [
       {
-        "eventName": "아침 조깅",
-        "type": "timed",
-        "hour": [
-          500,
-          530
-        ],
-        "icon": "🏃"
+        "eventName": "연말 프로젝트 마감일",
+        "icon": "📅",
+        "color": "red"
       },
       {
-        "eventName": "프로젝트 회의",
-        "type": "timed",
-        "hour": [
-          530,
-          600
-        ],
-        "icon": "📅"
-      }
-    ],
-    "2": [
-      {
-        "eventName": "고객과 통화",
-        "type": "timed",
-        "hour": [
-          500,
-          600
-        ],
-        "icon": "📞"
+        "eventName": "연말 축하 행사",
+        "type": "allDay",
+        "icon": "🎉",
+        "color": "yellow"
       },
       {
-        "eventName": "팀 점심식사",
-        "type": "timed",
-        "hour": [
-          730,
-          830
-        ],
-        "icon": "🍴"
+        "eventName": "연간 검토 회의",
+        "type": "allDay",
+        "icon": "📊",
+        "color": "blue"
       }
     ],
-    "3": [
+    "timed": [
       {
-        "eventName": "코드 리뷰",
+        "eventName": "팀 연말 회의",
         "type": "timed",
         "hour": [
-          700,
-          800
+          1400,
+          1500
         ],
-        "icon": "💻"
+        "icon": "👥",
+        "color": "orange"
       },
       {
-        "eventName": "요가 수업",
-        "type": "timed",
-        "hour": [
-          800,
-          900
-        ],
-        "icon": "🧘"
-      }
-    ],
-    "5": [
-      {
-        "eventName": "병원 예약",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "🏥"
-      }
-    ],
-    "8": [
-      {
-        "eventName": "쇼핑",
+        "eventName": "건강 검진 일정",
         "type": "timed",
         "hour": [
           1000,
-          1030
+          1100
         ],
-        "icon": "🛒"
+        "icon": "🏥",
+        "color": "green"
       },
       {
-        "eventName": "친구들과 저녁",
+        "eventName": "연말 영화 관람",
         "type": "timed",
         "hour": [
-          1030,
-          1200
+          1900,
+          2100
         ],
-        "icon": "🍽️"
-      }
-    ],
-    "10": [
-      {
-        "eventName": "스프린트 계획",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "📈"
-      }
-    ],
-    "15": [
-      {
-        "eventName": "주간 동기화 회의",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "📅"
+        "icon": "🎬",
+        "color": "red"
       },
       {
-        "eventName": "온라인 강의 세션",
+        "eventName": "연간 보고서 작성",
+        "type": "allDay",
+        "icon": "📝",
+        "color": "yellow"
+      },
+      {
+        "eventName": "연말 점심 초대",
         "type": "timed",
         "hour": [
           1200,
           1300
         ],
-        "icon": "💻"
+        "icon": "🍴",
+        "color": "orange"
       }
     ],
-    "18": [
+    "multiDay": [
       {
-        "eventName": "치과 방문",
-        "type": "timed",
-        "hour": [
-          1000,
-          1030
+        "eventName": "연말 워크숍",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-12-10",
+          "2024-12-12"
         ],
-        "icon": "🦷"
+        "hour": [
+          1100,
+          1160
+        ],
+        "icon": "🌐",
+        "color": "blue"
       },
       {
-        "eventName": "저녁 산책",
-        "type": "timed",
-        "hour": [
-          1030,
-          1200
+        "eventName": "프로젝트 마감 준비 기간",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-12-10",
+          "2024-12-15"
         ],
-        "icon": "🚶"
+        "hour": [
+          900,
+          1700
+        ],
+        "icon": "📅",
+        "color": "red"
+      },
+      {
+        "eventName": "연간 예산 보고 기간",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-12-18",
+          "2024-12-22"
+        ],
+        "hour": [
+          1000,
+          1600
+        ],
+        "icon": "📈",
+        "color": "green"
+      }
+    ]
+  },
+  "2": {
+    "allDay": [
+      {
+        "eventName": "12월 월간 회의",
+        "icon": "📅",
+        "color": "green"
+      },
+      {
+        "eventName": "연말 서류 제출",
+        "type": "allDay",
+        "icon": "🗂️",
+        "color": "red"
       }
     ],
-    "22": [
+    "timed": [
       {
-        "eventName": "크리스마스 쇼핑",
+        "eventName": "연말 코드 리뷰",
         "type": "timed",
         "hour": [
-          600,
-          800
+          1500,
+          1600
         ],
-        "icon": "🎄"
-      }
-    ],
-    "25": [
+        "icon": "💻",
+        "color": "blue"
+      },
       {
-        "eventName": "크리스마스 파티",
+        "eventName": "연말 가족 저녁",
         "type": "timed",
         "hour": [
-          830,
-          1200
+          1800,
+          2000
         ],
-        "icon": "🎉"
+        "icon": "🍽️",
+        "color": "red"
       }
     ],
-    "28": [
+    "multiDay": [
       {
-        "eventName": "팀 야유회",
+        "eventName": "연말 제품 테스트",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-12-20",
+          "2024-12-25"
+        ],
+        "hour": [
+          800,
+          1800
+        ],
+        "icon": "🧪",
+        "color": "orange"
+      }
+    ]
+  },
+  "3": {
+    "allDay": [
+      {
+        "eventName": "연말 임시 휴일",
+        "icon": "🚫",
+        "color": "yellow"
+      }
+    ],
+    "timed": [
+      {
+        "eventName": "운동센터 방문",
         "type": "timed",
         "hour": [
           700,
-          900
+          800
         ],
-        "icon": "🎈"
+        "icon": "🏋️",
+        "color": "orange"
       },
       {
-        "eventName": "보드게임",
+        "eventName": "연말 사업 계획 회의",
         "type": "timed",
         "hour": [
-          900,
-          1100
+          1000,
+          1200
         ],
-        "icon": "🎲"
+        "icon": "📊",
+        "color": "yellow"
       }
     ],
-    "31": [
+    "multiDay": [
       {
-        "eventName": "새해 카운트다운",
-        "type": "timed",
-        "hour": [
-          1400,
-          1600
+        "eventName": "연말 개발 스프린트",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-12-15",
+          "2024-12-20"
         ],
-        "icon": "🎆"
+        "hour": [
+          900,
+          1700
+        ],
+        "icon": "🏃",
+        "color": "blue"
       }
     ]
   }
 }
+

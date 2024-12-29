@@ -1,199 +1,116 @@
 {
-  "2025-2": {
-    "1": [
+  "1": {
+    "allDay": [
       {
-        "eventName": "아침 조깅",
-        "type": "timed",
-        "hour": [
-          500,
-          530
-        ],
-        "icon": "🏃"
+        "eventName": "프로젝트 마감일 변경",
+        "icon": "📅",
+        "color": "red"
       },
       {
-        "eventName": "프로젝트 회의",
-        "type": "timed",
-        "hour": [
-          530,
-          600
-        ],
-        "icon": "📅"
-      }
-    ],
-    "2": [
-      {
-        "eventName": "고객과 통화",
-        "type": "timed",
-        "hour": [
-          500,
-          600
-        ],
-        "icon": "📞"
+        "eventName": "근속 기념 행사",
+        "type": "allDay",
+        "icon": "🎉",
+        "color": "yellow"
       },
       {
-        "eventName": "팀 점심식사",
-        "type": "timed",
-        "hour": [
-          730,
-          830
-        ],
-        "icon": "🍴"
+        "eventName": "관리 회의",
+        "type": "allDay",
+        "icon": "📊",
+        "color": "blue"
       }
     ],
-    "3": [
+    "timed": [
       {
-        "eventName": "코드 리뷰",
+        "eventName": "팀 회의",
         "type": "timed",
         "hour": [
-          700,
-          800
-        ],
-        "icon": "💻"
-      },
-      {
-        "eventName": "요가 수업",
-        "type": "timed",
-        "hour": [
-          800,
-          900
-        ],
-        "icon": "🧘"
-      }
-    ],
-    "5": [
-      {
-        "eventName": "병원 예약",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "🏥"
-      }
-    ],
-    "8": [
-      {
-        "eventName": "쇼핑",
-        "type": "timed",
-        "hour": [
-          1000,
-          1030
-        ],
-        "icon": "🛒"
-      },
-      {
-        "eventName": "친구들과 저녁",
-        "type": "timed",
-        "hour": [
-          1030,
-          1200
-        ],
-        "icon": "🍽️"
-      }
-    ],
-    "10": [
-      {
-        "eventName": "스프린트 계획",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "📈"
-      }
-    ],
-    "15": [
-      {
-        "eventName": "주간 동기화 회의",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
-        ],
-        "icon": "📅"
-      },
-      {
-        "eventName": "온라인 강의 세션",
-        "type": "timed",
-        "hour": [
-          1200,
-          1300
-        ],
-        "icon": "💻"
-      }
-    ],
-    "18": [
-      {
-        "eventName": "치과 방문",
-        "type": "timed",
-        "hour": [
-          1000,
-          1030
-        ],
-        "icon": "🦷"
-      },
-      {
-        "eventName": "저녁 산책",
-        "type": "timed",
-        "hour": [
-          1030,
-          1200
-        ],
-        "icon": "🚶"
-      }
-    ],
-    "22": [
-      {
-        "eventName": "크리스마스 쇼핑",
-        "type": "timed",
-        "hour": [
-          600,
-          800
-        ],
-        "icon": "🎄"
-      }
-    ],
-    "25": [
-      {
-        "eventName": "크리스마스 파티",
-        "type": "timed",
-        "hour": [
-          830,
-          1200
-        ],
-        "icon": "🎉"
-      }
-    ],
-    "28": [
-      {
-        "eventName": "팀 야유회",
-        "type": "timed",
-        "hour": [
-          700,
-          900
-        ],
-        "icon": "🎈"
-      },
-      {
-        "eventName": "보드게임",
-        "type": "timed",
-        "hour": [
-          900,
-          1100
-        ],
-        "icon": "🎲"
-      }
-    ],
-    "31": [
-      {
-        "eventName": "새해 카운트다운",
-        "type": "timed",
-        "hour": [
-          1400,
+          1500,
           1600
         ],
-        "icon": "🎆"
+        "icon": "👥",
+        "color": "orange"
+      },
+      {
+        "eventName": "병원 진료 업데이트",
+        "type": "timed",
+        "hour": [
+          1030,
+          1130
+        ],
+        "icon": "🏥",
+        "color": "green"
+      },
+      {
+        "eventName": "영화 관람",
+        "type": "timed",
+        "hour": [
+          1900,
+          2200
+        ],
+        "icon": "🎬",
+        "color": "red"
+      },
+      {
+        "eventName": "주간 리포트 작성",
+        "type": "allDay",
+        "icon": "📝",
+        "color": "yellow"
+      },
+      {
+        "eventName": "점심 약속 업데이트",
+        "type": "timed",
+        "hour": [
+          1300,
+          1400
+        ],
+        "icon": "🍴",
+        "color": "orange"
+      }
+    ],
+    "multiDay": [
+      {
+        "eventName": "팀 빌딩 워크숍 변경",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-10-16",
+          "2024-10-18"
+        ],
+        "hour": [
+          1200,
+          1260
+        ],
+        "icon": "🌐",
+        "color": "blue"
+      },
+      {
+        "eventName": "마감 프로젝트 준비",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-10-15",
+          "2024-10-21"
+        ],
+        "hour": [
+          900,
+          1800
+        ],
+        "icon": "📅",
+        "color": "red"
+      },
+      {
+        "eventName": "회계 보고 기간 변경",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-10-25",
+          "2024-10-31"
+        ],
+        "hour": [
+          1030,
+          1630
+        ],
+        "icon": "📈",
+        "color": "green"
       }
     ]
   }
-}    
+}
+

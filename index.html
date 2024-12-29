@@ -15,15 +15,28 @@
     <main>
         <h1>스케줄 어플</h1>
         <div style="display: none;">
-            <div id="eventEx" class="event red" data-time="00:00,01:00">
-                <small class="time">00:00-01:00</small>
-                <div class="content">
-                    <span class="icon">🎉</span>
-                    <span class="title">새 이벤트</span>
-                </div>
+            <div id="dayEx" class="day" data-day="">
+                <div class="day-number"></div>
+                <ul class="all-day-schedule"></ul>
+                <ul class="timed-schedule"></ul>
+            </div>
+            <div id="dayContainerEx" class="month-container" id="202402">
             </div>
             <ul>
-                <li id="allDayEventEx" class="all-event red">
+                <li id="scheduleLiEx" class="schedule-list">
+                    <span class="icon"></span>
+                    <span class="date"></span>
+                    <span class="title"></span>
+                </li>
+
+                <li id="eventLiEx" class="event red" data-time="00:00,01:00">
+                    <small class="time">00:00-01:00</small>
+                    <div class="content">
+                        <span class="icon"></span>
+                        <span class="title">새 이벤트</span>
+                    </div>
+                </li>
+                <li id="allDayLiEx" class="all-event red">
                     <div class="content">
                         <span class="icon">🎉</span>
                         <span class="title">새 이벤트</span>
@@ -33,7 +46,7 @@
             <div id="dayFullEx" class="day-box">
                 <div class="day-number"></div>
                 <ul class="all-day-schedule"></ul>
-                <ul class="day-schedule"></ul>
+                <ul class="timed-schedule"></ul>
 
                 <div class="day-full none">
                     <div class="event-list">
@@ -135,18 +148,6 @@
                 </div>
             </div>
 
-            <div id="dayEx" class="day" data-day="">
-                <div class="day-number"></div>
-                <ul class="all-day-schedule"></ul>
-                <ul class="day-schedule"></ul>
-            </div>
-            <li id="scheduleLiEx" class="schedule-list">
-              <div class="icon"></div>
-              <div class="date"></div>
-              <div class="title"></div>
-            </li>
-            <div id="dayContainerEx" class="month-container" id="202402">
-            </div>
         </div>
         <div id="monthNameEx" class="month-name-container">
             <div class="month-name">12월</div>

@@ -1,253 +1,299 @@
 {
-  "2024-11": {
-    "1": [
+  "9": {
+    "allDay": [
       {
-        "eventName": "아침 운동",
-        "type": "timed",
-        "hour": [
-          800,
-          830
-        ],
-        "icon": "🏃"
-      },
+        "eventName": "11월 팀 회의",
+        "icon": "📋",
+        "color": "blue"
+      }
+    ],
+    "timed": [
       {
-        "eventName": "팀 미팅",
+        "eventName": "사업 전략 미팅",
         "type": "timed",
         "hour": [
           1000,
-          1100
+          1130
         ],
-        "icon": "📅"
+        "icon": "📊",
+        "color": "green"
       }
     ],
-    "2": [
+    "multiDay": [
       {
-        "eventName": "고객 미팅",
-        "type": "timed",
+        "eventName": "프로젝트 최종 준비",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-01",
+          "2024-11-06"
+        ],
         "hour": [
           900,
-          1000
+          1700
         ],
-        "icon": "📞"
-      },
+        "icon": "🚀",
+        "color": "red"
+      }
+    ]
+  },
+  "10": {
+    "allDay": [
       {
-        "eventName": "팀 런치",
-        "type": "timed",
-        "hour": [
-          1200,
-          1300
-        ],
-        "icon": "🍴"
+        "eventName": "팀 공지 발송",
+        "icon": "📧",
+        "color": "yellow"
       }
     ],
-    "3": [
+    "timed": [
       {
-        "eventName": "코드 리뷰",
+        "eventName": "HR 정책 브리핑",
         "type": "timed",
         "hour": [
-          1000,
-          1100
+          1500,
+          1630
         ],
-        "icon": "💻"
-      },
+        "icon": "👩‍💼",
+        "color": "orange"
+      }
+    ],
+    "multiDay": [
       {
-        "eventName": "요가 클래스",
+        "eventName": "연말 기획 회의",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-03",
+          "2024-11-08"
+        ],
+        "hour": [
+          1000,
+          1800
+        ],
+        "icon": "📑",
+        "color": "blue"
+      }
+    ]
+  },
+  "11": {
+    "allDay": [
+      {
+        "eventName": "재무 검토 회의",
+        "icon": "💼",
+        "color": "green"
+      }
+    ],
+    "timed": [
+      {
+        "eventName": "신제품 디자인 논의",
+        "type": "timed",
+        "hour": [
+          1030,
+          1230
+        ],
+        "icon": "🎨",
+        "color": "purple"
+      }
+    ],
+    "multiDay": [
+      {
+        "eventName": "기술 워크숍",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-08",
+          "2024-11-11"
+        ],
+        "hour": [
+          930,
+          1730
+        ],
+        "icon": "🔧",
+        "color": "yellow"
+      }
+    ]
+  },
+  "12": {
+    "allDay": [
+      {
+        "eventName": "중요 서류 검토",
+        "icon": "📜",
+        "color": "orange"
+      }
+    ],
+    "timed": [
+      {
+        "eventName": "팀 간 협력 회의",
         "type": "timed",
         "hour": [
           1400,
-          1500
+          1530
         ],
-        "icon": "🧘"
+        "icon": "🤝",
+        "color": "green"
       }
     ],
-    "5": [
+    "multiDay": [
       {
-        "eventName": "정기 검진",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
+        "eventName": "시장 분석 준비",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-10",
+          "2024-11-13"
         ],
-        "icon": "🏥"
-      },
+        "hour": [
+          930,
+          1700
+        ],
+        "icon": "📊",
+        "color": "blue"
+      }
+    ]
+  },
+  "13": {
+    "allDay": [
       {
-        "eventName": "프로젝트 회의",
-        "type": "timed",
-        "hour": [
-          1100,
-          1200
-        ],
-        "icon": "📅"
+        "eventName": "회의 결과 보고",
+        "icon": "📃",
+        "color": "red"
       }
     ],
-    "8": [
+    "timed": [
       {
-        "eventName": "장보기",
+        "eventName": "제품 출시 검토",
         "type": "timed",
         "hour": [
           1000,
-          1030
+          1200
         ],
-        "icon": "🛒"
-      },
+        "icon": "🚀",
+        "color": "orange"
+      }
+    ],
+    "multiDay": [
       {
-        "eventName": "친구 모임",
+        "eventName": "파트너사 점검 일정",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-13",
+          "2024-11-16"
+        ],
+        "hour": [
+          930,
+          1600
+        ],
+        "icon": "🔍",
+        "color": "purple"
+      }
+    ]
+  },
+  "14": {
+    "allDay": [
+      {
+        "eventName": "연말 이벤트 기획",
+        "icon": "🎉",
+        "color": "blue"
+      }
+    ],
+    "timed": [
+      {
+        "eventName": "마케팅 전략 회의",
         "type": "timed",
         "hour": [
           1300,
           1430
         ],
-        "icon": "🍽️"
+        "icon": "📈",
+        "color": "orange"
       }
     ],
-    "10": [
+    "multiDay": [
       {
-        "eventName": "스프린트 미팅",
-        "type": "timed",
-        "hour": [
-          900,
-          1000
+        "eventName": "기술 컨퍼런스 발표",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-14",
+          "2024-11-17"
         ],
-        "icon": "📈"
-      },
-      {
-        "eventName": "개발 세션",
-        "type": "timed",
-        "hour": [
-          1400,
-          1500
-        ],
-        "icon": "💻"
-      }
-    ],
-    "15": [
-      {
-        "eventName": "주간 회의",
-        "type": "timed",
         "hour": [
           1000,
-          1100
+          1600
         ],
-        "icon": "📅"
-      },
+        "icon": "🖥️",
+        "color": "green"
+      }
+    ]
+  },
+  "15": {
+    "allDay": [
       {
-        "eventName": "온라인 강의",
-        "type": "timed",
-        "hour": [
-          1400,
-          1500
-        ],
-        "icon": "💻"
+        "eventName": "11월 감사 행사",
+        "icon": "🙌",
+        "color": "yellow"
       }
     ],
-    "18": [
+    "timed": [
       {
-        "eventName": "치과 검진",
+        "eventName": "로드맵 제안 회의",
         "type": "timed",
         "hour": [
-          1100,
+          930,
           1130
         ],
-        "icon": "🦷"
-      },
-      {
-        "eventName": "저녁 산책",
-        "type": "timed",
-        "hour": [
-          1300,
-          1400
-        ],
-        "icon": "🚶"
+        "icon": "🗺️",
+        "color": "red"
       }
     ],
-    "22": [
+    "multiDay": [
       {
-        "eventName": "쇼핑",
-        "type": "timed",
-        "hour": [
-          1000,
-          1030
+        "eventName": "연구 이슈 심화 토론",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-15",
+          "2024-11-18"
         ],
-        "icon": "🛒"
-      },
-      {
-        "eventName": "카페 미팅",
-        "type": "timed",
-        "hour": [
-          1500,
-          1600
-        ],
-        "icon": "📅"
-      }
-    ],
-    "25": [
-      {
-        "eventName": "팀 워크숍",
-        "type": "timed",
         "hour": [
           900,
-          1100
+          1700
         ],
-        "icon": "📅"
-      },
+        "icon": "📝",
+        "color": "blue"
+      }
+    ]
+  },
+  "16": {
+    "allDay": [
       {
-        "eventName": "저녁 모임",
-        "type": "timed",
-        "hour": [
-          1300,
-          1500
-        ],
-        "icon": "🎉"
+        "eventName": "사내 체육 대회",
+        "icon": "⚽",
+        "color": "green"
       }
     ],
-    "28": [
+    "timed": [
       {
-        "eventName": "팀 빌딩",
-        "type": "timed",
-        "hour": [
-          1000,
-          1100
-        ],
-        "icon": "🎈"
-      },
-      {
-        "eventName": "보드게임",
-        "type": "timed",
-        "hour": [
-          1400,
-          1500
-        ],
-        "icon": "🎲"
-      },
-      {
-        "eventName": "회식",
-        "type": "timed",
-        "hour": [
-          1300,
-          1400
-        ],
-        "icon": "🍽️"
-      }
-    ],
-    "30": [
-      {
-        "eventName": "월간 회의",
-        "type": "timed",
-        "hour": [
-          1000,
-          1100
-        ],
-        "icon": "📅"
-      },
-      {
-        "eventName": "프로젝트 리뷰",
+        "eventName": "회계 자료 발표",
         "type": "timed",
         "hour": [
           1500,
-          1600
+          1630
         ],
-        "icon": "💻"
+        "icon": "💰",
+        "color": "purple"
+      }
+    ],
+    "multiDay": [
+      {
+        "eventName": "프로세스 개선 계획",
+        "type": "multiDay",
+        "multiDate": [
+          "2024-11-16",
+          "2024-11-19"
+        ],
+        "hour": [
+          1000,
+          1700
+        ],
+        "icon": "📎",
+        "color": "red"
       }
     ]
   }
 }
+

@@ -12,6 +12,8 @@
   --tooltip-bg-color: #333
   --button-bg-color: #5a5aed
   --border-color: #444
+  --border-color-08: #444444ba
+  --border-color-05: #44444480
   --timeline-color: #444
   --day-number-active-bg: #333
 
@@ -98,20 +100,20 @@ body
         grid-template-columns: repeat(7, 1fr)
         gap: .5px
         padding: 30px 0
-        & > .day-box:nth-child(2),
-        & > .day-box:nth-child(9),
-        & > .day-box:nth-child(16),
-        & > .day-box:nth-child(23),
-        & > .day-box:nth-child(30),
-        & > .day-box:nth-child(37)
+        & > .day-box:nth-child(2) .day-number,
+        & > .day-box:nth-child(9) .day-number,
+        & > .day-box:nth-child(16) .day-number,
+        & > .day-box:nth-child(23) .day-number,
+        & > .day-box:nth-child(30) .day-number,
+        & > .day-box:nth-child(37) .day-number
           color: red !important
 
-        & > .day-box:nth-child(8),
-        & > .day-box:nth-child(15),
-        & > .day-box:nth-child(22),
-        & > .day-box:nth-child(29),
-        & > .day-box:nth-child(36),
-        & > .day-box:nth-child(43)
+        & > .day-box:nth-child(8) .day-number,
+        & > .day-box:nth-child(15) .day-number,
+        & > .day-box:nth-child(22) .day-number,
+        & > .day-box:nth-child(29) .day-number,
+        & > .day-box:nth-child(36) .day-number,
+        & > .day-box:nth-child(43) .day-number
           color: blue !important
         .month-name-container
           grid-column: 1/8
@@ -130,10 +132,36 @@ body
             @include flex-center(column)
         .day-box
           border: 1px solid var(--border-color)
-          padding: 10px
           cursor: pointer
           position: relative
           border-collapse: collapse
+          height: var(--day-height)
+          overflow-y: auto
+
+          @include hidden-scrollbar
+          .day-number
+            font-size: 1.1em
+            padding: .3em
+          .all-day-schedule,.timed-schedule
+            padding: 0.3em
+            list-style: none
+            margin: 0
+            border-top: 1px solid var(--border-color-05)
+            min-height: 1.3em
+            @media (max-width: 768px)
+              padding: 0.4em 0.2em 0.2em 0.2em
+              min-height: .8em
+            li
+              font-size: 0.8em
+              display: -webkit-box
+              -webkit-box-orient: vertical
+              -webkit-line-clamp: 1
+              overflow: hidden
+              list-style: none
+              @media (max-width: 768px)
+                font-size: 0.7em
+                .icon
+                  display: none
           .day-full
             height: var(--day-height)
             @include hidden-scrollbar
@@ -183,7 +211,6 @@ body
                   button
                     background-color: var(--button-bg-color)
                     cursor: pointer
-
               .events
                 margin: 0
                 position: relative

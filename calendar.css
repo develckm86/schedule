@@ -11,6 +11,8 @@
   --tooltip-bg-color: #333;
   --button-bg-color: #5a5aed;
   --border-color: #444;
+  --border-color-08: #444444ba;
+  --border-color-05: #44444480;
   --timeline-color: #444;
   --day-number-active-bg: #333;
 }
@@ -64,10 +66,10 @@ body .navigation button {
   gap: 0.5px;
   padding: 30px 0;
 }
-#calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(2), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(9), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(16), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(23), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(30), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(37) {
+#calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(2) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(9) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(16) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(23) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(30) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(37) .day-number {
   color: red !important;
 }
-#calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(8), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(15), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(22), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(29), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(36), #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(43) {
+#calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(8) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(15) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(22) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(29) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(36) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(43) .day-number {
   color: blue !important;
 }
 #calendar #calendarGrid #calendarContainer .month-container .month-name-container {
@@ -92,10 +94,47 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box {
   border: 1px solid var(--border-color);
-  padding: 10px;
   cursor: pointer;
   position: relative;
   border-collapse: collapse;
+  height: var(--day-height);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: scroll;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-number {
+  font-size: 1.1em;
+  padding: 0.3em;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule {
+  padding: 0.3em;
+  list-style: none;
+  margin: 0;
+  border-top: 1px solid var(--border-color-05);
+  min-height: 1.3em;
+}
+@media (max-width: 768px) {
+  #calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule {
+    padding: 0.4em 0.2em 0.2em 0.2em;
+    min-height: 0.8em;
+  }
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule li, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule li {
+  font-size: 0.8em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  list-style: none;
+}
+@media (max-width: 768px) {
+  #calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule li, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule li {
+    font-size: 0.7em;
+  }
+  #calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule li .icon, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule li .icon {
+    display: none;
+  }
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full {
   height: var(--day-height);
