@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script defer src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./calendar.css">
     <title>프로젝트</title>
     <script type="module" src="./ko_holiday.js"></script>
@@ -13,6 +14,22 @@
 <body>
     <header></header>
     <main>
+
+        <label class="btn btn-outline-orange" >
+            <input type="radio" class="btn-check" name="eventColor" >
+            <span>
+                btn btn-outline-orange
+            </span>
+        </label>
+        <label class="btn btn-orange" >btn btn-orange
+            <input type="radio" class="btn-check" name="eventColor" >
+        </label>
+
+        <label class="btn btn-red">레드
+            <input type="radio" class="btn-check" name="eventColor">
+
+        </label>
+
         <h1>스케줄 어플</h1>
         <div style="display: none;">
             <div id="dayEx" class="day" data-day="">
@@ -107,30 +124,11 @@
                                 <label>
                                     <strong>이벤트 색상</strong>
                                     <div  class="color-radio">
-                                        <input checked type="radio" id="colorRed" name="eventColor" value="red">
-                                        <label for="colorRed">
-                                            <div class="color-box" style="background-color: var(--red-color);"></div>
-                                        </label>
+<!--                                        <input checked type="radio" id="colorRed" name="eventColor" value="red">-->
+<!--                                        <label for="colorRed">-->
+<!--                                            <div class="color-box" style="background-color: var(&#45;&#45;red-color);"></div>-->
+<!--                                        </label>-->
 
-                                        <input type="radio" id="colorOrange" name="eventColor" value="orange">
-                                        <label for="colorOrange">
-                                            <div class="color-box" style="background-color: var(--orange-color);"></div>
-                                        </label>
-
-                                        <input type="radio" id="colorYellow" name="eventColor" value="yellow">
-                                        <label for="colorYellow">
-                                            <div class="color-box" style="background-color: var(--yellow-color);"></div>
-                                        </label>
-
-                                        <input type="radio" id="colorGreen" name="eventColor" value="green">
-                                        <label for="colorGreen">
-                                            <div class="color-box" style="background-color: var(--green-color);"></div>
-                                        </label>
-
-                                        <input type="radio" id="colorBlue" name="eventColor" value="blue">
-                                        <label for="colorBlue">
-                                            <div class="color-box" style="background-color: var(--blue-color);"></div>
-                                        </label>
                                     </div>
                                 </label>
 

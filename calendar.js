@@ -25,38 +25,6 @@ const timeline = document.getElementById("timeline");
 // Object to manage events
 const events = {};
 
-// const init = function () {
-//     const startTime = eventForm.startTime;
-//     const endTime = eventForm.endTime;
-//     const time = eventLiEx.querySelector(".time");
-//     const now = new Date();
-//     const pad = (num) => num.toString().padStart(2, '0');
-//
-//     const defaultStartHour = now.getHours();
-//     const defaultStartMinute = now.getMinutes();
-//     const defaultStart = `${pad(defaultStartHour)}:${pad(defaultStartMinute)}`;
-//     startTime.value = defaultStart;
-//
-//
-//     let defaultEndHour = defaultStartHour + 1;
-//     let defaultEndMinute = defaultStartMinute;
-//
-//     // Correctly handle the rollover from 23 to 00
-//     if (defaultEndHour === 24) {
-//         defaultEndHour = 0;
-//         // Optionally increment the day (if your date picker supports it)
-//         // now.setDate(now.getDate() + 1) ;
-//     }
-//
-//     const defaultEnd = `${pad(defaultEndHour)}:${pad(defaultEndMinute)}`;
-//     endTime.value = defaultEnd;
-//
-//     eventLiEx.dataset.time = defaultStart + "," + defaultEnd;
-//     time.innerText = defaultStart + " - " + defaultEnd;
-// };
-// init();
-
-
 function createKeyframes(animationName, keyframes) {
     // 스타일 요소 생성
     let styleSheet = document.querySelector('#dynamic-keyframes');
@@ -116,7 +84,6 @@ eventForm.onsubmit = (e) => {
     e.preventDefault();
 
     const formData = new AddEventFormData(eventForm);
-    console.log(formData);
     const eventNode = formData.getEventNode();
 
     // Check for overlapping events
@@ -159,7 +126,6 @@ const cloneDayEx = function (dayNumber, addClassName) {
 }
 const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
     schedules.forEach(schedule => {
-        console.log(schedule)
         const liClone = allDayLiEx.cloneNode(true);
         liClone.removeAttribute('id');
         const icon = liClone.querySelector('.icon');
@@ -298,12 +264,12 @@ const createMonthNameNode=function (dateData) {
 }
 const dyaNodeClickHandler=function () {
     const dayFullNode=this.querySelector(".day-full");
-    const rect = dayFullNode.getBoundingClientRect();
-    console.log(rect.top, rect.left);
+    const rect = this.getBoundingClientRect();
     let width = rect.width;
     let height = rect.height;
     let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
     let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
+
 
     dayFullNode.classList.remove("none");
     dayFullNode.classList.add("full");
@@ -321,7 +287,6 @@ const dyaNodeClickHandler=function () {
             height: height,
             left: left,
             top: top
-
         },
         '25%': {
             position: 'fixed',
@@ -376,7 +341,7 @@ const dyaNodeClickHandler=function () {
     createKeyframes('fade-in', keyframes);
 
     // 애니메이션 시작
-    dayFullNode.style.animation = 'fade-in 2s forwards';
+    dayFullNode.style.animation = 'fade-in 1s forwards';
 
 }
 const renderCalendar = async function (date = new Date(), encode = "ko") {
@@ -394,7 +359,6 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     renderDateData[dateData.nowDateNodeKey]["node"] = dayContainer;
 
 
-    console.log(renderDateData);
     // 공휴일 가져오기
     //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
 
@@ -427,7 +391,6 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
         const allDayUl = dayNode.querySelector('.all-day-schedule');
         const schedule=renderDateData[dateData.nowDateNodeKey]?.schedule[i];
         if (schedule) {
-            console.log(schedule)
             const allDay=schedule["allDay"];
             const timed=schedule["timed"];
             //const multiDay=schedule["multiDay"];

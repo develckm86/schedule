@@ -1,0 +1,447 @@
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@use "./node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@use "./node_modules/bootstrap/scss/variables";
+@use "./node_modules/bootstrap/scss/variables-dark";
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@use "./node_modules/bootstrap/scss/maps";
+@use "./node_modules/bootstrap/scss/mixins";
+@use "./node_modules/bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@use "./node_modules/bootstrap/scss/utilities";
+@use "./node_modules/bootstrap/scss/reboot";
+@use "./node_modules/bootstrap/scss/type";
+@use "./node_modules/bootstrap/scss/images";
+@use "./node_modules/bootstrap/scss/containers";
+@use "./node_modules/bootstrap/scss/grid";
+@use "./node_modules/bootstrap/scss/helpers";
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@use "./node_modules/bootstrap/scss/utilities/api";
+
+// Variables
+$red-color: #ff7b7b;
+$orange-color: #ffb07b;
+$yellow-color: #fff27b;
+$green-color: #b7ff7b;
+$blue-color: #7bffbd;
+$event-height: 50px;
+$day-height: 130px;
+$header-bg-color: #2c2c2e;
+$form-bg-color: #1c1c1e;
+$tooltip-bg-color: #333;
+$button-bg-color: #5a5aed;
+$border-color: #444;
+$border-color-08: #444444ba;
+$border-color-05: #44444480;
+$timeline-color: #444;
+$day-number-active-bg: #333;
+$white-color: #fff;
+$black-color: #000;
+$bs-btn-bg: #6c63ff;
+$bd-violet: #6c63ff;
+.bg-red {
+  background-color: $red-color;
+}
+.bg-orange {
+  background-color: $orange-color;
+}
+.bg-yellow {
+  background-color: $yellow-color;
+}
+.bg-green {
+  background-color: $green-color;
+}
+.bg-blue {
+  background-color: $blue-color;
+}
+
+// Bootstrap
+.btn-orange {
+  @include button-variant( $orange-color,
+  darken($orange-color, 30%),
+  $white-color,
+  darken($orange-color, 10%),
+  darken($orange-color, 50%),
+  $white-color);
+
+}
+
+.btn-outline-orange {
+  @include button-outline-variant( $orange-color,
+  $black-color,
+  $orange-color,
+  darken($orange-color, 30%),
+  $white-color);
+
+}
+
+// Mixins for shared styles
+@mixin flex-center($direction: row) {
+  display:flex;
+  flex-direction: $direction;
+  justify-content:center;
+  align-items:center;
+
+}
+
+@mixin hidden-scrollbar {
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  overflow-y:scroll;
+
+}
+
+@mixin tooltip-style($bg-color: $tooltip-bg-color, $font-color: #fff) {
+  position:absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: $bg-color;
+  color: $font-color;
+  font-size: 0.9em;
+  border-radius: 4px;
+  white-space:nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility:hidden;
+  transition:opacity 0.2s ease-in-out;
+  z-index: 1000;
+
+}
+
+// 새로운 mixin
+@mixin responsive-font-size(
+  $size-pc,
+  $size-tablet: $size-pc,
+  $size-mobile: $size-tablet
+) {
+  font-size: $size-pc;
+
+  @media (max-width: 768px)
+{
+  font-size: $size-tablet; }
+
+  @media (max-width: 480px)
+{
+  font-size: $size-mobile; }
+
+}
+
+// Base styles
+body {
+  background-color: rgba(29, 27, 32, 1);
+  margin: 0;
+  padding: 0;
+  color:white;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+
+}
+
+  .navigation {
+    display:flex;
+    gap: 1rem;
+
+    button {
+      background:none;
+      border:none;
+      color:white;
+      cursor:pointer;
+      font-size: 1rem;
+
+  }
+
+}
+
+}
+
+#calendar {
+  max-width: 800px;
+  height: 850px;
+  margin: 0 auto;
+  font-family:Arial, sans-serif;
+  border: 1px solid;
+  @include hidden-scrollbar;
+
+  .calendar-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom: 10px;
+
+}
+
+  #calendarGrid {
+
+    .day-name {
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+
+  }
+
+    #calendarContainer {
+
+      .month-container {
+        display:grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5px;
+        padding: 30px 0;
+
+        & > .day-box:nth-child(2) .day-number,
+        & > .day-box:nth-child(9) .day-number,
+        & > .day-box:nth-child(16) .day-number,
+        & > .day-box:nth-child(23) .day-number,
+        & > .day-box:nth-child(30) .day-number,
+        & > .day-box:nth-child(37) .day-number {
+          color: red !important;
+
+      }
+
+        & > .day-box:nth-child(8) .day-number,
+        & > .day-box:nth-child(15) .day-number,
+        & > .day-box:nth-child(22) .day-number,
+        & > .day-box:nth-child(29) .day-number,
+        & > .day-box:nth-child(36) .day-number,
+        & > .day-box:nth-child(43) .day-number {
+          color: blue !important;
+
+      }
+
+        .month-name-container {
+          grid-column: 1/8;
+          text-align:center;
+          border-bottom: 1px solid;
+          display:flex;
+          align-items:center;
+          justify-content:start;
+          padding: 10px 30px;
+
+          .month-name {
+            font-size: 1.2em;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: $header-bg-color;
+            @include flex-center(column);
+
+        }
+
+      }
+
+        .day-box {
+          border: 1px solid $border-color;
+          cursor:pointer;
+          position:relative;
+          border-collapse:collapse;
+          height: $day-height;
+          overflow-y:auto;
+          @include hidden-scrollbar;
+
+          .day-number {
+            font-size: 1.1em;
+            padding: 0.3em;
+
+        }
+
+          .all-day-schedule,
+          .timed-schedule {
+            padding: 0.3em;
+            list-style:none;
+            margin: 0;
+            border-top: 1px solid $border-color-05;
+            min-height: 1.3em;
+            @media (max-width: 768px)
+          {
+            padding: 0.4em 0.2em 0.2em 0.2em;
+            min-height: 0.8em; }
+
+            li {
+              font-size: 0.8em;
+              display:-webkit-box;
+              -webkit-box-orient:vertical;
+              -webkit-line-clamp: 1;
+              overflow:hidden;
+              list-style:none;
+              @media (max-width: 768px)
+            {
+              font-size: 0.7em;
+
+              .icon {
+                display:none;
+
+            } }
+
+          }
+
+        }
+
+          .day-full {
+            height: $day-height;
+            @include hidden-scrollbar;
+            @include flex-center(column);
+
+            &.none {
+              display:none;
+
+          }
+
+            &.full {
+              position:fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 999;
+
+              .event-list {
+                width: 100%;
+                height: 100%;
+
+            }
+
+          }
+
+            .event-list {
+              position:relative;
+              background-color: $header-bg-color;
+              height: 0;
+              width: 0;
+              display:flex;
+              @include hidden-scrollbar;
+
+              .form-container {
+                @include flex-center(row);
+                background-color: $header-bg-color;
+                padding: 1rem;
+
+                .new-event-form {
+                  width: 400px;
+                  border: 1px solid $border-color;
+                  border-radius: 5px;
+
+                  label {
+                    display:block;
+                    margin-bottom: 0.5rem;
+
+                }
+
+                  input,
+                  select,
+                  button {
+                    width: 100%;
+                    padding: 0.5rem;
+                    margin-bottom: 1rem;
+                    border: 1px solid $border-color;
+                    border-radius: 5px;
+                    background-color: $form-bg-color;
+                    color:white;
+
+                }
+
+                  button {
+                    background-color: $button-bg-color;
+                    cursor:pointer;
+
+                }
+
+              }
+
+            }
+
+              .events {
+                margin: 0;
+                position:relative;
+                flex-grow: 1;
+
+                .timeline > li {
+                  position:relative;
+                  height: $event-height;
+                  border-bottom: 1px solid $timeline-color;
+                  @include flex-center(row);
+
+                  span {
+                    width: 70px;
+                    text-align:center;
+
+                }
+
+                  .event {
+                    position:absolute;
+                    left: 70px;
+                    width: calc(100% - 70px);
+                    border-radius: 2px;
+                    padding: 0rem 1rem;
+                    color:black;
+                    @include flex-center(column);
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+  // Media Queries
+  @media (max-width: 768px)
+{
+
+  .day-number {
+    font-size: 1em;
+
+}
+
+  .day-schedule {
+    font-size: 0.8em;
+
+} }
+
+  @media (max-width: 480px)
+{
+
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+
+}
+
+  .day-full {
+    padding: 5px;
+    height: 80px;
+
+}
+
+  .day-number {
+    font-size: 0.9em;
+
+}
+
+  .day-schedule {
+    font-size: 0.7em;
+
+} }
+
+}
