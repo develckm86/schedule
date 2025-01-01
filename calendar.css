@@ -150,18 +150,19 @@ body .navigation button {
   display: none;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full.full {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  z-index: 1000;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list {
   position: relative;
   background-color: var(--header-bg-color);
-  height: 0;
-  width: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-y: scroll;
@@ -171,7 +172,6 @@ body .navigation button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
   background-color: var(--header-bg-color);
   padding: 1rem;
 }

@@ -298,13 +298,11 @@ const createMonthNameNode=function (dateData) {
 }
 const dyaNodeClickHandler=function () {
     const dayFullNode=this.querySelector(".day-full");
-    const rect = dayFullNode.getBoundingClientRect();
-    console.log(rect.top, rect.left);
+    const rect = this.getBoundingClientRect();
     let width = rect.width;
     let height = rect.height;
     let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
     let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
-
     dayFullNode.classList.remove("none");
     dayFullNode.classList.add("full");
 
@@ -321,7 +319,6 @@ const dyaNodeClickHandler=function () {
             height: height,
             left: left,
             top: top
-
         },
         '25%': {
             position: 'fixed',
@@ -376,8 +373,7 @@ const dyaNodeClickHandler=function () {
     createKeyframes('fade-in', keyframes);
 
     // 애니메이션 시작
-    dayFullNode.style.animation = 'fade-in 2s forwards';
-
+    dayFullNode.style.animation = 'fade-in 1s forwards';
 }
 const renderCalendar = async function (date = new Date(), encode = "ko") {
     if(Number.isNaN(date.valueOf())) return;
