@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    <link rel="stylesheet" href="./index.css">
+=======
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+>>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
     <link rel="stylesheet" href="./calendar.css">
     <title>프로젝트</title>
+    <script defer src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./ko_holiday.js"></script>
     <script defer type="module" src="./calendar.js"></script>
     <script defer type="module" src="./app.js"></script>
 </head>
-<body>
+<body data-bs-theme="dark">
     <header></header>
     <main>
 
@@ -66,6 +72,13 @@
                 <ul class="timed-schedule"></ul>
 
                 <div class="day-full none">
+                    <div class="day-full-header">
+                        <h5 class="day-full-title">
+                            <span>이벤트 추가</span>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </h5>
+                    </div>
+
                     <div class="event-list">
                         <div class="events">
                             <div class="all-day-events">
@@ -145,10 +158,10 @@
                     </div>
                 </div>
             </div>
+            <div id="monthNameEx" class="month-name-container">
+                <div class="month-name">12월</div>
+            </div>
 
-        </div>
-        <div id="monthNameEx" class="month-name-container">
-            <div class="month-name">12월</div>
         </div>
         <div id="calendar">
             <div class="calendar-header">

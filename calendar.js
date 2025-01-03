@@ -16,7 +16,6 @@ const scheduleData = {};
 let observer = null;
 
 
-
 const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
 const eventForm = document.forms["newEventForm"];
 const eventLiEx = document.getElementById("eventLiEx");
@@ -24,7 +23,29 @@ const timeline = document.getElementById("timeline");
 
 // Object to manage events
 const events = {};
+let isScrollingToTop = false;
+document.body.style.overflow = "hidden";
+window.addEventListener('scroll', () => {
+    if (isScrollingToTop) return; // 무시
+    // 다른 스크롤 동작 처리
+});
 
+const scrollToTop=function() {
+    isScrollingToTop = true;
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+
+<<<<<<< HEAD
+=======
+    setTimeout(() => {
+        isScrollingToTop = false; // 스크롤 완료 후 상태 초기화
+    }, 1000); // 스크롤 애니메이션 시간과 일치
+}
+scrollToTop();
+
+>>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
 function createKeyframes(animationName, keyframes) {
     // 스타일 요소 생성
     let styleSheet = document.querySelector('#dynamic-keyframes');
@@ -114,11 +135,20 @@ eventForm.onsubmit = (e) => {
     timeline.appendChild(eventNode);
     events[formData.timeRange] = { ...formData, node: eventNode };
 };
+const closeBtnHandler=function(e,dayNode){
+    e.preventDefault();
+    const dayFull = dayNode.querySelector(".day-full")
+    dayFull.classList.remove('full')
+    dayFull.classList.add('none')
+
+}
 
 const cloneDayEx = function (dayNumber, addClassName) {
     const dayClone = dayEx.cloneNode(true);
     dayClone.removeAttribute('id');
     dayClone.querySelector('.day-number').textContent = dayNumber;
+    const closeBtn = dayClone.querySelector('.btn-close');    
+    closeBtn.addEventListener('click',(e)=>{closeBtnHandler(e,dayClone);})
     dayClone.dataset.day = dayNumber;
     if (addClassName) dayClone.classList.add(addClassName);
     //dayClone.classList.add('empty');//투명하게 만들기
@@ -262,18 +292,23 @@ const createMonthNameNode=function (dateData) {
     monthName.style.gridColumn = `${dateData.firstDay + 1} / 8`;
     return monthName;
 }
-const dyaNodeClickHandler=function () {
+const dyaNodeClickHandler=function (e) {
+    console.log(this);
+    
+    if( e.target.classList.contains("btn-close") ) return;
     const dayFullNode=this.querySelector(".day-full");
     const rect = this.getBoundingClientRect();
     let width = rect.width;
     let height = rect.height;
     let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
     let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
     dayFullNode.classList.remove("none");
     dayFullNode.classList.add("full");
-
     width+="px";
     height+="px";
     top+="px";
@@ -342,7 +377,10 @@ const dyaNodeClickHandler=function () {
 
     // 애니메이션 시작
     dayFullNode.style.animation = 'fade-in 1s forwards';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
 }
 const renderCalendar = async function (date = new Date(), encode = "ko") {
     if(Number.isNaN(date.valueOf())) return;
@@ -357,8 +395,11 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     const dayContainer = dayContainerEx.cloneNode(true);
     dayContainer.id = dateData.nowDateNodeKey;
     renderDateData[dateData.nowDateNodeKey]["node"] = dayContainer;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
     // 공휴일 가져오기
     //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
 
