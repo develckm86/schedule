@@ -1,18 +1,8 @@
 {
   "devDependencies": {
-<<<<<<< HEAD
-    "sass": "1.32.13",
-    "sass-loader": "13.2.0"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "D": "1.0.0",
-    "sass-migrator": "^2.3.0"
-=======
     "sass": "^1.83.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.3"
->>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
   }
 }

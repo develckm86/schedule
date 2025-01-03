@@ -29,23 +29,20 @@ window.addEventListener('scroll', () => {
     if (isScrollingToTop) return; // 무시
     // 다른 스크롤 동작 처리
 });
-
 const scrollToTop=function() {
     isScrollingToTop = true;
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
 
-<<<<<<< HEAD
-=======
     setTimeout(() => {
         isScrollingToTop = false; // 스크롤 완료 후 상태 초기화
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+
     }, 1000); // 스크롤 애니메이션 시간과 일치
 }
 scrollToTop();
 
->>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
 function createKeyframes(animationName, keyframes) {
     // 스타일 요소 생성
     let styleSheet = document.querySelector('#dynamic-keyframes');
@@ -302,11 +299,6 @@ const dyaNodeClickHandler=function (e) {
     let height = rect.height;
     let top = rect.top + window.scrollY; // 페이지 전체 기준으로 top
     let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
     dayFullNode.classList.remove("none");
     dayFullNode.classList.add("full");
     width+="px";
@@ -377,10 +369,6 @@ const dyaNodeClickHandler=function (e) {
 
     // 애니메이션 시작
     dayFullNode.style.animation = 'fade-in 1s forwards';
-<<<<<<< HEAD
-
-=======
->>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
 }
 const renderCalendar = async function (date = new Date(), encode = "ko") {
     if(Number.isNaN(date.valueOf())) return;
@@ -395,11 +383,6 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     const dayContainer = dayContainerEx.cloneNode(true);
     dayContainer.id = dateData.nowDateNodeKey;
     renderDateData[dateData.nowDateNodeKey]["node"] = dayContainer;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 2cc1e34525bccc066afdab3d4d4f717905e3d57c
     // 공휴일 가져오기
     //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
 
