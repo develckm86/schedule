@@ -62,8 +62,9 @@ body
   padding: 0
   color: white
   h1
-    margin: 0
+    margin: 2em 0
     font-size: 1.5rem
+    text-align: center
 
   .navigation
     display: flex
@@ -75,7 +76,16 @@ body
       color: white
       cursor: pointer
       font-size: 1rem
-
+@keyframes opacityFadeIn 
+  0%
+    opacity: 0
+  
+  50%
+    opacity: 0
+  
+  100%
+    opacity: 1
+  
 
 #calendar
   max-width: 800px
@@ -163,6 +173,7 @@ body
                 .icon
                   display: none
           .day-full
+            background-color: var(--header-bg-color)
             height: var(--day-height)
             @include hidden-scrollbar
             @include flex-center(column)
@@ -175,10 +186,25 @@ body
               width: 100%
               height: 100%
               z-index: 1000
+              .day-full-header
+                .day-full-title
+                  .btn-close
+                    opacity: 1
+                    animation: opacityFadeIn 2s
+            .day-full-header
+              margin-top: 2em
+              margin-bottom: 1em
+              .day-full-title
+                font-size: 1.2em
+                margin: 0
+                .btn-close
+                  position: absolute
+                  right: 2em
+                  opacity: 0
 
+                 
             .event-list
               position: relative
-              background-color: var(--header-bg-color)
               height: 100%
               width: 100%
               display: flex

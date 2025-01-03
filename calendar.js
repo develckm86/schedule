@@ -16,7 +16,6 @@ const scheduleData = {};
 let observer = null;
 
 
-
 const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
 const eventForm = document.forms["newEventForm"];
 const eventLiEx = document.getElementById("eventLiEx");
@@ -24,38 +23,25 @@ const timeline = document.getElementById("timeline");
 
 // Object to manage events
 const events = {};
+let isScrollingToTop = false;
+document.body.style.overflow = "hidden";
+window.addEventListener('scroll', () => {
+    if (isScrollingToTop) return; // 무시
+    // 다른 스크롤 동작 처리
+});
 
-// const init = function () {
-//     const startTime = eventForm.startTime;
-//     const endTime = eventForm.endTime;
-//     const time = eventLiEx.querySelector(".time");
-//     const now = new Date();
-//     const pad = (num) => num.toString().padStart(2, '0');
-//
-//     const defaultStartHour = now.getHours();
-//     const defaultStartMinute = now.getMinutes();
-//     const defaultStart = `${pad(defaultStartHour)}:${pad(defaultStartMinute)}`;
-//     startTime.value = defaultStart;
-//
-//
-//     let defaultEndHour = defaultStartHour + 1;
-//     let defaultEndMinute = defaultStartMinute;
-//
-//     // Correctly handle the rollover from 23 to 00
-//     if (defaultEndHour === 24) {
-//         defaultEndHour = 0;
-//         // Optionally increment the day (if your date picker supports it)
-//         // now.setDate(now.getDate() + 1) ;
-//     }
-//
-//     const defaultEnd = `${pad(defaultEndHour)}:${pad(defaultEndMinute)}`;
-//     endTime.value = defaultEnd;
-//
-//     eventLiEx.dataset.time = defaultStart + "," + defaultEnd;
-//     time.innerText = defaultStart + " - " + defaultEnd;
-// };
-// init();
+const scrollToTop=function() {
+    isScrollingToTop = true;
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
 
+    setTimeout(() => {
+        isScrollingToTop = false; // 스크롤 완료 후 상태 초기화
+    }, 1000); // 스크롤 애니메이션 시간과 일치
+}
+scrollToTop();
 
 function createKeyframes(animationName, keyframes) {
     // 스타일 요소 생성
@@ -147,11 +133,20 @@ eventForm.onsubmit = (e) => {
     timeline.appendChild(eventNode);
     events[formData.timeRange] = { ...formData, node: eventNode };
 };
+const closeBtnHandler=function(e,dayNode){
+    e.preventDefault();
+    const dayFull = dayNode.querySelector(".day-full")
+    dayFull.classList.remove('full')
+    dayFull.classList.add('none')
+
+}
 
 const cloneDayEx = function (dayNumber, addClassName) {
     const dayClone = dayEx.cloneNode(true);
     dayClone.removeAttribute('id');
     dayClone.querySelector('.day-number').textContent = dayNumber;
+    const closeBtn = dayClone.querySelector('.btn-close');    
+    closeBtn.addEventListener('click',(e)=>{closeBtnHandler(e,dayClone);})
     dayClone.dataset.day = dayNumber;
     if (addClassName) dayClone.classList.add(addClassName);
     //dayClone.classList.add('empty');//투명하게 만들기
@@ -159,7 +154,6 @@ const cloneDayEx = function (dayNumber, addClassName) {
 }
 const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
     schedules.forEach(schedule => {
-        console.log(schedule)
         const liClone = allDayLiEx.cloneNode(true);
         liClone.removeAttribute('id');
         const icon = liClone.querySelector('.icon');
@@ -296,7 +290,10 @@ const createMonthNameNode=function (dateData) {
     monthName.style.gridColumn = `${dateData.firstDay + 1} / 8`;
     return monthName;
 }
-const dyaNodeClickHandler=function () {
+const dyaNodeClickHandler=function (e) {
+    console.log(this);
+    
+    if( e.target.classList.contains("btn-close") ) return;
     const dayFullNode=this.querySelector(".day-full");
     const rect = this.getBoundingClientRect();
     let width = rect.width;
@@ -305,7 +302,6 @@ const dyaNodeClickHandler=function () {
     let left = rect.left + window.scrollX; // 페이지 전체 기준으로 left
     dayFullNode.classList.remove("none");
     dayFullNode.classList.add("full");
-
     width+="px";
     height+="px";
     top+="px";
@@ -388,9 +384,6 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     const dayContainer = dayContainerEx.cloneNode(true);
     dayContainer.id = dateData.nowDateNodeKey;
     renderDateData[dateData.nowDateNodeKey]["node"] = dayContainer;
-
-
-    console.log(renderDateData);
     // 공휴일 가져오기
     //const holidayData=await loadHoliday(dateData.nowYear.toString(), dateData.nowMonth.toString());
 
@@ -423,7 +416,6 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
         const allDayUl = dayNode.querySelector('.all-day-schedule');
         const schedule=renderDateData[dateData.nowDateNodeKey]?.schedule[i];
         if (schedule) {
-            console.log(schedule)
             const allDay=schedule["allDay"];
             const timed=schedule["timed"];
             //const multiDay=schedule["multiDay"];

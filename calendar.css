@@ -24,8 +24,9 @@ body {
   color: white;
 }
 body h1 {
-  margin: 0;
+  margin: 2em 0;
   font-size: 1.5rem;
+  text-align: center;
 }
 body .navigation {
   display: flex;
@@ -39,6 +40,17 @@ body .navigation button {
   font-size: 1rem;
 }
 
+@keyframes opacityFadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 #calendar {
   max-width: 800px;
   height: 850px;
@@ -137,6 +149,7 @@ body .navigation button {
   }
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full {
+  background-color: var(--header-bg-color);
   height: var(--day-height);
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -157,9 +170,25 @@ body .navigation button {
   height: 100%;
   z-index: 1000;
 }
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full.full .day-full-header .day-full-title .btn-close {
+  opacity: 1;
+  animation: opacityFadeIn 2s;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .day-full-header {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .day-full-header .day-full-title {
+  font-size: 1.2em;
+  margin: 0;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .day-full-header .day-full-title .btn-close {
+  position: absolute;
+  right: 2em;
+  opacity: 0;
+}
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list {
   position: relative;
-  background-color: var(--header-bg-color);
   height: 100%;
   width: 100%;
   display: flex;
