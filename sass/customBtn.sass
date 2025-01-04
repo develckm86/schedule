@@ -1,0 +1,7 @@
+@use '../node_modules/bootstrap/scss/bootstrap.scss' as bs
+.btn-orange 
+  @include bs.button-variant( $orange-color, darken($orange-color, 30%), $white-color, darken($orange-color, 10%), darken($orange-color, 50%), $white-color)
+
+.btn-outline-orange 
+  @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
+

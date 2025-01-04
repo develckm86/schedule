@@ -1,21 +1,13 @@
-// Variables
-:root
-  --red-color: #ff7b7b
-  --orange-color: #ffb07b
-  --yellow-color: #fff27b
-  --green-color: #b7ff7b
-  --blue-color: #7bffbd
-  --event-height: 50px
-  --day-height: 130px
-  --header-bg-color: #2c2c2e
-  --form-bg-color: #1c1c1e
-  --tooltip-bg-color: #333
-  --button-bg-color: #5a5aed
-  --border-color: #444
-  --border-color-08: #444444ba
-  --border-color-05: #44444480
-  --timeline-color: #444
-  --day-number-active-bg: #333
+@use "./_var" as *
+@use '../node_modules/bootstrap/scss/bootstrap.scss' as bs
+
+.btn-orange 
+  @include bs.button-variant( $orange-color, darken($orange-color, 30%), $white-color, darken($orange-color, 10%), darken($orange-color, 50%), $white-color)
+
+.btn-outline-orange 
+  @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
+
+
 
 // Mixins for shared styles
 @mixin flex-center($direction: row)
@@ -28,7 +20,7 @@
   scrollbar-width: none
   -ms-overflow-style: none
   overflow-y: scroll
-@mixin tooltip-style($bg-color: var(--tooltip-bg-color), $font-color: #fff)
+@mixin tooltip-style($bg-color: $tooltip-bg-color, $font-color: #fff)
   position: absolute
   top: -25px
   left: 50%
@@ -116,7 +108,7 @@ body
         & > .day-box:nth-child(23) .day-number,
         & > .day-box:nth-child(30) .day-number,
         & > .day-box:nth-child(37) .day-number
-          color: red !important
+          color: $red-color !important
 
         & > .day-box:nth-child(8) .day-number,
         & > .day-box:nth-child(15) .day-number,
@@ -124,7 +116,7 @@ body
         & > .day-box:nth-child(29) .day-number,
         & > .day-box:nth-child(36) .day-number,
         & > .day-box:nth-child(43) .day-number
-          color: blue !important
+          color: $blue-color !important
         .month-name-container
           grid-column: 1/8
           text-align: center
@@ -138,14 +130,14 @@ body
             width: 60px
             height: 60px
             border-radius: 50%
-            background-color: var(--header-bg-color)
+            background-color: $header-bg-color
             @include flex-center(column)
         .day-box
-          border: 1px solid var(--border-color)
+          border: 1px solid $border-color
           cursor: pointer
           position: relative
           border-collapse: collapse
-          height: var(--day-height)
+          height: $day-height
           overflow-y: auto
 
           @include hidden-scrollbar
@@ -156,7 +148,7 @@ body
             padding: 0.3em
             list-style: none
             margin: 0
-            border-top: 1px solid var(--border-color-05)
+            border-top: 1px solid $border-color-05
             min-height: 1.3em
             @media (max-width: 768px)
               padding: 0.4em 0.2em 0.2em 0.2em
@@ -173,8 +165,8 @@ body
                 .icon
                   display: none
           .day-full
-            background-color: var(--header-bg-color)
-            height: var(--day-height)
+            background-color: $header-bg-color
+            height: $day-height
             @include hidden-scrollbar
             @include flex-center(column)
             &.none
@@ -212,12 +204,12 @@ body
 
               .form-container
                 @include flex-center(row)
-                background-color: var(--header-bg-color)
+                background-color: $header-bg-color
                 padding: 1rem
 
                 .new-event-form
                   width: 400px
-                  border: 1px solid var(--border-color)
+                  border: 1px solid $border-color
                   border-radius: 5px
 
                   label
@@ -230,13 +222,13 @@ body
                     width: 100%
                     padding: 0.5rem
                     margin-bottom: 1rem
-                    border: 1px solid var(--border-color)
+                    border: 1px solid $border-color
                     border-radius: 5px
-                    background-color: var(--form-bg-color)
+                    background-color: $form-bg-color
                     color: white
 
                   button
-                    background-color: var(--button-bg-color)
+                    background-color: $button-bg-color
                     cursor: pointer
               .events
                 margin: 0
@@ -244,8 +236,8 @@ body
                 flex-grow: 1
                 .timeline > li
                   position: relative
-                  height: var(--event-height)
-                  border-bottom: 1px solid var(--timeline-color)
+                  height: $event-height
+                  border-bottom: 1px solid $timeline-color
                   @include flex-center(row)
 
                   span
@@ -262,42 +254,38 @@ body
                     @include flex-center(column)
 
                     &.red
-                      background-color: var(--red-color)
+                      background-color: $red-color
 
                     &.orange
-                      background-color: var(--orange-color)
+                      background-color: $orange-color
 
                     &.yellow
-                      background-color: var(--yellow-color)
+                      background-color: $yellow-color
 
                     &.green
-                      background-color: var(--green-color)
+                      background-color: $green-color
 
                     &.blue
-                      background-color: var(--blue-color)
+                      background-color: $blue-color
 
+// Media Queries
+@media (max-width: 768px)
+  .day-number
+    font-size: 1em
 
+  .day-schedule
+    font-size: 0.8em
 
+@media (max-width: 480px)
+  .calendar-grid
+    grid-template-columns: repeat(4, 1fr)
 
+  .day-full
+    padding: 5px
+    height: 80px
 
-  // Media Queries
-  @media (max-width: 768px)
-    .day-number
-      font-size: 1em
+  .day-number
+    font-size: 0.9em
 
-    .day-schedule
-      font-size: 0.8em
-
-  @media (max-width: 480px)
-    .calendar-grid
-      grid-template-columns: repeat(4, 1fr)
-
-    .day-full
-      padding: 5px
-      height: 80px
-
-    .day-number
-      font-size: 0.9em
-
-    .day-schedule
-      font-size: 0.7em
+  .day-schedule
+    font-size: 0.7em
