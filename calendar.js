@@ -454,15 +454,11 @@ const initCalendar = async function () {
             nowDay.id = "now"
             const calendarWrapper = calendar;  // 부모 요소
             const offsetTop = nowDay.offsetTop - calendarWrapper.offsetTop;  // 상대 위치 계산
-            calendarWrapper.scrollTo({ top: offsetTop, behavior: 'smooth' });
-
+            calendarWrapper.scrollTo({ top: offsetTop });
             observer.unobserve(scheduleNode)
         } else {
             observer.observe(scheduleNode);
         }
     }
-
-    //window.location.href = `./#${nowDateData.nowDateNodeKey}`;
-
 }
 export {initCalendar, renderCalendar, renderDateData, selectedDateData, scheduleData, observer}

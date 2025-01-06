@@ -1,11 +1,12 @@
-@use "./_var" as *
+@use './_var' as *
 @use '../node_modules/bootstrap/scss/bootstrap.scss' as bs
+@use './customBtn' as *
 
-.btn-orange 
-  @include bs.button-variant( $orange-color, darken($orange-color, 30%), $white-color, darken($orange-color, 10%), darken($orange-color, 50%), $white-color)
+// .btn-orange 
+//   @include bs.button-variant( $orange-color, darken($orange-color, 30%), $white-color, darken($orange-color, 10%), darken($orange-color, 50%), $white-color)
 
-.btn-outline-orange 
-  @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
+// .btn-outline-orange 
+//   @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
 
 
 
@@ -139,20 +140,18 @@ body
           border-collapse: collapse
           height: $day-height
           overflow-y: auto
-
           @include hidden-scrollbar
+
           .day-number
             font-size: 1.1em
             padding: .3em
+
           .all-day-schedule,.timed-schedule
             padding: 0.3em
             list-style: none
             margin: 0
             border-top: 1px solid $border-color-05
             min-height: 1.3em
-            @media (max-width: 768px)
-              padding: 0.4em 0.2em 0.2em 0.2em
-              min-height: .8em
             li
               font-size: 0.8em
               display: -webkit-box

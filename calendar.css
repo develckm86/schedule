@@ -11844,6 +11844,40 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.btn-red {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #ff7b7b;
+  --bs-btn-border-color: #e10000;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #ff4848;
+  --bs-btn-hover-border-color: #7b0000;
+  --bs-btn-focus-shadow-rgb: 230, 38, 38;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: rgb(204, 98.4, 98.4);
+  --bs-btn-active-border-color: rgb(168.75, 0, 0);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #ff7b7b;
+  --bs-btn-disabled-border-color: #e10000;
+}
+
+.btn-outline-red {
+  --bs-btn-color: #ff7b7b;
+  --bs-btn-border-color: #ff7b7b;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #ff7b7b;
+  --bs-btn-hover-border-color: #e10000;
+  --bs-btn-focus-shadow-rgb: 255, 123, 123;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #ff7b7b;
+  --bs-btn-active-border-color: #e10000;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #ff7b7b;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #ff7b7b;
+  --bs-gradient: none;
+}
+
 .btn-orange {
   --bs-btn-color: #fff;
   --bs-btn-bg: #ffb07b;
@@ -11875,6 +11909,108 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #ffb07b;
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #ffb07b;
+  --bs-gradient: none;
+}
+
+.btn-yellow {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #fff27b;
+  --bs-btn-border-color: rgb(225, 202.8409090909, 0);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgb(255, 236.9772727273, 72);
+  --bs-btn-hover-border-color: rgb(123, 110.8863636364, 0);
+  --bs-btn-focus-shadow-rgb: 230, 211, 38;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: rgb(204, 193.6, 98.4);
+  --bs-btn-active-border-color: rgb(168.75, 152.1306818182, 0);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #fff27b;
+  --bs-btn-disabled-border-color: rgb(225, 202.8409090909, 0);
+}
+
+.btn-outline-yellow {
+  --bs-btn-color: #fff27b;
+  --bs-btn-border-color: #fff27b;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #fff27b;
+  --bs-btn-hover-border-color: rgb(225, 202.8409090909, 0);
+  --bs-btn-focus-shadow-rgb: 255, 242, 123;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff27b;
+  --bs-btn-active-border-color: rgb(225, 202.8409090909, 0);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff27b;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #fff27b;
+  --bs-gradient: none;
+}
+
+.btn-green {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #b7ff7b;
+  --bs-btn-border-color: rgb(102.2727272727, 225, 0);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgb(155.1818181818, 255, 72);
+  --bs-btn-hover-border-color: rgb(55.9090909091, 123, 0);
+  --bs-btn-focus-shadow-rgb: 125, 230, 38;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: rgb(146.4, 204, 98.4);
+  --bs-btn-active-border-color: rgb(76.7045454545, 168.75, 0);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #b7ff7b;
+  --bs-btn-disabled-border-color: rgb(102.2727272727, 225, 0);
+}
+
+.btn-outline-green {
+  --bs-btn-color: #b7ff7b;
+  --bs-btn-border-color: #b7ff7b;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #b7ff7b;
+  --bs-btn-hover-border-color: rgb(102.2727272727, 225, 0);
+  --bs-btn-focus-shadow-rgb: 183, 255, 123;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #b7ff7b;
+  --bs-btn-active-border-color: rgb(102.2727272727, 225, 0);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #b7ff7b;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #b7ff7b;
+  --bs-gradient: none;
+}
+
+.btn-blue {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #788cff;
+  --bs-btn-border-color: rgb(0, 32.8888888889, 222);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgb(69, 96.5555555556, 255);
+  --bs-btn-hover-border-color: rgb(0, 17.7777777778, 120);
+  --bs-btn-focus-shadow-rgb: 38, 66, 227;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #6070cc;
+  --bs-btn-active-border-color: rgb(0, 24.6666666667, 166.5);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #788cff;
+  --bs-btn-disabled-border-color: rgb(0, 32.8888888889, 222);
+}
+
+.btn-outline-blue {
+  --bs-btn-color: #788cff;
+  --bs-btn-border-color: #788cff;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #788cff;
+  --bs-btn-hover-border-color: rgb(0, 32.8888888889, 222);
+  --bs-btn-focus-shadow-rgb: 120, 140, 255;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #788cff;
+  --bs-btn-active-border-color: rgb(0, 32.8888888889, 222);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #788cff;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #788cff;
   --bs-gradient: none;
 }
 
@@ -11943,7 +12079,7 @@ body .navigation button {
   color: #ff7b7b !important;
 }
 #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(8) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(15) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(22) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(29) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(36) .day-number, #calendar #calendarGrid #calendarContainer .month-container > .day-box:nth-child(43) .day-number {
-  color: #7bffbd !important;
+  color: #788cff !important;
 }
 #calendar #calendarGrid #calendarContainer .month-container .month-name-container {
   grid-column: 1/8;
@@ -11986,12 +12122,6 @@ body .navigation button {
   margin: 0;
   border-top: 1px solid rgba(68, 68, 68, 0.5019607843);
   min-height: 1.3em;
-}
-@media (max-width: 768px) {
-  #calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule {
-    padding: 0.4em 0.2em 0.2em 0.2em;
-    min-height: 0.8em;
-  }
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .all-day-schedule li, #calendar #calendarGrid #calendarContainer .month-container .day-box .timed-schedule li {
   font-size: 0.8em;
@@ -12132,7 +12262,7 @@ body .navigation button {
   background-color: #b7ff7b;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.blue {
-  background-color: #7bffbd;
+  background-color: #788cff;
 }
 
 @media (max-width: 768px) {

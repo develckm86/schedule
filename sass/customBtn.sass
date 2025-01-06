@@ -1,7 +1,34 @@
+@use './_var' as *
 @use '../node_modules/bootstrap/scss/bootstrap.scss' as bs
-.btn-orange 
-  @include bs.button-variant( $orange-color, darken($orange-color, 30%), $white-color, darken($orange-color, 10%), darken($orange-color, 50%), $white-color)
 
-.btn-outline-orange 
-  @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
+@mixin button-variant-with-color($color) 
+  $darken-30: darken($color, 30%)
+  $darken-10: darken($color, 10%)
+  $darken-50: darken($color, 50%)
+  @include bs.button-variant($color, $darken-30, $white-color, $darken-10, $darken-50, $white-color)
 
+@mixin button-outline-variant-with-color($color) 
+  $darken-30: darken($color, 30%)
+  $darken-10: darken($color, 10%)
+  $darken-50: darken($color, 50%)
+  @include bs.button-outline-variant($color, $black-color, $color, $darken-30, $white-color)
+
+@each $key,$color in $btn-colors
+  .btn-#{$key} 
+    @include button-variant-with-color($color)
+
+  .btn-outline-#{$key}  
+    @include button-outline-variant-with-color($color)
+
+   
+// .btn-orange 
+//   @include button-variant-with-color($orange-color)
+
+// .btn-outline-orange 
+//   @include button-outline-variant-with-color($orange-color)
+
+// .btn-red
+//   @include button-variant-with-color($red-color)
+
+// .btn-outline-red 
+//   @include button-outline-variant-with-color($red-color)
