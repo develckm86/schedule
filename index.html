@@ -124,25 +124,28 @@
                         </div>
                         <div class="form-container">
                             <form class="new-event-form none" id="newEventForm">
-                                <label>
-                                    <strong>제목</strong>
-                                    <input type="text" name="eventName" placeholder="이벤트 이름" value="새 이벤트">
-                                </label>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="eventName" placeholder="이벤트 제목">
+                                    <label>이벤트 제목</label>
+                                </div>
 
-                                <label>
-                                    <strong>이벤트 유형</strong>
-                                    <select name="eventType">
-                                        <option value="timed" selected>Timed</option>
-                                        <option value="allDay">All Day</option>
-                                    </select>
-                                </label>
-                                    <strong>시작 및 종료 시간</strong>
-                                    <div class="time-range" >
-                                        <input type="time"  name="startTime">
-                                        ~
-                                        <input type="time"  name="endTime">
-                                    </div>
-                                </label>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="eventType" placeholder="이벤트 유형">
+                                    <label>이벤트 유형</label>
+                                </div>
+                                <div class="d-flex mb-3 justify-content-between align-items-center">
+                                    
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" name="startTime" placeholder="시작 시간">
+                                            <label>시작 시간</label>
+                                        </div>
+                                        <div>~</div>
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" name="endTime" placeholder="종료 시간">
+                                            <label>종료시간</label>
+                                        </div>
+                                   
+                                </div>
 
                                 <label>
                                     <strong>이벤트 색상</strong>
