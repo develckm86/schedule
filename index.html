@@ -16,11 +16,8 @@
     <header></header>
     <main>
 
-        <label class="btn btn-outline-orange" >
-            <input type="radio" class="btn-check" name="eventColor" >
-            <span>
-                오렌지
-            </span>
+        <label class="btn btn-outline-orange" >오렌지
+            <input type="radio" class="btn-check" name="eventColor" value="오렌지" checked>
         </label>
         <label class="btn btn-orange" >오렌지
             <input type="radio" class="btn-check" name="eventColor" >
@@ -45,7 +42,21 @@
         <label class="btn btn-green">그린
             <input type="radio" class="btn-check" name="eventColor">
         </label>
-
+        <script>
+            const btns=document.querySelectorAll(".btn");
+            btns.forEach((btn)=>{
+                btn.addEventListener("click",(e)=>{
+                    const btn=e.target;
+                    const radio=btn.querySelector(".btn-check");
+                    if(!radio)return;
+                    console.log(radio);
+                    
+                    if(radio.checked){
+                        btn.classList.add("checked")
+                    }
+                })
+            })
+        </script>
         <h1>스케줄 어플</h1>
         <div style="display: none;">
             <div id="dayEx" class="day" data-day="">

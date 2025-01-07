@@ -11860,6 +11860,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #ff7b7b;
   --bs-btn-disabled-border-color: #e10000;
 }
+.btn-red.checked {
+  border-color: #fff !important;
+}
 
 .btn-outline-red {
   --bs-btn-color: #ff7b7b;
@@ -11876,6 +11879,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #ff7b7b;
   --bs-gradient: none;
+}
+.btn-outline-red.checked {
+  border-color: #fff !important;
 }
 
 .btn-orange {
@@ -11894,6 +11900,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #ffb07b;
   --bs-btn-disabled-border-color: rgb(225, 90.3409090909, 0);
 }
+.btn-orange.checked {
+  border-color: #fff !important;
+}
 
 .btn-outline-orange {
   --bs-btn-color: #ffb07b;
@@ -11910,6 +11919,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #ffb07b;
   --bs-gradient: none;
+}
+.btn-outline-orange.checked {
+  border-color: #fff !important;
 }
 
 .btn-yellow {
@@ -11928,6 +11940,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #fff27b;
   --bs-btn-disabled-border-color: rgb(225, 202.8409090909, 0);
 }
+.btn-yellow.checked {
+  border-color: #fff !important;
+}
 
 .btn-outline-yellow {
   --bs-btn-color: #fff27b;
@@ -11944,6 +11959,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #fff27b;
   --bs-gradient: none;
+}
+.btn-outline-yellow.checked {
+  border-color: #fff !important;
 }
 
 .btn-green {
@@ -11962,6 +11980,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #b7ff7b;
   --bs-btn-disabled-border-color: rgb(102.2727272727, 225, 0);
 }
+.btn-green.checked {
+  border-color: #fff !important;
+}
 
 .btn-outline-green {
   --bs-btn-color: #b7ff7b;
@@ -11978,6 +11999,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #b7ff7b;
   --bs-gradient: none;
+}
+.btn-outline-green.checked {
+  border-color: #fff !important;
 }
 
 .btn-blue {
@@ -11996,6 +12020,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #788cff;
   --bs-btn-disabled-border-color: rgb(0, 32.8888888889, 222);
 }
+.btn-blue.checked {
+  border-color: #fff !important;
+}
 
 .btn-outline-blue {
   --bs-btn-color: #788cff;
@@ -12012,6 +12039,9 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #788cff;
   --bs-gradient: none;
+}
+.btn-outline-blue.checked {
+  border-color: #fff !important;
 }
 
 body {

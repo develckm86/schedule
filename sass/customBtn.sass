@@ -16,19 +16,11 @@
 @each $key,$color in $btn-colors
   .btn-#{$key} 
     @include button-variant-with-color($color)
-
+    &.checked
+      border-color: $white-color !important
   .btn-outline-#{$key}  
     @include button-outline-variant-with-color($color)
+    &.checked
+      border-color: $white-color !important
 
-   
-// .btn-orange 
-//   @include button-variant-with-color($orange-color)
 
-// .btn-outline-orange 
-//   @include button-outline-variant-with-color($orange-color)
-
-// .btn-red
-//   @include button-variant-with-color($red-color)
-
-// .btn-outline-red 
-//   @include button-outline-variant-with-color($red-color)
