@@ -16,47 +16,28 @@
     <header></header>
     <main>
 
-        <label class="btn btn-outline-orange" >오렌지
-            <input type="radio" class="btn-check" name="eventColor" value="오렌지" checked>
-        </label>
-        <label class="btn btn-orange" >오렌지
-            <input type="radio" class="btn-check" name="eventColor" >
-        </label>
+<!--        <input type="radio" class="btn-check" id="eventColorOrangeOut" name="eventColor" value="오렌지">-->
+<!--        <label class="btn btn-outline-orange" for="eventColorOrangeOut" >오렌지</label>-->
 
-        <label class="btn btn-outline-red">레드
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
-        <label class="btn btn-red">레드
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
-        <label class="btn btn-outline-blue">블루
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
-        <label class="btn btn-blue">블루
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
+<!--        <input type="radio" class="btn-check" id="eventColorRedOut" name="eventColor" value="오렌지">-->
+<!--        <label class="btn btn-outline-red" for="eventColorRedOut" >레드</label>-->
+<!--        <input type="radio" class="btn-check" id="eventColorBlueOut" name="eventColor" value="오렌지">-->
+<!--        <label class="btn btn-outline-blue" for="eventColorBlueOut" >레드</label>-->
+<!--        <input type="radio" class="btn-check" id="eventColorGreenOut" name="eventColor" value="오렌지">-->
+<!--        <label class="btn btn-outline-green" for="eventColorGreenOut" >레드</label>-->
 
-        <label class="btn btn-outline-green">그린
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
-        <label class="btn btn-green">그린
-            <input type="radio" class="btn-check" name="eventColor">
-        </label>
-        <script>
-            const btns=document.querySelectorAll(".btn");
-            btns.forEach((btn)=>{
-                btn.addEventListener("click",(e)=>{
-                    const btn=e.target;
-                    const radio=btn.querySelector(".btn-check");
-                    if(!radio)return;
-                    console.log(radio);
-                    
-                    if(radio.checked){
-                        btn.classList.add("checked")
-                    }
-                })
-            })
-        </script>
+
+        <br>
+
+        <input type="radio" class="btn-check" id="eventColorOrange" name="eventColor" value="오렌지">
+        <label class="btn btn-orange" for="eventColorOrange" >오렌지</label>
+        <input type="radio" class="btn-check" id="eventColorRed" name="eventColor" value="오렌지">
+        <label class="btn btn-red" for="eventColorRed" >레드</label>
+        <input type="radio" class="btn-check" id="eventColorBlue" name="eventColor" value="오렌지">
+        <label class="btn btn-blue" for="eventColorBlue" >블루</label>
+        <input type="radio" class="btn-check" id="eventColorGreen" name="eventColor" value="오렌지">
+        <label class="btn btn-green" for="eventColorGreen" >그린</label>
+
         <h1>스케줄 어플</h1>
         <div style="display: none;">
             <div id="dayEx" class="day" data-day="">
@@ -158,25 +139,91 @@
                                    
                                 </div>
 
-                                <label>
-                                    <strong>이벤트 색상</strong>
-                                    <div  class="color-radio">
-<!--                                        <input checked type="radio" id="colorRed" name="eventColor" value="red">-->
-<!--                                        <label for="colorRed">-->
-<!--                                            <div class="color-box" style="background-color: var(&#45;&#45;red-color);"></div>-->
-<!--                                        </label>-->
+                               <div class="color-container mb-3">
+                                   <strong>색상 </strong>
+                                   <div  class="colors">
+                                        <input type="radio" class="btn-check" id="eventColorOrangeOut" name="eventColor" value="오렌지">
+                                        <label class="btn btn-outline-orange" for="eventColorOrangeOut">&nbsp;</label>
+
+                                        <input type="radio" class="btn-check" id="eventColorRedOut" name="eventColor" value="오렌지">
+                                        <label class="btn btn-outline-red" for="eventColorRedOut">&nbsp;</label>
+
+                                        <input type="radio" class="btn-check" id="eventColorBlueOut" name="eventColor" value="오렌지">
+                                        <label class="btn btn-outline-blue" for="eventColorBlueOut">&nbsp;</label>
+
+                                        <input type="radio" class="btn-check" id="eventColorGreenOut" name="eventColor" value="오렌지">
+                                        <label class="btn btn-outline-green" for="eventColorGreenOut">&nbsp;</label>
 
                                     </div>
-                                </label>
+                               </div>
+                                <div class="icon-container mb-3">
+                                    <strong>아이콘 </strong>
+                                    <div class="icons">
+                                        <input type="radio" class="btn-check" id="icon-party" name="eventIcon" value="🎉">
+                                        <label class="btn btn-outline-light" for="icon-party">🎉</label>
 
-                                <select name="eventIcon">
-                                    <option selected value="🎉">🎉 파티</option>
-                                    <option value="🏥">🏥 병원</option>
-                                    <option value="🍴">🍴 식사</option>
-                                    <option value="💻">💻 작업</option>
-                                    <option value="📞">📞 전화</option>
-                                </select>
-                                <button type="submit" id="addEventButton">이벤트 추가</button>
+                                        <input type="radio" class="btn-check" id="icon-hospital" name="eventIcon" value="🏥">
+                                        <label class="btn btn-outline-light" for="icon-hospital">🏥</label>
+
+                                        <input type="radio" class="btn-check" id="icon-food" name="eventIcon" value="🍴">
+                                        <label class="btn btn-outline-light" for="icon-food">🍴</label>
+
+                                        <input type="radio" class="btn-check" id="icon-work" name="eventIcon" value="💻">
+                                        <label class="btn btn-outline-light" for="icon-work">💻</label>
+
+                                        <input type="radio" class="btn-check" id="icon-call" name="eventIcon" value="📞">
+                                        <label class="btn btn-outline-light" for="icon-call">📞</label>
+
+                                        <input type="radio" class="btn-check" id="icon-study" name="eventIcon" value="📚">
+                                        <label class="btn btn-outline-light" for="icon-study">📚</label>
+
+                                        <input type="radio" class="btn-check" id="icon-run" name="eventIcon" value="🏃">
+                                        <label class="btn btn-outline-light" for="icon-run">🏃</label>
+
+                                        <input type="radio" class="btn-check" id="icon-movie" name="eventIcon" value="🎬">
+                                        <label class="btn btn-outline-light" for="icon-movie">🎬</label>
+
+                                        <input type="radio" class="btn-check" id="icon-shopping" name="eventIcon" value="🛒">
+                                        <label class="btn btn-outline-light" for="icon-shopping">🛒</label>
+
+                                        <input type="radio" class="btn-check" id="icon-travel" name="eventIcon" value="✈️">
+                                        <label class="btn btn-outline-light" for="icon-travel">✈️</label>
+
+                                        <input type="radio" class="btn-check" id="icon-rest" name="eventIcon" value="💤">
+                                        <label class="btn btn-outline-light" for="icon-rest">💤</label>
+
+                                        <input type="radio" class="btn-check" id="icon-cleaning" name="eventIcon" value="🧹">
+                                        <label class="btn btn-outline-light" for="icon-cleaning">🧹</label>
+
+                                        <input type="radio" class="btn-check" id="icon-music" name="eventIcon" value="🎶">
+                                        <label class="btn btn-outline-light" for="icon-music">🎶</label>
+
+                                        <input type="radio" class="btn-check" id="icon-meeting" name="eventIcon" value="📅">
+                                        <label class="btn btn-outline-light" for="icon-meeting">📅</label>
+
+                                        <input type="radio" class="btn-check" id="icon-note" name="eventIcon" value="📝">
+                                        <label class="btn btn-outline-light" for="icon-note">📝</label>
+
+                                        <input type="radio" class="btn-check" id="icon-drive" name="eventIcon" value="🚗">
+                                        <label class="btn btn-outline-light" for="icon-drive">🚗</label>
+
+                                        <input type="radio" class="btn-check" id="icon-birthday" name="eventIcon" value="🎂">
+                                        <label class="btn btn-outline-light" for="icon-birthday">🎂</label>
+
+                                        <input type="radio" class="btn-check" id="icon-anniversary" name="eventIcon" value="🕯️">
+                                        <label class="btn btn-outline-light" for="icon-anniversary">🕯️</label>
+
+                                        <input type="radio" class="btn-check" id="icon-school" name="eventIcon" value="🏫">
+                                        <label class="btn btn-outline-light" for="icon-school">🏫</label>
+
+                                        <input type="radio" class="btn-check" id="icon-business" name="eventIcon" value="👔">
+                                        <label class="btn btn-outline-light" for="icon-business">👔</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="reset" class="btn btn-outline-warning me-2">초기화</button>
+                                    <button type="submit" class="btn btn-outline-primary">이벤트 추가</button>
+                                </div>
                             </form>
                         </div>
                     </div>

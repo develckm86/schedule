@@ -12230,9 +12230,14 @@ body .navigation button {
   border: 1px solid #444;
   border-radius: 5px;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form label {
-  display: block;
-  margin-bottom: 0.5rem;
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form .color-container {
+  display: flex;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form .color-container strong {
+  margin: 0 10px;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form .color-container label {
+  margin-right: 5px;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events {
   margin: 0;

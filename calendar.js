@@ -140,7 +140,7 @@ const closeBtnHandler=function(e,dayNode){
 
 }
 
-const cloneDayEx = function (dayNumber, addClassName) {
+const cloneDayEx = function (dayNumber, addClassName,yearMonth) {
     const dayClone = dayEx.cloneNode(true);
     dayClone.removeAttribute('id');
     dayClone.querySelector('.day-number').textContent = dayNumber;
@@ -149,6 +149,18 @@ const cloneDayEx = function (dayNumber, addClassName) {
     dayClone.dataset.day = dayNumber;
     if (addClassName) dayClone.classList.add(addClassName);
     //dayClone.classList.add('empty');//투명하게 만들기
+    const eventForm=dayClone.querySelector(".new-event-form");
+    const colors=eventForm["eventColor"];
+    colors.forEach((color)=>{
+        const label=color.nextElementSibling;
+        if(color) color.id+=(yearMonth+""+dayNumber);
+        if(label){
+            let forAttrebute=(label.getAttribute("for"));
+            forAttrebute+=(yearMonth+""+dayNumber);
+            label.setAttribute("for",forAttrebute);
+        }
+        //label.for+=(yearMonth+""+dayNumber);
+    })
     return dayClone;
 }
 const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
@@ -290,8 +302,7 @@ const createMonthNameNode=function (dateData) {
     return monthName;
 }
 const dyaNodeClickHandler=function (e) {
-    console.log(this);
-    
+
     if( e.target.classList.contains("btn-close") ) return;
     const dayFullNode=this.querySelector(".day-full");
     const rect = this.getBoundingClientRect();
@@ -407,7 +418,7 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     // 이번 달의 날짜들을 추가합니다
     for (let i = 1; i <= dateData.lastDateNum; i++) {
 
-        const dayNode = cloneDayEx(i);
+        const dayNode = cloneDayEx(i,"", dateData.nowDateNodeKey);
         //확대 이벤트 추가
         dayNode.addEventListener("click", dyaNodeClickHandler);
         dayContainer.appendChild(dayNode);
