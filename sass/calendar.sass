@@ -9,7 +9,9 @@
 //   @include bs.button-outline-variant( $orange-color, $black-color,$orange-color, darken($orange-color, 30%), $white-color)
 
 
-
+:root
+  --event-height: 3em
+  --day-height: 9em
 // Mixins for shared styles
 @mixin flex-center($direction: row)
   display: flex
@@ -138,7 +140,7 @@ body
           cursor: pointer
           position: relative
           border-collapse: collapse
-          height: $day-height
+          height: var(--day-height)
           overflow-y: auto
           @include hidden-scrollbar
 
@@ -165,7 +167,7 @@ body
                   display: none
           .day-full
             background-color: $header-bg-color
-            height: $day-height
+            height: var(--day-height)
             @include hidden-scrollbar
             @include flex-center(column)
             &.none
@@ -202,14 +204,17 @@ body
               @include hidden-scrollbar
 
               .form-container
-                @include flex-center(row)
+                @include flex-center(column)
                 background-color: $header-bg-color
                 padding: 1rem
 
                 .new-event-form
                   width: 280px
-                  border: 1px solid $border-color
+                  border-width: 0 1px 1px 1px
+                  border-color: $border-color
+                  border-style: solid
                   border-radius: 5px
+                  padding: 1em
                   .color-container
                     display: flex
                     strong
@@ -223,7 +228,7 @@ body
                 flex-grow: 1
                 .timeline > li
                   position: relative
-                  height: $event-height
+                  height: var(--event-height)
                   border-bottom: 1px solid $timeline-color
                   @include flex-center(row)
 
@@ -231,7 +236,7 @@ body
                     width: 70px
                     text-align: center
 
-                  .event
+                  &.event
                     position: absolute
                     left: 70px
                     width: calc(100% - 70px)
@@ -240,20 +245,6 @@ body
                     color: black
                     @include flex-center(column)
 
-                    &.red
-                      background-color: $red-color
-
-                    &.orange
-                      background-color: $orange-color
-
-                    &.yellow
-                      background-color: $yellow-color
-
-                    &.green
-                      background-color: $green-color
-
-                    &.blue
-                      background-color: $blue-color
 
 // Media Queries
 @media (max-width: 768px)

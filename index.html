@@ -43,7 +43,7 @@
                     <span class="title"></span>
                 </li>
 
-                <li id="eventLiEx" class="event red" data-time="00:00,01:00">
+                <li id="eventLiEx" class="event btn" data-time="00:00,01:00">
                     <small class="time">00:00-01:00</small>
                     <div class="content">
                         <span class="icon"></span>
@@ -104,112 +104,210 @@
                             </ul>
                         </div>
                         <div class="form-container">
-                            <form class="new-event-form none" id="newEventForm">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="eventName" placeholder="이벤트 제목">
-                                    <label>이벤트 제목</label>
-                                </div>
-
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="eventType" placeholder="이벤트 유형">
-                                    <label>이벤트 유형</label>
-                                </div>
-                                <div class="d-flex mb-3 justify-content-between align-items-center">
-                                    <div class="form-floating">
-                                        <input type="time" class="form-control" name="startTime" placeholder="시작 시간">
-                                        <label>시작 시간</label>
+                            <p class="nav nav-tabs nav-fill event-btn-container w-100">
+                                <button class="nav-link active" type="button" data-bs-toggle="tab"  data-bs-target="#allDayForm">
+                                    종일 이벤트
+                                </button>
+                                <button class="nav-link" type="button" data-bs-toggle="tab"  data-bs-target="#timedForm">
+                                    시간 이벤트
+                                </button>
+                            </p>
+                            <div class="tab-content">
+                                <form class="tab-pane new-event-form timed-form fade" id="timedForm">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="eventName" placeholder="이벤트 제목" value="축제">
+                                        <label>이벤트 제목</label>
                                     </div>
-                                    <div>~</div>
-                                    <div class="form-floating">
-                                        <input type="time" class="form-control" name="endTime" placeholder="종료 시간">
-                                        <label>종료시간</label>
+                                    <div class="d-flex mb-3 justify-content-between align-items-center">
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" name="startTime" placeholder="시작 시간">
+                                            <label>시작 시간</label>
+                                        </div>
+                                        <div>~</div>
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" name="endTime" placeholder="종료 시간">
+                                            <label>종료시간</label>
+                                        </div>
                                     </div>
-                                </div>
-                               <div class="color-container mb-3">
-                                   <strong>색상 </strong>
-                                   <div  class="colors">
-                                        <input type="radio" class="btn-check" id="eventColorOrangeOut" name="eventColor" value="오렌지">
-                                        <label class="btn btn-outline-orange" for="eventColorOrangeOut">&nbsp;</label>
 
-                                        <input type="radio" class="btn-check" id="eventColorRedOut" name="eventColor" value="오렌지">
-                                        <label class="btn btn-outline-red" for="eventColorRedOut">&nbsp;</label>
+                                    <div class="color-container mb-3">
+                                       <strong>색상 </strong>
+                                       <div  class="colors">
+                                            <input type="radio" class="btn-check" id="timed-orange" name="eventColor" value="btn-orange" checked>
+                                            <label class="btn btn-outline-orange" for="timed-orange">&nbsp;</label>
 
-                                        <input type="radio" class="btn-check" id="eventColorBlueOut" name="eventColor" value="오렌지">
-                                        <label class="btn btn-outline-blue" for="eventColorBlueOut">&nbsp;</label>
+                                            <input type="radio" class="btn-check" id="timed-red" name="eventColor" value="btn-red">
+                                            <label class="btn btn-outline-red" for="timed-red">&nbsp;</label>
 
-                                        <input type="radio" class="btn-check" id="eventColorGreenOut" name="eventColor" value="오렌지">
-                                        <label class="btn btn-outline-green" for="eventColorGreenOut">&nbsp;</label>
+                                            <input type="radio" class="btn-check" id="timed-blue" name="eventColor" value="btn-blue">
+                                            <label class="btn btn-outline-blue" for="timed-blue">&nbsp;</label>
+
+                                            <input type="radio" class="btn-check" id="timed-green" name="eventColor" value="btn-green">
+                                            <label class="btn btn-outline-green" for="timed-green">&nbsp;</label>
+                                        </div>
+                                   </div>
+                                    <div class="icon-container mb-3">
+                                        <strong>아이콘 </strong>
+                                        <div class="icons">
+                                            <input type="radio" class="btn-check" id="timed-party" name="eventIcon" value="🎉">
+                                            <label class="btn btn-outline-light" for="timed-party">🎉</label>
+
+                                            <input type="radio" class="btn-check" id="timed-hospital" name="eventIcon" value="🏥">
+                                            <label class="btn btn-outline-light" for="timed-hospital">🏥</label>
+
+                                            <input type="radio" class="btn-check" id="timed-food" name="eventIcon" value="🍴">
+                                            <label class="btn btn-outline-light" for="timed-food">🍴</label>
+
+                                            <input type="radio" class="btn-check" id="timed-work" name="eventIcon" value="💻">
+                                            <label class="btn btn-outline-light" for="timed-work">💻</label>
+
+                                            <input type="radio" class="btn-check" id="timed-call" name="eventIcon" value="📞">
+                                            <label class="btn btn-outline-light" for="timed-call">📞</label>
+
+                                            <input type="radio" class="btn-check" id="timed-study" name="eventIcon" value="📚">
+                                            <label class="btn btn-outline-light" for="timed-study">📚</label>
+
+                                            <input type="radio" class="btn-check" id="timed-run" name="eventIcon" value="🏃">
+                                            <label class="btn btn-outline-light" for="timed-run">🏃</label>
+
+                                            <input type="radio" class="btn-check" id="timed-movie" name="eventIcon" value="🎬">
+                                            <label class="btn btn-outline-light" for="timed-movie">🎬</label>
+
+                                            <input type="radio" class="btn-check" id="timed-shopping" name="eventIcon" value="🛒">
+                                            <label class="btn btn-outline-light" for="timed-shopping">🛒</label>
+
+                                            <input type="radio" class="btn-check" id="timed-travel" name="eventIcon" value="✈️">
+                                            <label class="btn btn-outline-light" for="timed-travel">✈️</label>
+
+                                            <input type="radio" class="btn-check" id="timed-rest" name="eventIcon" value="💤">
+                                            <label class="btn btn-outline-light" for="timed-rest">💤</label>
+
+                                            <input type="radio" class="btn-check" id="timed-cleaning" name="eventIcon" value="🧹">
+                                            <label class="btn btn-outline-light" for="timed-cleaning">🧹</label>
+
+                                            <input type="radio" class="btn-check" id="timed-music" name="eventIcon" value="🎶">
+                                            <label class="btn btn-outline-light" for="timed-music">🎶</label>
+
+                                            <input type="radio" class="btn-check" id="timed-meeting" name="eventIcon" value="📅">
+                                            <label class="btn btn-outline-light" for="timed-meeting">📅</label>
+
+                                            <input type="radio" class="btn-check" id="timed-note" name="eventIcon" value="📝">
+                                            <label class="btn btn-outline-light" for="timed-note">📝</label>
+
+                                            <input type="radio" class="btn-check" id="timed-drive" name="eventIcon" value="🚗">
+                                            <label class="btn btn-outline-light" for="timed-drive">🚗</label>
+
+                                            <input type="radio" class="btn-check" id="timed-birthday" name="eventIcon" value="🎂">
+                                            <label class="btn btn-outline-light" for="timed-birthday">🎂</label>
+
+                                            <input type="radio" class="btn-check" id="timed-anniversary" name="eventIcon" value="🕯️">
+                                            <label class="btn btn-outline-light" for="timed-anniversary">🕯️</label>
+
+                                            <input type="radio" class="btn-check" id="timed-school" name="eventIcon" value="🏫">
+                                            <label class="btn btn-outline-light" for="timed-school">🏫</label>
+
+                                            <input type="radio" class="btn-check" id="timed-business" name="eventIcon" value="👔">
+                                            <label class="btn btn-outline-light" for="timed-business">👔</label>
+                                        </div>
                                     </div>
-                               </div>
-                                <div class="icon-container mb-3">
-                                    <strong>아이콘 </strong>
-                                    <div class="icons">
-                                        <input type="radio" class="btn-check" id="icon-party" name="eventIcon" value="🎉">
-                                        <label class="btn btn-outline-light" for="icon-party">🎉</label>
-
-                                        <input type="radio" class="btn-check" id="icon-hospital" name="eventIcon" value="🏥">
-                                        <label class="btn btn-outline-light" for="icon-hospital">🏥</label>
-
-                                        <input type="radio" class="btn-check" id="icon-food" name="eventIcon" value="🍴">
-                                        <label class="btn btn-outline-light" for="icon-food">🍴</label>
-
-                                        <input type="radio" class="btn-check" id="icon-work" name="eventIcon" value="💻">
-                                        <label class="btn btn-outline-light" for="icon-work">💻</label>
-
-                                        <input type="radio" class="btn-check" id="icon-call" name="eventIcon" value="📞">
-                                        <label class="btn btn-outline-light" for="icon-call">📞</label>
-
-                                        <input type="radio" class="btn-check" id="icon-study" name="eventIcon" value="📚">
-                                        <label class="btn btn-outline-light" for="icon-study">📚</label>
-
-                                        <input type="radio" class="btn-check" id="icon-run" name="eventIcon" value="🏃">
-                                        <label class="btn btn-outline-light" for="icon-run">🏃</label>
-
-                                        <input type="radio" class="btn-check" id="icon-movie" name="eventIcon" value="🎬">
-                                        <label class="btn btn-outline-light" for="icon-movie">🎬</label>
-
-                                        <input type="radio" class="btn-check" id="icon-shopping" name="eventIcon" value="🛒">
-                                        <label class="btn btn-outline-light" for="icon-shopping">🛒</label>
-
-                                        <input type="radio" class="btn-check" id="icon-travel" name="eventIcon" value="✈️">
-                                        <label class="btn btn-outline-light" for="icon-travel">✈️</label>
-
-                                        <input type="radio" class="btn-check" id="icon-rest" name="eventIcon" value="💤">
-                                        <label class="btn btn-outline-light" for="icon-rest">💤</label>
-
-                                        <input type="radio" class="btn-check" id="icon-cleaning" name="eventIcon" value="🧹">
-                                        <label class="btn btn-outline-light" for="icon-cleaning">🧹</label>
-
-                                        <input type="radio" class="btn-check" id="icon-music" name="eventIcon" value="🎶">
-                                        <label class="btn btn-outline-light" for="icon-music">🎶</label>
-
-                                        <input type="radio" class="btn-check" id="icon-meeting" name="eventIcon" value="📅">
-                                        <label class="btn btn-outline-light" for="icon-meeting">📅</label>
-
-                                        <input type="radio" class="btn-check" id="icon-note" name="eventIcon" value="📝">
-                                        <label class="btn btn-outline-light" for="icon-note">📝</label>
-
-                                        <input type="radio" class="btn-check" id="icon-drive" name="eventIcon" value="🚗">
-                                        <label class="btn btn-outline-light" for="icon-drive">🚗</label>
-
-                                        <input type="radio" class="btn-check" id="icon-birthday" name="eventIcon" value="🎂">
-                                        <label class="btn btn-outline-light" for="icon-birthday">🎂</label>
-
-                                        <input type="radio" class="btn-check" id="icon-anniversary" name="eventIcon" value="🕯️">
-                                        <label class="btn btn-outline-light" for="icon-anniversary">🕯️</label>
-
-                                        <input type="radio" class="btn-check" id="icon-school" name="eventIcon" value="🏫">
-                                        <label class="btn btn-outline-light" for="icon-school">🏫</label>
-
-                                        <input type="radio" class="btn-check" id="icon-business" name="eventIcon" value="👔">
-                                        <label class="btn btn-outline-light" for="icon-business">👔</label>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="reset" class="btn btn-outline-warning me-2">초기화</button>
+                                        <button type="submit" class="btn btn-outline-primary">이벤트 추가</button>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="reset" class="btn btn-outline-warning me-2">초기화</button>
-                                    <button type="submit" class="btn btn-outline-primary">이벤트 추가</button>
-                                </div>
-                            </form>
+                                </form>
+                                <form class="tab-pane new-event-form all-day-form show active" id="allDayForm">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="eventName" placeholder="이벤트 제목" value="축제">
+                                        <label>이벤트 제목</label>
+                                    </div>
+
+                                    <div class="color-container mb-3">
+                                        <strong>색상 </strong>
+                                        <div  class="colors">
+                                            <input type="radio" class="btn-check" id="all-orange" name="eventColor" value="btn-orange" checked>
+                                            <label class="btn btn-outline-orange" for="all-orange">&nbsp;</label>
+
+                                            <input type="radio" class="btn-check" id="all-red" name="eventColor" value="btn-red">
+                                            <label class="btn btn-outline-red" for="all-red">&nbsp;</label>
+
+                                            <input type="radio" class="btn-check" id="all-blue" name="eventColor" value="btn-blue">
+                                            <label class="btn btn-outline-blue" for="all-blue">&nbsp;</label>
+
+                                            <input type="radio" class="btn-check" id="all-green" name="eventColor" value="btn-green">
+                                            <label class="btn btn-outline-green" for="all-green">&nbsp;</label>
+                                        </div>
+                                    </div>
+                                    <div class="icon-container mb-3">
+                                        <strong>아이콘 </strong>
+                                        <div class="icons">
+                                            <input type="radio" class="btn-check" id="all-party" name="eventIcon" value="🎉">
+                                            <label class="btn btn-outline-light" for="all-party">🎉</label>
+
+                                            <input type="radio" class="btn-check" id="all-hospital" name="eventIcon" value="🏥">
+                                            <label class="btn btn-outline-light" for="all-hospital">🏥</label>
+
+                                            <input type="radio" class="btn-check" id="all-food" name="eventIcon" value="🍴">
+                                            <label class="btn btn-outline-light" for="all-food">🍴</label>
+
+                                            <input type="radio" class="btn-check" id="all-work" name="eventIcon" value="💻">
+                                            <label class="btn btn-outline-light" for="all-work">💻</label>
+
+                                            <input type="radio" class="btn-check" id="all-call" name="eventIcon" value="📞">
+                                            <label class="btn btn-outline-light" for="all-call">📞</label>
+
+                                            <input type="radio" class="btn-check" id="all-study" name="eventIcon" value="📚">
+                                            <label class="btn btn-outline-light" for="all-study">📚</label>
+
+                                            <input type="radio" class="btn-check" id="all-run" name="eventIcon" value="🏃">
+                                            <label class="btn btn-outline-light" for="all-run">🏃</label>
+
+                                            <input type="radio" class="btn-check" id="all-movie" name="eventIcon" value="🎬">
+                                            <label class="btn btn-outline-light" for="all-movie">🎬</label>
+
+                                            <input type="radio" class="btn-check" id="all-shopping" name="eventIcon" value="🛒">
+                                            <label class="btn btn-outline-light" for="all-shopping">🛒</label>
+
+                                            <input type="radio" class="btn-check" id="all-travel" name="eventIcon" value="✈️">
+                                            <label class="btn btn-outline-light" for="all-travel">✈️</label>
+
+                                            <input type="radio" class="btn-check" id="all-rest" name="eventIcon" value="💤">
+                                            <label class="btn btn-outline-light" for="all-rest">💤</label>
+
+                                            <input type="radio" class="btn-check" id="all-cleaning" name="eventIcon" value="🧹">
+                                            <label class="btn btn-outline-light" for="all-cleaning">🧹</label>
+
+                                            <input type="radio" class="btn-check" id="all-music" name="eventIcon" value="🎶">
+                                            <label class="btn btn-outline-light" for="all-music">🎶</label>
+
+                                            <input type="radio" class="btn-check" id="all-meeting" name="eventIcon" value="📅">
+                                            <label class="btn btn-outline-light" for="all-meeting">📅</label>
+
+                                            <input type="radio" class="btn-check" id="all-note" name="eventIcon" value="📝">
+                                            <label class="btn btn-outline-light" for="all-note">📝</label>
+
+                                            <input type="radio" class="btn-check" id="all-drive" name="eventIcon" value="🚗">
+                                            <label class="btn btn-outline-light" for="all-drive">🚗</label>
+
+                                            <input type="radio" class="btn-check" id="all-birthday" name="eventIcon" value="🎂">
+                                            <label class="btn btn-outline-light" for="all-birthday">🎂</label>
+
+                                            <input type="radio" class="btn-check" id="all-anniversary" name="eventIcon" value="🕯️">
+                                            <label class="btn btn-outline-light" for="all-anniversary">🕯️</label>
+
+                                            <input type="radio" class="btn-check" id="all-school" name="eventIcon" value="🏫">
+                                            <label class="btn btn-outline-light" for="all-school">🏫</label>
+
+                                            <input type="radio" class="btn-check" id="all-business" name="eventIcon" value="👔">
+                                            <label class="btn btn-outline-light" for="all-business">👔</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="reset" class="btn btn-outline-warning me-2">초기화</button>
+                                        <button type="submit" class="btn btn-outline-primary">이벤트 추가</button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

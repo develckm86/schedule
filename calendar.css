@@ -12044,6 +12044,11 @@ textarea.form-control-lg {
   border-color: #fff !important;
 }
 
+:root {
+  --event-height: 3em;
+  --day-height: 9em;
+}
+
 body {
   background-color: rgb(29, 27, 32);
   margin: 0;
@@ -12136,7 +12141,7 @@ body .navigation button {
   cursor: pointer;
   position: relative;
   border-collapse: collapse;
-  height: 130px;
+  height: var(--day-height);
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -12171,7 +12176,7 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full {
   background-color: #2c2c2e;
-  height: 130px;
+  height: var(--day-height);
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-y: scroll;
@@ -12219,7 +12224,7 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #2c2c2e;
@@ -12227,8 +12232,11 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form {
   width: 280px;
-  border: 1px solid #444;
+  border-width: 0 1px 1px 1px;
+  border-color: #444;
+  border-style: solid;
   border-radius: 5px;
+  padding: 1em;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .new-event-form .color-container {
   display: flex;
@@ -12246,7 +12254,7 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li {
   position: relative;
-  height: 50px;
+  height: var(--event-height);
   border-bottom: 1px solid #444;
   display: flex;
   flex-direction: row;
@@ -12257,7 +12265,7 @@ body .navigation button {
   width: 70px;
   text-align: center;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li.event {
   position: absolute;
   left: 70px;
   width: calc(100% - 70px);
@@ -12268,21 +12276,6 @@ body .navigation button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.red {
-  background-color: #ff7b7b;
-}
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.orange {
-  background-color: #ffb07b;
-}
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.yellow {
-  background-color: #fff27b;
-}
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.green {
-  background-color: #b7ff7b;
-}
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline > li .event.blue {
-  background-color: #788cff;
 }
 
 @media (max-width: 768px) {

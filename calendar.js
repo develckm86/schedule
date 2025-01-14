@@ -17,9 +17,8 @@ let observer = null;
 
 
 const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
-const eventForm = document.forms["newEventForm"];
+
 const eventLiEx = document.getElementById("eventLiEx");
-const timeline = document.getElementById("timeline");
 
 // Object to manage events
 const events = {};
@@ -88,8 +87,8 @@ class AddEventFormData{
         const icon = node.querySelector(".icon");
         node.dataset.time = this.timeRange;
         node.classList.add(this.eventColor);
-        node.style.top = `${this.startDecimal * EVENT_HEIGHT}px`;
-        node.style.height = `${(this.endDecimal - this.startDecimal) * EVENT_HEIGHT}px`;
+        node.style.top = `${this.startDecimal * EVENT_HEIGHT}em`;
+        node.style.height = `${(this.endDecimal - this.startDecimal) * EVENT_HEIGHT}em`;
         title.innerText = this.eventName;
         icon.innerText = this.eventIcon;
         time.innerText = this.timeRange;
@@ -98,40 +97,6 @@ class AddEventFormData{
     };
 }
 // Add new event
-eventForm.onsubmit = (e) => {
-    e.preventDefault();
-
-    const formData = new AddEventFormData(eventForm);
-    const eventNode = formData.getEventNode();
-
-    // Check for overlapping events
-    for (const [key, value] of Object.entries(events)) {
-        const [existingStart, existingEnd] = key.split(" - ").map((time) => {
-            const [hours, minutes] = time.split(":").map(Number);
-            return hours + minutes / 60;
-        });
-
-        if (
-            (formData.startDecimal < existingEnd && formData.startDecimal > existingStart) ||
-            (formData.endDecimal > existingStart && formData.endDecimal < existingEnd) ||
-            (formData.startDecimal <= existingStart && formData.endDecimal >= existingEnd) ||
-            (formData.startDecimal >= existingStart && formData.endDecimal <= existingEnd)
-        ) {
-            const replace = confirm(`"${value.eventName}"와 겹칩니다. 대체하시겠습니까?`);
-            if (!replace) {
-                return; // Cancel adding the event
-            }
-            // Remove the overlapping event
-            timeline.removeChild(value.node);
-            delete events[key];
-            break;
-        }
-    }
-
-    // Add new event to the timeline and events object
-    timeline.appendChild(eventNode);
-    events[formData.timeRange] = { ...formData, node: eventNode };
-};
 const closeBtnHandler=function(e,dayNode){
     e.preventDefault();
     const dayFull = dayNode.querySelector(".day-full")
@@ -139,9 +104,73 @@ const closeBtnHandler=function(e,dayNode){
     dayFull.classList.add('none')
 
 }
+const setNewEventForm=function(dayNode,key){
+    const timedForm=dayNode.querySelector(".timed-form");
+    const allDayForm=dayNode.querySelector(".all-day-form");
+    const timeline = dayNode.querySelector(".timeline");
 
-const cloneDayEx = function (dayNumber, addClassName,yearMonth) {
+
+    //form 에 eventColor 선탹
+
+    const eventBtn=dayNode.querySelectorAll(".event-btn-container>button");
+    timedForm.id+=key;
+    allDayForm.id+=key;
+    eventBtn.forEach((btn)=>{
+        btn.dataset.bsTarget+=key;
+    });
+    const radios=dayNode.querySelectorAll(".btn-check");
+
+    radios.forEach((color)=>{
+        const label=color.nextElementSibling;
+        if(color) color.id+=key;
+        if(label){
+            let forAttribute=(label.getAttribute("for"));
+            forAttribute+=key;
+            label.setAttribute("for",forAttribute);
+        }
+        //label.for+=(yearMonth+""+dayNumber);
+    });
+    timedForm.onsubmit = (e) => {
+        e.preventDefault();
+
+        const formData = new AddEventFormData(timedForm);
+        const eventNode = formData.getEventNode();
+
+        // 동일한 시간에 이벤트가 존재하는지 검사
+        for (const [key, value] of Object.entries(events)) {
+            const [existingStart, existingEnd] = key.split(" - ").map((time) => {
+                const [hours, minutes] = time.split(":").map(Number);
+                return hours + minutes / 60;
+            });
+
+            if (
+                (formData.startDecimal < existingEnd && formData.startDecimal > existingStart) ||
+                (formData.endDecimal > existingStart && formData.endDecimal < existingEnd) ||
+                (formData.startDecimal <= existingStart && formData.endDecimal >= existingEnd) ||
+                (formData.startDecimal >= existingStart && formData.endDecimal <= existingEnd)
+            ) {
+                const replace = confirm(`"${value.eventName}"와 겹칩니다. 대체하시겠습니까?`);
+                if (!replace) {
+                    return; // Cancel adding the event
+                }
+                // Remove the overlapping event
+                timeline.removeChild(value.node);
+                delete events[key];
+                break;
+            }
+        }
+
+        // Add new event to the timeline and events object
+        timeline.appendChild(eventNode);
+        events[formData.timeRange] = { ...formData, node: eventNode };
+    };
+
+
+
+}
+const cloneDayEx = function (dayNumber,dateData, addClassName) {
     const dayClone = dayEx.cloneNode(true);
+    let key=dateData.nowDateNodeKey+(dayNumber<10 ? "0" : "")+dayNumber; //202412+""+01
     dayClone.removeAttribute('id');
     dayClone.querySelector('.day-number').textContent = dayNumber;
     const closeBtn = dayClone.querySelector('.btn-close');    
@@ -149,18 +178,8 @@ const cloneDayEx = function (dayNumber, addClassName,yearMonth) {
     dayClone.dataset.day = dayNumber;
     if (addClassName) dayClone.classList.add(addClassName);
     //dayClone.classList.add('empty');//투명하게 만들기
-    const eventForm=dayClone.querySelector(".new-event-form");
-    const colors=eventForm["eventColor"];
-    colors.forEach((color)=>{
-        const label=color.nextElementSibling;
-        if(color) color.id+=(yearMonth+""+dayNumber);
-        if(label){
-            let forAttrebute=(label.getAttribute("for"));
-            forAttrebute+=(yearMonth+""+dayNumber);
-            label.setAttribute("for",forAttrebute);
-        }
-        //label.for+=(yearMonth+""+dayNumber);
-    })
+
+    setNewEventForm(dayClone,key);
     return dayClone;
 }
 const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
@@ -412,13 +431,13 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
     // 이전 달의 날짜들을 추가합니다
     for (let i = 0; i < dateData.firstDay; i++) {
         const day = dateData.lastDateNum - dateData.firstDay + i + 1;
-        dayContainer.appendChild(cloneDayEx(day, 'empty'));
+        dayContainer.appendChild(cloneDayEx(day,dateData, 'empty'));
     }
 
     // 이번 달의 날짜들을 추가합니다
     for (let i = 1; i <= dateData.lastDateNum; i++) {
 
-        const dayNode = cloneDayEx(i,"", dateData.nowDateNodeKey);
+        const dayNode = cloneDayEx(i,dateData, "");
         //확대 이벤트 추가
         dayNode.addEventListener("click", dyaNodeClickHandler);
         dayContainer.appendChild(dayNode);
