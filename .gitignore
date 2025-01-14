@@ -29,4 +29,5 @@ bin/
 .DS_Store
 
 ### node_module ###
-./node_modules/
+/node_modules/
+/.idea/
