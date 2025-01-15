@@ -1,3 +1,3 @@
 import {initCalendar} from "./calendar.js"
 
-initCalendar();
+initCalendar().then(r => {});

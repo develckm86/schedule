@@ -143,7 +143,9 @@ body
           height: var(--day-height)
           overflow-y: auto
           @include hidden-scrollbar
-
+          &.empty
+            cursor: not-allowed
+            opacity: .5
           .day-number
             font-size: 1.1em
             padding: .3em

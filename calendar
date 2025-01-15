@@ -1,19 +1,25 @@
 //const dayEx = document.getElementById('dayEx');
 const dayContainerEx = document.getElementById('dayContainerEx');
 const dayEx = document.getElementById('dayFullEx');
+const scheduleLiEx = document.getElementById('scheduleLiEx');
 const allDayLiEx = document.getElementById('allDayLiEx');
-const calendar = document.getElementById('calendar');
-const monthNameEx = document.getElementById('monthNameEx');
-const timedScheduleLiEx = document.getElementById('timedScheduleLiEx');
-const allDayScheduleLiEx = document.getElementById('allDayScheduleLiEx');
+
 const calendarContainer = document.getElementById('calendarContainer');
-const timedLiEx = document.getElementById("timedLiEx");
+const calendar = document.getElementById('calendar');
+
+const monthNameEx = document.getElementById('monthNameEx');
+
 const renderDateData = {};
 let selectedDateData = null;
 // Example schedule data
 const scheduleData = {};
 let observer = null;
+
+
 const EVENT_HEIGHT = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--event-height'));
+
+const eventLiEx = document.getElementById("eventLiEx");
+
 // Object to manage events
 const events = {};
 let isScrollingToTop = false;
@@ -59,39 +65,34 @@ function createKeyframes(animationName, keyframes) {
     styleSheet.sheet.insertRule(`@keyframes ${animationName} { ${keyframesRules} }`, styleSheet.sheet.cssRules.length);
 }
 
-const timedLiSetTopHeight = (startTime,endTime) => {
-    let startHours,startMinutes,endHours,endMinutes;
-    [startHours, startMinutes] = startTime.split(":").map(Number);
-    [endHours, endMinutes] = endTime.split(":").map(Number);
 
-    let startDecimal = startHours + startMinutes / 60;
-    let endDecimal = endHours + endMinutes / 60;
-    let top=startDecimal*EVENT_HEIGHT+"em"
-    let height=(endDecimal-startDecimal)*EVENT_HEIGHT+"em"
-    return [top,height]
-}
-
-class TimedFormData{
+class AddEventFormData{
     constructor(form) {
         this.eventName = form.eventName.value;
         this.eventColor = form.eventColor.value;
         this.eventIcon = form.eventIcon.value;
         this.startTime = form.startTime.value;
         this.endTime = form.endTime.value;
-        this.timeRange = `${this.startTime}-${this.endTime}`;
+        this.timeRange = `${this.startTime} - ${this.endTime}`;
+        const [startHours, startMinutes] = this.startTime.split(":").map(Number);
+        const [endHours, endMinutes] = this.endTime.split(":").map(Number);
+        this.startDecimal = startHours + startMinutes / 60;
+        this.endDecimal = endHours + endMinutes / 60;
     }
     getEventNode(){
-        const node = timedLiEx.cloneNode(true);
+        const node = eventLiEx.cloneNode(true);
         node.removeAttribute("id");
         const time = node.querySelector(".time");
         const title = node.querySelector(".title");
         const icon = node.querySelector(".icon");
         node.dataset.time = this.timeRange;
         node.classList.add(this.eventColor);
-        [node.style.top,node.style.height]=timedLiSetTopHeight(this.startTime,this.endTime)
+        node.style.top = `${this.startDecimal * EVENT_HEIGHT}em`;
+        node.style.height = `${(this.endDecimal - this.startDecimal) * EVENT_HEIGHT}em`;
         title.innerText = this.eventName;
         icon.innerText = this.eventIcon;
         time.innerText = this.timeRange;
+
         return node;
     };
 }
@@ -103,44 +104,12 @@ const closeBtnHandler=function(e,dayNode){
     dayFull.classList.add('none')
 
 }
-const timedFormSubmitHandler=(e,timeline)=>{
-    e.preventDefault();
-    const timedForm=e.target;
-    const formData = new TimedFormData(timedForm);
-    const eventNode = formData.getEventNode();
-
-    // 동일한 시간에 이벤트가 존재하는지 검사
-    // for (const [key, value] of Object.entries(events)) {
-    //     const [existingStart, existingEnd] = key.split(" - ").map((time) => {
-    //         const [hours, minutes] = time.split(":").map(Number);
-    //         return hours + minutes / 60;
-    //     });
-    //
-    //     if (
-    //         (formData.startDecimal < existingEnd && formData.startDecimal > existingStart) ||
-    //         (formData.endDecimal > existingStart && formData.endDecimal < existingEnd) ||
-    //         (formData.startDecimal <= existingStart && formData.endDecimal >= existingEnd) ||
-    //         (formData.startDecimal >= existingStart && formData.endDecimal <= existingEnd)
-    //     ) {
-    //         const replace = confirm(`"${value.eventName}"와 겹칩니다. 대체하시겠습니까?`);
-    //         if (!replace) {
-    //             return; // Cancel adding the event
-    //         }
-    //         // Remove the overlapping event
-    //         timeline.removeChild(value.node);
-    //         delete events[key];
-    //         break;
-    //     }
-    // }
-
-    // Add new event to the timeline and events object
-    timeline.appendChild(eventNode);
-    events[formData.timeRange] = { ...formData, node: eventNode };
-};
 const setNewEventForm=function(dayNode,key){
     const timedForm=dayNode.querySelector(".timed-form");
     const allDayForm=dayNode.querySelector(".all-day-form");
     const timeline = dayNode.querySelector(".timeline");
+
+
     //form 에 eventColor 선탹
 
     const eventBtn=dayNode.querySelectorAll(".event-btn-container>button");
@@ -162,29 +131,45 @@ const setNewEventForm=function(dayNode,key){
         //label.for+=(yearMonth+""+dayNumber);
     });
     timedForm.onsubmit = (e) => {
-        timedFormSubmitHandler(e, timeline);
-    }
+        e.preventDefault();
+
+        const formData = new AddEventFormData(timedForm);
+        const eventNode = formData.getEventNode();
+
+        // 동일한 시간에 이벤트가 존재하는지 검사
+        for (const [key, value] of Object.entries(events)) {
+            const [existingStart, existingEnd] = key.split(" - ").map((time) => {
+                const [hours, minutes] = time.split(":").map(Number);
+                return hours + minutes / 60;
+            });
+
+            if (
+                (formData.startDecimal < existingEnd && formData.startDecimal > existingStart) ||
+                (formData.endDecimal > existingStart && formData.endDecimal < existingEnd) ||
+                (formData.startDecimal <= existingStart && formData.endDecimal >= existingEnd) ||
+                (formData.startDecimal >= existingStart && formData.endDecimal <= existingEnd)
+            ) {
+                const replace = confirm(`"${value.eventName}"와 겹칩니다. 대체하시겠습니까?`);
+                if (!replace) {
+                    return; // Cancel adding the event
+                }
+                // Remove the overlapping event
+                timeline.removeChild(value.node);
+                delete events[key];
+                break;
+            }
+        }
+
+        // Add new event to the timeline and events object
+        timeline.appendChild(eventNode);
+        events[formData.timeRange] = { ...formData, node: eventNode };
+    };
 
 
 
 }
-const cloneDayEx = function (dayNumber, dateData, addClassName) {
+const cloneDayEx = function (dayNumber,dateData, addClassName) {
     const dayClone = dayEx.cloneNode(true);
-
-    const timedSchedule = dayClone.querySelector('.timed-schedule');
-    const allDaySchedule = dayClone.querySelector('.all-day-schedule');
-    const timedUl = dayClone.querySelector('.timeline');
-    const allDayUl = dayClone.querySelector('.all-day-ul');
-    const schedule=renderDateData[dateData.nowDateNodeKey]?.schedule[dayNumber];
-    if (schedule) {
-        const allDay=schedule["allDay"];
-        const timed=schedule["timed"];
-        //const multiDay=schedule["multiDay"];
-        allDayAppend(allDay, allDaySchedule,allDayUl);
-        timedAppend(timed, timedSchedule,timedUl);
-
-    }
-
     let key=dateData.nowDateNodeKey+(dayNumber<10 ? "0" : "")+dayNumber; //202412+""+01
     dayClone.removeAttribute('id');
     dayClone.querySelector('.day-number').textContent = dayNumber;
@@ -198,75 +183,28 @@ const cloneDayEx = function (dayNumber, dateData, addClassName) {
     setNewEventForm(dayClone,key);
     return dayClone;
 }
-const allDayAppend = function (schedules, allDaySchedule,allDayUl) {
+const allDayLiAppendScheduleUl = function (schedules, allDayUlNode) {
     schedules.forEach(schedule => {
-        //월 달력에 있는 작은 박스에 하루종일 이벤트 출력
-        let li = allDayScheduleLiEx.cloneNode(true);
-        li.removeAttribute('id');
-        let icon = li.querySelector('.icon');
-        let title = li.querySelector('.title');
+        const liClone = allDayLiEx.cloneNode(true);
+        liClone.removeAttribute('id');
+        const icon = liClone.querySelector('.icon');
+        let title = liClone.querySelector('.title');
         title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
-        allDaySchedule.appendChild(li);
 
-        li=allDayLiEx.cloneNode(true);
-        li.removeAttribute('id');
-        icon=li.querySelector('.icon');
-        title=li.querySelector('.title');
-        title.textContent = schedule.eventName;
-        icon.textContent = schedule.icon;
-        allDayUl.appendChild(li);
-
-
-
+        allDayUlNode.appendChild(liClone);
     });
 }
-const timedAppend = function (schedules, timedSchedule,timedUl) {
-    /*    "timed": [
-      {
-        "eventName": "팀 회의",
-        "type": "timed",
-        "hour": [
-          1400,
-          1500
-        ],
-        "icon": "👥",
-        "color": "orange"
-      },
-*/
+const scheduleLiAppendScheduleUl = function (schedules, scheduleUlNode) {
     schedules.forEach(schedule => {
-        if(schedule.type !== "timed") return
-        //월 달력에 있는 작은 박스에 시간 에벤트 출력
-        let li = timedScheduleLiEx.cloneNode(true);
-        li.removeAttribute('id');
-        let icon = li.querySelector('.icon');
-        let date = li.querySelector('.date');
-        let title = li.querySelector('.title');
-        title.textContent = schedule.eventName;
-        console.log(schedule);
-        let startTime=schedule.hour[0];
-        let endTime=schedule.hour[1];
-        let startHours = parseInt(startTime/60);
-        let startMinutes=startTime%60;
-        let endHours = parseInt(endTime/60);
-        let endMinutes=endTime%60;
-        let startStr=`${startMinutes}:${startMinutes}`;
-        let endStr=`${endMinutes}:${endMinutes}`;
-        let [top,height]=timedLiSetTopHeight(startStr,endStr);
-
-        date.dataset.time = `${startStr}-${endStr}`;
-        date.textContent = schedule.eventName;
-        icon.textContent = schedule.icon;
-        timedSchedule.appendChild(li);
-
-        li = timedLiEx.cloneNode(true);
-        li.removeAttribute('id');
-        icon = li.querySelector('.icon');
-        title = li.querySelector('.title');
+        const liClone = scheduleLiEx.cloneNode(true);
+        liClone.removeAttribute('id');
+        const icon = liClone.querySelector('.icon');
+        let title = liClone.querySelector('.title');
         title.dataset.time = Math.floor(schedule.hour / 60) + ':' + schedule.hour % 60;
         title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
-        timedUl.appendChild(li);
+        scheduleUlNode.appendChild(liClone);
     });
 }
 
@@ -335,7 +273,7 @@ const observerCallback = function (entries, innerObserver) {
 
 
             if (entry.boundingClientRect.top < 0) { // 스크롤을 올릴 때
-                //console.log("up");
+               //console.log("up");
                 let prevDateKey = dateData.prevDateKey;
                 let prevDateNodeKey = dateData.prevDateNodeKey;
 
@@ -504,9 +442,21 @@ const renderCalendar = async function (date = new Date(), encode = "ko") {
         //확대 이벤트 추가
         dayNode.addEventListener("click", dyaNodeClickHandler);
         dayContainer.appendChild(dayNode);
+        const scheduleUl = dayNode.querySelector('.timed-schedule');
+        const allDayUl = dayNode.querySelector('.all-day-schedule');
+        const schedule=renderDateData[dateData.nowDateNodeKey]?.schedule[i];
+        if (schedule) {
+            const allDay=schedule["allDay"];
+            const timed=schedule["timed"];
+            //const multiDay=schedule["multiDay"];
+            allDayLiAppendScheduleUl(allDay, allDayUl);
+            scheduleLiAppendScheduleUl(timed, scheduleUl);
+
+
+        }
         // // 공휴일 내용 추가
         // if (scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`]) {
-        //     timedAppend(scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`], scheduleUl);
+        //     scheduleLiAppendScheduleUl(scheduleData[`${dateData.nowDateKey}-${String(i).padStart(2, '0')}`], scheduleUl);
         // }
 
     }

@@ -12147,6 +12147,10 @@ body .navigation button {
   -ms-overflow-style: none;
   overflow-y: scroll;
 }
+#calendar #calendarGrid #calendarContainer .month-container .day-box.empty {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-number {
   font-size: 1.1em;
   padding: 0.3em;
