@@ -237,34 +237,43 @@ const timedAppend = function (schedules, timedSchedule,timedUl) {
     schedules.forEach(schedule => {
         if(schedule.type !== "timed") return
         //월 달력에 있는 작은 박스에 시간 에벤트 출력
-        let li = timedScheduleLiEx.cloneNode(true);
-        li.removeAttribute('id');
-        let icon = li.querySelector('.icon');
-        let date = li.querySelector('.date');
-        let title = li.querySelector('.title');
-        title.textContent = schedule.eventName;
-        console.log(schedule);
         let startTime=schedule.hour[0];
         let endTime=schedule.hour[1];
         let startHours = parseInt(startTime/60);
         let startMinutes=startTime%60;
         let endHours = parseInt(endTime/60);
         let endMinutes=endTime%60;
-        let startStr=`${startMinutes}:${startMinutes}`;
-        let endStr=`${endMinutes}:${endMinutes}`;
+        let startStr=`${startHours}:${startMinutes}`;
+        let endStr=`${endHours}:${endMinutes}`;
         let [top,height]=timedLiSetTopHeight(startStr,endStr);
 
-        date.dataset.time = `${startStr}-${endStr}`;
-        date.textContent = schedule.eventName;
+        let li = timedScheduleLiEx.cloneNode(true);
+        let icon = li.querySelector('.icon');
+        let date = li.querySelector('.date');
+        let title = li.querySelector('.title');
+        li.removeAttribute('id');
+        li.classList.add("bg-"+schedule["color"]);
+        li.classList.add("text-dark");
+
+
+        li.dataset.time = `${startStr}-${endStr}`;
+        date.textContent = `${startStr}-${endStr}`;
+        title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
         timedSchedule.appendChild(li);
 
         li = timedLiEx.cloneNode(true);
-        li.removeAttribute('id');
         icon = li.querySelector('.icon');
+        date = li.querySelector('.time');
         title = li.querySelector('.title');
-        title.dataset.time = Math.floor(schedule.hour / 60) + ':' + schedule.hour % 60;
+
+        li.removeAttribute('id');
+        li.classList.add(`btn-${schedule["color"]}`)
+        li.style.top=top;
+        li.style.height=height;
         title.textContent = schedule.eventName;
+        li.dataset.time = `${startStr}-${endStr}`;
+        date.textContent = `${startStr}-${endStr}`;
         icon.textContent = schedule.icon;
         timedUl.appendChild(li);
     });
