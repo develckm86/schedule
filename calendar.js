@@ -142,10 +142,17 @@ const setNewEventForm=function(dayNode,key){
     const allDayForm=dayNode.querySelector(".all-day-form");
     const timeline = dayNode.querySelector(".timeline");
     //form 에 eventColor 선탹
+    const offcanvas = dayNode.querySelector(".offcanvas-sm");
+    const offcanvasBtn = dayNode.querySelector(".offcanvas-btn");
+    const offcanvasCloseBtn = dayNode.querySelector(".offcanvas-close-btn");
 
     const eventBtn=dayNode.querySelectorAll(".event-btn-container>button");
     timedForm.id+=key;
     allDayForm.id+=key;
+    offcanvas.id+=key;
+    offcanvasBtn.dataset.bsTarget+=key;
+    //offcanvasCloseBtn.dataset.bsTarget+=key;
+
     eventBtn.forEach((btn)=>{
         btn.dataset.bsTarget+=key;
     });
@@ -202,15 +209,21 @@ const allDayAppend = function (schedules, allDaySchedule,allDayUl) {
     schedules.forEach(schedule => {
         //월 달력에 있는 작은 박스에 하루종일 이벤트 출력
         let li = allDayScheduleLiEx.cloneNode(true);
-        li.removeAttribute('id');
         let icon = li.querySelector('.icon');
         let title = li.querySelector('.title');
+
+        li.removeAttribute('id');
+        li.classList.add("bg-"+schedule["color"]);
+        li.classList.add("border-"+schedule["color"]);
         title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
         allDaySchedule.appendChild(li);
 
         li=allDayLiEx.cloneNode(true);
         li.removeAttribute('id');
+        li.classList.add("bg-"+schedule["color"]);
+        li.classList.add("btn-"+schedule["color"]);
+
         icon=li.querySelector('.icon');
         title=li.querySelector('.title');
         title.textContent = schedule.eventName;
@@ -253,11 +266,12 @@ const timedAppend = function (schedules, timedSchedule,timedUl) {
         let title = li.querySelector('.title');
         li.removeAttribute('id');
         li.classList.add("bg-"+schedule["color"]);
-        li.classList.add("text-dark");
+        li.classList.add("border-"+schedule["color"]);
 
+        li.dataset.bsTitle = `${startStr}-${endStr}`;
+        new bootstrap.Tooltip(li);
+        //date.textContent = `${startStr}-${endStr}`;
 
-        li.dataset.time = `${startStr}-${endStr}`;
-        date.textContent = `${startStr}-${endStr}`;
         title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
         timedSchedule.appendChild(li);

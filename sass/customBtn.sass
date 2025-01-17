@@ -1,29 +1,63 @@
 @use './_var' as *
 @use '../node_modules/bootstrap/scss/bootstrap.scss' as bs
 
-@mixin button-variant-with-color($color) 
+@mixin button-variant-with-color($key,$color)
   $darken-30: darken($color, 30%)
   $darken-10: darken($color, 10%)
   $darken-50: darken($color, 50%)
-  @include bs.button-variant($color, $darken-30, $white-color, $darken-10, $darken-50, $white-color)
+  .btn-#{$key}
+    @include bs.button-variant($color, $darken-30, $white-color, $darken-10, $darken-50, $white-color)
+    &.checked
+      border-color: $white-color !important
 
-@mixin button-outline-variant-with-color($color) 
+@mixin button-outline-variant-with-color($key,$color)
   $darken-30: darken($color, 30%)
   $darken-10: darken($color, 10%)
   $darken-50: darken($color, 50%)
-  @include bs.button-outline-variant($color, $black-color, $color, $darken-30, $white-color)
+  .btn-outline-#{$key}
+    @include bs.button-outline-variant($color, $black-color, $color, $darken-30, $white-color)
+    &.checked
+      border-color: $white-color !important
 
-@each $key,$color in $btn-colors
-  .btn-#{$key} 
-    @include button-variant-with-color($color)
-    &.checked
-      border-color: $white-color !important
-  .btn-outline-#{$key}  
-    @include button-outline-variant-with-color($color)
-    &.checked
-      border-color: $white-color !important
+@mixin bg-gradient-opacity($key,$color)
   .bg-#{$key}
     @include bs.gradient-bg($color)
+    &.bg-opacity-100
+      background-color: rgba($color, 1)
+    &.bg-opacity-75
+      background-color: rgba($color, 0.75)
+    &.bg-opacity-50
+      background-color: rgba($color, 0.5)
+    &.bg-opacity-25
+      background-color: rgba($color, 0.25)
+    &.bg-opacity-10
+      background-color: rgba($color, 0.1)
+@mixin border-opacity($key,$color)
+  .border-#{$key}
+    border: 1px solid $color
+    &.border-opacity-100
+      border-color: rgba($color, 1)
+
+    &.border-opacity-75
+      border-color: rgba($color, 0.75)
+
+    &.border-opacity-50
+      border-color: rgba($color, 0.5)
+
+    &.border-opacity-25
+      border-color: rgba($color, 0.25)
+
+    &.border-opacity-10
+      border-color: rgba($color, 0.1)
+
+
+@each $key,$color in $btn-colors
+    @include button-variant-with-color($key,$color)
+    @include button-outline-variant-with-color($key,$color)
+    @include bg-gradient-opacity($key,$color)
+    @include border-opacity($key,$color)
+
+
 
 
 

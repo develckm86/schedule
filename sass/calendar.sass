@@ -49,7 +49,8 @@
 
   @media (max-width: 480px)
     font-size: $size-mobile
-
+.tooltip
+  z-index: 1080
 // Base styles
 body
   background-color: rgba(29, 27, 32, 1)
@@ -163,10 +164,15 @@ body
               -webkit-line-clamp: 1
               overflow: hidden
               list-style: none
+              margin-bottom: .2em
+              border-radius: .5em
               @media (max-width: 768px)
                 font-size: 0.7em
                 .icon
                   display: none
+          //.timed-schedule
+          //  .schedule-list
+
           .day-full
             background-color: $header-bg-color
             height: var(--day-height)
@@ -209,43 +215,70 @@ body
                 @include flex-center(column)
                 background-color: $header-bg-color
                 padding: 1rem
-
-                .new-event-form
-                  width: 280px
-                  border-width: 0 1px 1px 1px
-                  border-color: $border-color
-                  border-style: solid
-                  border-radius: 5px
-                  padding: 1em
-                  .color-container
-                    display: flex
-                    strong
-                      margin: 0 10px
-                    label
-                      margin-right: 5px
+                width: 400px
+                @media (max-width: 768px)
+                  position: fixed
+                  bottom: 0
+                  width: 100%
+                .tab-content
+                  width: 100%
+                  .new-event-form
+                    width: 100%
+                    border-width: 0 1px 1px 1px
+                    border-color: $border-color
+                    border-style: solid
+                    border-radius: 5px
+                    padding: 1em
+                    .color-container,.icon-container
+                      display: flex
+                      white-space: nowrap
+                      overflow-x: auto
+                      padding-bottom: 1em
+                      strong
+                        margin: 0 10px
+                      label
+                        margin-right: 5px
 
               .events
                 margin: 0
                 position: relative
                 flex-grow: 1
-                .timeline > li
-                  position: relative
-                  height: var(--event-height)
-                  border-bottom: 1px solid $timeline-color
-                  @include flex-center(row)
+                .all-day-events
+                  position: absolute
+                  background: $form-bg-color
+                  border-bottom: 1px solid $white-color
+                  z-index: 999
+                  width: 100%
+                  display: flex
+                  .head
+                    align-content: center
+                    padding: 0 1em
+                    border-right: 1px solid $timeline-color
+                  .all-day-ul
+                    list-style: none
+                    flex-grow: 1
+                    max-height: 5em
+                    overflow-y: auto
+                    padding: 1em
+                    li
+                      margin-bottom: .5em
+                      border-radius: .5em
 
-                  span
-                    width: 70px
-                    text-align: center
+                .timeline
+                  margin-top: 7em
+                  li
+                    position: relative
+                    height: var(--event-height)
+                    border-bottom: 1px solid $timeline-color
+                    @include flex-center(row)
+                    &.event
+                      position: absolute
+                      width: 100%
+                      padding: 0rem 1rem
+                      margin-bottom: .5em
+                      border-radius: .5em
 
-                  &.event
-                    position: absolute
-                    left: 70px
-                    width: calc(100% - 70px)
-                    border-radius: 2px
-                    padding: 0rem 1rem
-                    color: black
-                    @include flex-center(column)
+                      @include flex-center(column)
 
 
 // Media Queries
