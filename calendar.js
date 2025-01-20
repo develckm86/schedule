@@ -215,6 +215,7 @@ const allDayAppend = function (schedules, allDaySchedule,allDayUl) {
         li.removeAttribute('id');
         li.classList.add("bg-"+schedule["color"]);
         li.classList.add("border-"+schedule["color"]);
+
         title.textContent = schedule.eventName;
         icon.textContent = schedule.icon;
         allDaySchedule.appendChild(li);
@@ -235,18 +236,6 @@ const allDayAppend = function (schedules, allDaySchedule,allDayUl) {
     });
 }
 const timedAppend = function (schedules, timedSchedule,timedUl) {
-    /*    "timed": [
-      {
-        "eventName": "팀 회의",
-        "type": "timed",
-        "hour": [
-          1400,
-          1500
-        ],
-        "icon": "👥",
-        "color": "orange"
-      },
-*/
     schedules.forEach(schedule => {
         if(schedule.type !== "timed") return
         //월 달력에 있는 작은 박스에 시간 에벤트 출력
@@ -266,6 +255,7 @@ const timedAppend = function (schedules, timedSchedule,timedUl) {
         let title = li.querySelector('.title');
         li.removeAttribute('id');
         li.classList.add("bg-"+schedule["color"]);
+        li.classList.add("btn-"+schedule["color"]);
         li.classList.add("border-"+schedule["color"]);
 
         li.dataset.bsTitle = `${startStr}-${endStr}`;
