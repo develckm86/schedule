@@ -51,12 +51,6 @@
         "color": "red"
       },
       {
-        "eventName": "주간 리포트 작성",
-        "type": "allDay",
-        "icon": "📝",
-        "color": "yellow"
-      },
-      {
         "eventName": "점심 약속",
         "type": "timed",
         "hour": [

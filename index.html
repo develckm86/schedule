@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+<!--        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
         <link rel="stylesheet" href="./index.css">
         <link rel="stylesheet" href="./calendar.css">
         <title>프로젝트</title>
-        <script defer src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--        <script defer src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script type="module" src="./ko_holiday.js"></script>
         <script defer type="module" src="./calendar.js"></script>
         <script defer type="module" src="./app.js"></script>
@@ -27,7 +30,7 @@
             <input type="radio" class="btn-check" id="eventColorGreen" name="eventColor" value="green">
             <label class="btn btn-green" for="eventColorGreen">그린</label>
             <input type="radio" class="btn-check" id="eventColorYellow" name="eventColor" value="yellow">
-            <label class="btn btn-yellow" for="eventColorYellow">그린</label>
+            <label class="btn btn-yellow" for="eventColorYellow">노랑</label>
 
             <h1>스케줄 어플</h1>
             <div style="display: none;">
@@ -110,9 +113,10 @@
                                     <li><span>23:00</span></li>
                                 </ul>
                             </div>
-                            <button class="d-lg-none btn btn-primary position-fixed bottom-0 end-0 offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">Toggle bottom offcanvas</button>
+                            <button class="d-lg-none btn btn-primary btn-lg position-fixed bottom-0 end-0 me-5 mb-5 rounded-5 offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+                                +
+                            </button>
                             <div  class="offcanvas-sm offcanvas-bottom" data-bs-backdrop="false"  tabindex="-1" id="offcanvas">
-
                                 <div class="form-container" >
                                     <p class="nav nav-tabs nav-fill event-btn-container w-100">
                                         <button class="nav-link active" type="button" data-bs-toggle="tab" data-bs-target="#allDayForm">
@@ -121,7 +125,7 @@
                                         <button class="nav-link" type="button" data-bs-toggle="tab" data-bs-target="#timedForm">
                                             시간 이벤트
                                         </button>
-                                        <button type="button" class="offcanvas-close-btn btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvas" aria-label="Close"></button>
+                                        <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="offcanvas" data-bs-target="#offcanvas" aria-label="Close"></button>
                                     </p>
                                     <div class="tab-content">
                                         <form class="tab-pane new-event-form timed-form fade" id="timedForm">
@@ -315,7 +319,7 @@
                                                     <label class="btn btn-outline-light" for="all-business">👔</label>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-center mt-2">
                                                 <button type="reset" class="btn btn-outline-warning me-2">초기화</button>
                                                 <button type="submit" class="btn btn-outline-primary">이벤트 추가</button>
                                             </div>

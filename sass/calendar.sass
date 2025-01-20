@@ -210,34 +210,36 @@ body
               width: 100%
               display: flex
               @include hidden-scrollbar
-
-              .form-container
-                @include flex-center(column)
-                background-color: $header-bg-color
-                padding: 1rem
-                width: 400px
-                @media (max-width: 768px)
-                  position: fixed
-                  bottom: 0
-                  width: 100%
-                .tab-content
-                  width: 100%
-                  .new-event-form
+              .offcanvas-sm
+                display: flex
+                .form-container
+                  @include flex-center(column)
+                  background-color: $header-bg-color
+                  padding: 1rem
+                  width: 400px
+                  @media (max-width: 768px)
+                    border-top: 1px solid $white-color
+                    position: fixed
+                    bottom: 0
                     width: 100%
-                    border-width: 0 1px 1px 1px
-                    border-color: $border-color
-                    border-style: solid
-                    border-radius: 5px
-                    padding: 1em
-                    .color-container,.icon-container
-                      display: flex
-                      white-space: nowrap
-                      overflow-x: auto
-                      padding-bottom: 1em
-                      strong
-                        margin: 0 10px
-                      label
-                        margin-right: 5px
+                  .tab-content
+                    width: 100%
+                    .new-event-form
+                      width: 100%
+                      border-width: 0 1px 1px 1px
+                      border-color: $border-color
+                      border-style: solid
+                      border-radius: 5px
+                      padding: 1em
+                      .color-container,.icon-container
+                        display: flex
+                        white-space: nowrap
+                        overflow-x: auto
+                        padding-bottom: 1em
+                        strong
+                          margin: 0 10px
+                        label
+                          margin-right: 5px
 
               .events
                 margin: 0
@@ -266,6 +268,7 @@ body
 
                 .timeline
                   margin-top: 7em
+                  padding: 0
                   li
                     position: relative
                     height: var(--event-height)

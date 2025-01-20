@@ -12422,7 +12422,10 @@ body .navigation button {
   -ms-overflow-style: none;
   overflow-y: scroll;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm {
+  display: flex;
+}
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12432,16 +12435,17 @@ body .navigation button {
   width: 400px;
 }
 @media (max-width: 768px) {
-  #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container {
+  #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container {
+    border-top: 1px solid #fff;
     position: fixed;
     bottom: 0;
     width: 100%;
   }
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content {
   width: 100%;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form {
   width: 100%;
   border-width: 0 1px 1px 1px;
   border-color: #444;
@@ -12449,16 +12453,16 @@ body .navigation button {
   border-radius: 5px;
   padding: 1em;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .color-container, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .icon-container {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .color-container, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .icon-container {
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
   padding-bottom: 1em;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .color-container strong, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .icon-container strong {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .color-container strong, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .icon-container strong {
   margin: 0 10px;
 }
-#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .color-container label, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .form-container .tab-content .new-event-form .icon-container label {
+#calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .color-container label, #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .offcanvas-sm .form-container .tab-content .new-event-form .icon-container label {
   margin-right: 5px;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events {
@@ -12492,6 +12496,7 @@ body .navigation button {
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline {
   margin-top: 7em;
+  padding: 0;
 }
 #calendar #calendarGrid #calendarContainer .month-container .day-box .day-full .event-list .events .timeline li {
   position: relative;
