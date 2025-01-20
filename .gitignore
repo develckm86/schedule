@@ -34,5 +34,4 @@ bin/
 node_modules/*
 ### node_module ###
 !node_modules/bootstrap/
-node_modules/bootstrap/*
 !node_modules/bootstrap/dist/
